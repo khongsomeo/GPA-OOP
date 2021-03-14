@@ -159,7 +159,7 @@ std::multiset<Subject> Personal::getClassesFailed() {
  */
 void Personal::addSubject(Subject subject) {
   // If a class is failed, insert it into failed set.
-  if (!Personal::passed(subject.grade)) {
+  if (!Personal::passed(subject)) {
     setFailedClass(subject);
     return;
   }
@@ -176,9 +176,9 @@ void Personal::addSubject(Subject subject) {
 /**
  * This function check if a grade is enough to pass.
  *
- * @param double
+ * @param  Subject
  * @return bool
  */
-bool Personal::passed(const double grade) {
-  return grade >= 5.0;
+bool Personal::passed(Subject subject) {
+  return subject.grade >= 5.0;
 }

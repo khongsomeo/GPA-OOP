@@ -23,7 +23,7 @@ private:
   std::multiset<Subject> classesFailed;
 
   // Private methods.
-  bool passed(const double);
+  bool passed(Subject);
 
 public:
   Personal(std::vector<Subject>);
