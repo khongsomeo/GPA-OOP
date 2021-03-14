@@ -12,6 +12,5 @@
 #define CUSTOM_FILE_H
 
 bool isFileExist(std::string);
-bool isFileCSV(std::string);
 
 #endif

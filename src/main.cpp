@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
 
-  // Input must have the '*.csv' file.
+  // Input must have the path to input file.
   if (argc - 1 != 1) {
     std::cout << "Error: Input file not specified." << '\n';
     return 0;
