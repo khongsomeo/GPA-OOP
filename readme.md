@@ -18,11 +18,12 @@ VNUHCM - University of Science, Spring 2021.
 3. In `run.sh`, 
     edit `YOUR_GRADE_FILE` with your `.csv` name from step 2.
     edit `GPA_FILE` with a nice, awesome file name, or just leave it alone.
-4. Grant permissons for `compile.sh` and `run.sh`: `chmod 0700 compile.sh`. 
+4. Grant permissons for `compile.sh` and `run.sh`:
 
-    Same to `run.sh` 
+    `chmod 0700 compile.sh run.sh`. 
 5. Compile the script: `./compile.sh`
 6. Run the script: `./run.sh`
 
 ## Attention!
-1. Grades are in scale 10.
+1. Default grade scale is 10.
+2. 4-scale and A-scale are based on [VNUHCM - University of Science Student Guide 2020-21](https://www.hcmus.edu.vn/component/content/article/124-cong-tac-sinh-vien/thong-tin-danh-cho-tan-sinh-vien/3323-so-tay-sinh-vien-nam-hoc-2020-2021?Itemid=437)
