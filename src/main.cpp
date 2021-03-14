@@ -50,7 +50,8 @@ int main(int argc, char* argv[]) {
               << "|\n";
 
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
-  std::cout << "|" << std::setw(12) << "***"
+  std::cout << "|" << std::setw(12)
+            << "***"
             << "|" << std::setw(9)
             << chumeochuixoong->getResultCredits()
             << "|" << std::setw(20)
