@@ -73,9 +73,9 @@ std::vector<Subject> readSubjectsFromCSVFile(std::string fileName) {
         subjects.push_back(readSubject(currentLine));
       }
       catch (std::invalid_argument e) {
-	std::cout << "Error on line " << currentLineIndex
+        std::cout << "Error on line " << currentLineIndex
                   << " of " << fileName
-		  << ", error message: " << e.what() << '\n';
+                  << ", error message: " << e.what() << '\n';
       }
     }
   }
