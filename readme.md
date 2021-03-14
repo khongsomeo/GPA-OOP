@@ -24,3 +24,5 @@ VNUHCM - University of Science, Spring 2021.
 5. Compile the script: `./compile.sh`
 6. Run the script: `./run.sh`
 
+## Attention!
+1. Grades are in scale 10.
