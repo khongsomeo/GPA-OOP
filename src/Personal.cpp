@@ -8,13 +8,27 @@
 
 /**
  * Constructor for Personal class.
+ *
  */
 Personal::Personal(std::vector<Subject> subjectsVector) {
+  // Set default greades to 0.
   setCredit(0);
   setSumGrades(0);
   setResultGPA(0);
 
+  // Set default classes to 0.
+  setTotalClasses(0);
+
+  // Add subjects to Personal.
   for (auto subject : subjectsVector) addSubject(subject);
+}
+
+/**
+ * Destructor for Personal class.
+ *
+ */
+Personal::~Personal() {
+  // Do nothing.
 }
 
 /**
@@ -23,7 +37,7 @@ Personal::Personal(std::vector<Subject> subjectsVector) {
  * @param int
  */
 void Personal::setCredit(int credit) {
-  sumCredits = credit;
+  _sumCredits = credit;
 }
 
 /**
@@ -32,7 +46,7 @@ void Personal::setCredit(int credit) {
  * @param double
  */
 void Personal::setSumGrades(double grades) {
-  sumGrades = grades;
+  _sumGrades = grades;
 }
 
 /**
@@ -41,7 +55,16 @@ void Personal::setSumGrades(double grades) {
  * @param double
  */
 void Personal::setResultGPA(double grades) {
-  resultGPA = grades;
+  _resultGPA = grades;
+}
+
+/**
+ * This function set total classes for Personal.
+ *
+ * @param classes
+ */
+void Personal::setTotalClasses(int classes) {
+  _totalClasses = classes;
 }
 
 /**
@@ -50,7 +73,7 @@ void Personal::setResultGPA(double grades) {
  * @param Subject
  */
 void Personal::setPassedClass(Subject subject) {
-  classesPassed.insert(subject);
+  _classesPassed.insert(subject);
 }
 
 /**
@@ -59,7 +82,7 @@ void Personal::setPassedClass(Subject subject) {
  * @param Subject
  */
 void Personal::setFailedClass(Subject subject) {
-  classesFailed.insert(subject);
+  _classesFailed.insert(subject);
 }
 
 /**
@@ -68,7 +91,7 @@ void Personal::setFailedClass(Subject subject) {
  * @return int
  */
 int Personal::getResultCredits() {
-  return sumCredits;
+  return _sumCredits;
 }
 
 /**
@@ -77,7 +100,7 @@ int Personal::getResultCredits() {
  * @return double
  */
 double Personal::getSumGrades() {
-  return sumGrades;
+  return _sumGrades;
 }
 
 /**
@@ -86,7 +109,7 @@ double Personal::getSumGrades() {
  * @return double
  */
 double Personal::getResultGPA() {
-  return resultGPA;
+  return _resultGPA;
 }
 
 /**
@@ -95,7 +118,7 @@ double Personal::getResultGPA() {
  * @return double
  */
 double Personal::getGPAIn10Scale() {
-  return resultGPA;
+  return getResultGPA();
 }
 
 /**
@@ -117,12 +140,21 @@ std::string Personal::getGPAInAScale() {
 }
 
 /**
+ * This function return total classes.
+ *
+ * @return int
+ */
+int Personal::getTotalClasses() {
+  return _totalClasses;
+}
+
+/**
  * This function return a number represents how many classes passed.
  *
  * @return int
  */
 int Personal::getTotalClassesPassed() {
-  return classesPassed.size();
+  return _classesPassed.size();
 }
 
 /**
@@ -131,7 +163,7 @@ int Personal::getTotalClassesPassed() {
  * @return int
  */
 int Personal::getTotalClassesFailed() {
-  return classesFailed.size();
+  return _classesFailed.size();
 }
 
 /**
@@ -140,7 +172,7 @@ int Personal::getTotalClassesFailed() {
  * @return std::multiset<Subject>
  */
 std::multiset<Subject> Personal::getClassesPassed() {
-  return classesPassed;
+  return _classesPassed;
 }
 
 /**
@@ -149,7 +181,7 @@ std::multiset<Subject> Personal::getClassesPassed() {
  * @return std::multiset<Subject>
  */
 std::multiset<Subject> Personal::getClassesFailed() {
-  return classesFailed;
+  return _classesFailed;
 }
 
 /**
@@ -158,8 +190,11 @@ std::multiset<Subject> Personal::getClassesFailed() {
  * @param Subject
  */
 void Personal::addSubject(Subject subject) {
+  // Count this subject.
+  setTotalClasses(getTotalClasses() + 1);
+
   // If a class is failed, insert it into failed set.
-  if (!Personal::passed(subject)) {
+  if (!Personal::_passed(subject)) {
     setFailedClass(subject);
     return;
   }
@@ -179,6 +214,6 @@ void Personal::addSubject(Subject subject) {
  * @param  Subject
  * @return bool
  */
-bool Personal::passed(Subject subject) {
+bool Personal::_passed(Subject subject) {
   return subject.grade >= 5.0;
 }

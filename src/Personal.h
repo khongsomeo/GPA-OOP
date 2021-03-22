@@ -14,25 +14,29 @@
 class Personal {
 private:
   // Personal grades.
-  int 	  sumCredits;
-  double  sumGrades;
-  double  resultGPA;
+  int 	  _sumCredits;
+  double  _sumGrades;
+  double  _resultGPA;
 
   // Classes.
-  std::multiset<Subject> classesPassed;
-  std::multiset<Subject> classesFailed;
+  int                    _totalClasses;
+  std::multiset<Subject> _classesPassed;
+  std::multiset<Subject> _classesFailed;
 
   // Private methods.
-  bool passed(Subject);
+  bool _passed(Subject);
 
 public:
+  // Constructor & destructor.
   Personal(std::vector<Subject>);
-  ~Personal(){}
+  ~Personal();
 
+public:
   // Setter
   void setCredit(int);
   void setSumGrades(double);
   void setResultGPA(double);
+  void setTotalClasses(int);
   void setPassedClass(Subject);
   void setFailedClass(Subject);
 
@@ -45,6 +49,7 @@ public:
   std::string getGPAInAScale();
 
   // Classes (passed/failed) related.
+  int getTotalClasses();
   int getTotalClassesPassed();
   int getTotalClassesFailed();
 

@@ -8,9 +8,13 @@
 #include"include.h"
 #endif
 
-#ifndef CUSTOM_FILE_H
-#define CUSTOM_FILE_H
+#ifndef UTILITY_H
+#define UTILITY_H
 
-bool isFileExist(std::string);
+class Utility {
+public:
+  static bool isFileExist(std::string);
+  static double percent(int, int);
+};
 
 #endif

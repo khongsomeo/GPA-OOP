@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
   std::string fileName(argv[1]);
 
   // Check if the input file exist or not.
-  if (!isFileExist(fileName)) {
+  if (!Utility::isFileExist(fileName)) {
     std::cout << "Error: Cannot open " << fileName << " due to some teachnical reasons." << '\n';
     return 0;
   }
@@ -32,7 +32,9 @@ int main(int argc, char* argv[]) {
   Personal* chumeochuixoong = new Personal(subjects);
 
   // Print list of classes passed.
-  std::cout << "Total classes passed: " << chumeochuixoong->getTotalClassesPassed() << '\n';
+  std::cout << "Total classes passed: " << chumeochuixoong->getTotalClassesPassed() 
+            << " ("<< Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses())
+            << " %)" << '\n';
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
   std::cout << "| class name | credits | grade (10 - scale) | grade (4 - scale) | grade (A - scale) |" << '\n';
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
@@ -64,7 +66,9 @@ int main(int argc, char* argv[]) {
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
 
   // Print list of failed classes.
-  std::cout << "Total classes failed: " << chumeochuixoong->getTotalClassesFailed() << '\n';
+  std::cout << "Total classes failed: " << chumeochuixoong->getTotalClassesFailed() 
+            << " ("<< Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) 
+            << " %)" << '\n';
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
   std::cout << "| class name | credits | grade (10 - scale) | grade (4 - scale) | grade (A - scale) |" << '\n';
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
