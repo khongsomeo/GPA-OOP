@@ -31,6 +31,9 @@ int main(int argc, char* argv[]) {
   // Create a new Personal object.
   Personal* chumeochuixoong = new Personal(subjects);
 
+  // Print the textart.
+  Utility::printTextart();
+
   // Print list of classes passed.
   std::cout << "Total classes passed: " << chumeochuixoong->getTotalClassesPassed() 
             << " ("<< Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses())
@@ -65,6 +68,8 @@ int main(int argc, char* argv[]) {
             << "|\n";
   std::cout << "+------------+---------+--------------------+-------------------+-------------------+" << '\n';
 
+  std::cout << '\n';
+  
   // Print list of failed classes.
   std::cout << "Total classes failed: " << chumeochuixoong->getTotalClassesFailed() 
             << " ("<< Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) 
