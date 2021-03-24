@@ -6,6 +6,8 @@ VNUHCM - University of Science, Spring 2021.
 ## How-to
 ### Installation
 1. `git clone`
+
+### Running
 2. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
 
     | Course name | Credits | Grade |
@@ -26,6 +28,11 @@ VNUHCM - University of Science, Spring 2021.
     `chmod 0700 compile.sh run.sh`. 
 5. Compile the script: `./compile.sh`
 6. Run the script: `./run.sh`
+
+### Don't want to use shell scripts?
+This program use commandline arguments, so you need to compile it to executable file before taken any further actions.
+
+To start the program, `./<PROGRAM_NAME> <path to your .csv data file>` with `<PROGRAM NAME>` replaced with your program name after compile.
 
 ### Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
