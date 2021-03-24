@@ -1,6 +1,6 @@
 # Script execution
 
-RESULT_FILE="data/19120338.csv"
-GPA_FILE="19120338.txt"
+RESULT_FILE="YOUR_GRADE_FILE.csv"
+GPA_FILE="GPA_FILE.txt"
 
 ./main $RESULT_FILE > $GPA_FILE
