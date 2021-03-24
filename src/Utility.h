@@ -1,5 +1,5 @@
 /**
- * This file is header for custom file check.
+ * Utility functions.
  *
  * Code by @trhgquan - https://github.com/trhgquan
  */

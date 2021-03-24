@@ -33,13 +33,15 @@ double Utility::percent(int x, int y) {
  * (a cooler but not suitable move). 
  */
 void Utility::printTextart() {
-  std::ifstream fileBuffer(TEXTART_FILE, std::ios::in);
+  // Create a file stream
+  std::ifstream fileStream(TEXTART_FILE, std::ios::in);
 
+  // Create a line buffer
   std::string lineBuffer;
-  while (getline(fileBuffer, lineBuffer))
+  while (getline(fileStream, lineBuffer))
     std::cout << lineBuffer << '\n'; 
 
   std::cout << '\n';
 
-  fileBuffer.close();
+  fileStream.close();
 }
