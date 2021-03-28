@@ -41,7 +41,7 @@ public:
   void setFailedClass(Subject);
 
   // Getter.
-  int 	                   getResultCredits();
+  int                      getResultCredits();
   double                   getSumGrades();
   double                   getResultGPA();
   double                   getGPAIn10Scale();

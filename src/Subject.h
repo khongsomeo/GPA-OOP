@@ -14,7 +14,7 @@
 // Subject structure.
 struct Subject {
   std::string name;
-  int 	      credit;
+  int         credit;
   double      grade;
   double      scale4Grade;
   std::string textGrade;
@@ -25,6 +25,7 @@ struct Subject {
     return (grade > subject.grade) || (grade == subject.grade && credit > subject.credit);
   }
 
+  // Method to return a vector, containing subject's info in string.
   std::vector<std::string> toStringVector() {
     std::stringstream builder;
     builder << std::fixed << std::setprecision(2);
