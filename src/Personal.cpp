@@ -209,6 +209,40 @@ void Personal::addSubject(Subject subject) {
 }
 
 /**
+ * This function return a personal result's vector string.
+ *
+ * @return std::vector<std::string>
+ */
+std::vector<std::string> Personal::toStringVector() {
+  std::stringstream builder;
+  std::vector<std::string> personalResultStringVector;
+
+  builder << std::fixed << std::setprecision(2);
+
+  builder << "GPA";
+  personalResultStringVector.push_back(builder.str());
+  builder.str(std::string());
+
+  builder << getResultCredits();
+  personalResultStringVector.push_back(builder.str());
+  builder.str(std::string());
+
+  builder << getGPAIn10Scale();
+  personalResultStringVector.push_back(builder.str());
+  builder.str(std::string());
+
+  builder << getGPAIn4Scale();
+  personalResultStringVector.push_back(builder.str());
+  builder.str(std::string());
+
+  builder << getGPAInAScale();
+  personalResultStringVector.push_back(builder.str());
+  builder.str(std::string());
+
+  return personalResultStringVector;
+}
+
+/**
  * This function check if a grade is enough to pass.
  *
  * @param  Subject

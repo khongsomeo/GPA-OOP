@@ -4,6 +4,7 @@
 #include<iostream>
 #include<iomanip>
 #include<fstream>
+#include<sstream>
 #include<string>
 #include<set>
 #include<vector>
@@ -12,5 +13,6 @@
 #include"Subject.h"
 #include"Personal.h"
 #include"Utility.h"
+#include"OutputHelper.h"
 
 #endif

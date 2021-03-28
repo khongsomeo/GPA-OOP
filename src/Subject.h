@@ -14,7 +14,7 @@
 // Subject structure.
 struct Subject {
   std::string name;
-  int	      credit;
+  int         credit;
   double      grade;
   double      scale4Grade;
   std::string textGrade;
@@ -23,6 +23,36 @@ struct Subject {
   // Also, we really need this since std::multiset doesn't support structs by default.
   bool operator < (const Subject& subject) const {
     return (grade > subject.grade) || (grade == subject.grade && credit > subject.credit);
+  }
+
+  // Method to return a vector, containing subject's info in string.
+  std::vector<std::string> toStringVector() {
+    std::stringstream builder;
+    builder << std::fixed << std::setprecision(2);
+
+    std::vector<std::string> subjectString;
+
+    builder << name;
+    subjectString.push_back(builder.str());
+    // Clear the stringstream.
+    builder.str(std::string());
+    
+    builder << credit;
+    subjectString.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << grade;
+    subjectString.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << scale4Grade;
+    subjectString.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << textGrade;
+    subjectString.push_back(builder.str());
+
+    return subjectString;
   }
 };
 
