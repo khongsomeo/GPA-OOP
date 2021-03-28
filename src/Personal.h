@@ -41,12 +41,13 @@ public:
   void setFailedClass(Subject);
 
   // Getter.
-  int 	      getResultCredits();
-  double      getSumGrades();
-  double      getResultGPA();
-  double      getGPAIn10Scale();
-  double      getGPAIn4Scale();
-  std::string getGPAInAScale();
+  int 	                   getResultCredits();
+  double                   getSumGrades();
+  double                   getResultGPA();
+  double                   getGPAIn10Scale();
+  double                   getGPAIn4Scale();
+  std::string              getGPAInAScale();
+  std::vector<std::string> toStringVector();
 
   // Classes (passed/failed) related.
   int getTotalClasses();
