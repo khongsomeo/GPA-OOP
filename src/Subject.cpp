@@ -29,9 +29,9 @@ Subject readSubject(std::string subjectLine) {
           resultSubject.name = token;
           break;
 
-	case 1:
-	  resultSubject.credit = stoi(token);
-	  break;
+        case 1:
+          resultSubject.credit = stoi(token);
+          break;
       }
     }
 
