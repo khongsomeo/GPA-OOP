@@ -7,10 +7,10 @@
 #include"OutputHelper.h"
 
 // Total columns
-int                      OutputHelper::columnCount = 5;
+int OutputHelper::columnCount = 5;
 
 // Column size
-std::vector<int>         OutputHelper::columnWidth = {12, 9, 20, 19, 19};
+std::vector<int> OutputHelper::columnWidth = {12, 9, 20, 19, 19};
 
 // Column title
 std::vector<std::string> OutputHelper::columnTitle = {"class name", "credits", "grade (10 - scale)", "grade (4 - scale)", "grade (A - scale)"};

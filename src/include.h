@@ -1,3 +1,9 @@
+/**
+ * Include all necessary files.
+ *
+ * Code by @trhgquan - https://github.com/trhgquan
+ */
+
 #ifndef INCLUDE_H
 #define INCLUDE_H
 
