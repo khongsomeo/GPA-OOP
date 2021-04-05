@@ -9,8 +9,9 @@
 /**
  * Constructor for Personal class.
  *
+ * @param  const std::vector<Subject>&
  */
-Personal::Personal(std::vector<Subject> subjectsVector) {
+Personal::Personal(const std::vector<Subject>& subjectsVector) {
   // Set default greades to 0.
   setCredit(0);
   setSumGrades(0);

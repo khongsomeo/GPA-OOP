@@ -28,7 +28,7 @@ private:
 
 public:
   // Constructor & destructor.
-  Personal(std::vector<Subject>);
+  Personal(const std::vector<Subject>&);
   ~Personal();
 
 public:

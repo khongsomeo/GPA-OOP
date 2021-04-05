@@ -64,6 +64,7 @@ void OutputHelper::printTableRow() {
 /**
  * This function print the table.
  *
+ * @param  const std::vector<std::string>&
  */
 void OutputHelper::printTableRow(const std::vector<std::string>& columnData) {
   std::cout << std::setfill(' ');
