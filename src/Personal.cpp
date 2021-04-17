@@ -9,8 +9,9 @@
 /**
  * Constructor for Personal class.
  *
+ * @param  const std::vector<Subject>&
  */
-Personal::Personal(std::vector<Subject> subjectsVector) {
+Personal::Personal(const std::vector<Subject>& subjectsVector) {
   // Set default greades to 0.
   setCredit(0);
   setSumGrades(0);
@@ -34,7 +35,7 @@ Personal::~Personal() {
 /**
  * This function set credit for Personal.
  *
- * @param int
+ * @param  int
  */
 void Personal::setCredit(int credit) {
   _sumCredits = credit;
@@ -43,7 +44,7 @@ void Personal::setCredit(int credit) {
 /**
  * This function set sum grades for Personal.
  *
- * @param double
+ * @param  double
  */
 void Personal::setSumGrades(double grades) {
   _sumGrades = grades;
@@ -52,7 +53,7 @@ void Personal::setSumGrades(double grades) {
 /**
  * This function set result GPA for Personal.
  *
- * @param double
+ * @param  double
  */
 void Personal::setResultGPA(double grades) {
   _resultGPA = grades;
@@ -61,7 +62,7 @@ void Personal::setResultGPA(double grades) {
 /**
  * This function set total classes for Personal.
  *
- * @param classes
+ * @param  int
  */
 void Personal::setTotalClasses(int classes) {
   _totalClasses = classes;
@@ -70,7 +71,7 @@ void Personal::setTotalClasses(int classes) {
 /**
  * This function insert a passed class into passed set.
  *
- * @param Subject
+ * @param  Subject
  */
 void Personal::setPassedClass(Subject subject) {
   _classesPassed.insert(subject);
@@ -79,7 +80,7 @@ void Personal::setPassedClass(Subject subject) {
 /**
  * This function insert a failed class into failed set.
  *
- * @param Subject
+ * @param  Subject
  */
 void Personal::setFailedClass(Subject subject) {
   _classesFailed.insert(subject);
@@ -88,7 +89,7 @@ void Personal::setFailedClass(Subject subject) {
 /**
  * This function get result credit from Personal class.
  *
- * @return int
+ * @return  int
  */
 int Personal::getResultCredits() {
   return _sumCredits;
@@ -97,7 +98,7 @@ int Personal::getResultCredits() {
 /**
  * This function get sum grades from Personal class.
  *
- * @return double
+ * @return  double
  */
 double Personal::getSumGrades() {
   return _sumGrades;
@@ -106,7 +107,7 @@ double Personal::getSumGrades() {
 /**
  * This function get result GPA from Personal class.
  *
- * @return double
+ * @return  double
  */
 double Personal::getResultGPA() {
   return _resultGPA;
@@ -115,7 +116,7 @@ double Personal::getResultGPA() {
 /**
  * This function get result GPA (in 10 - scale) from Personal class.
  *
- * @return double
+ * @return  double
  */
 double Personal::getGPAIn10Scale() {
   return getResultGPA();
@@ -124,7 +125,7 @@ double Personal::getGPAIn10Scale() {
 /**
  * This function get result GPA (in 4 - scale) from Personal class.
  *
- * @return double
+ * @return  double
  */
 double Personal::getGPAIn4Scale() {
   return convertGradeTo4Scale(getResultGPA());
@@ -133,7 +134,7 @@ double Personal::getGPAIn4Scale() {
 /**
  * This function get result GPA (in A - scale) from Personal class.
  *
- * @return std::string
+ * @return  std::string
  */
 std::string Personal::getGPAInAScale() {
   return convertGradeToAScale(getResultGPA());
@@ -142,7 +143,7 @@ std::string Personal::getGPAInAScale() {
 /**
  * This function return total classes.
  *
- * @return int
+ * @return  int
  */
 int Personal::getTotalClasses() {
   return _totalClasses;
@@ -151,7 +152,7 @@ int Personal::getTotalClasses() {
 /**
  * This function return a number represents how many classes passed.
  *
- * @return int
+ * @return  int
  */
 int Personal::getTotalClassesPassed() {
   return _classesPassed.size();
@@ -160,7 +161,7 @@ int Personal::getTotalClassesPassed() {
 /**
  * This function return a number represents how many classes failed.
  *
- * @return int
+ * @return  int
  */
 int Personal::getTotalClassesFailed() {
   return _classesFailed.size();
@@ -169,7 +170,7 @@ int Personal::getTotalClassesFailed() {
 /**
  * This function return a set of passed classes.
  *
- * @return std::multiset<Subject>
+ * @return  std::multiset<Subject>
  */
 std::multiset<Subject> Personal::getClassesPassed() {
   return _classesPassed;
@@ -178,7 +179,7 @@ std::multiset<Subject> Personal::getClassesPassed() {
 /**
  * This function return a set of failed classes.
  *
- * @return std::multiset<Subject>
+ * @return  std::multiset<Subject>
  */
 std::multiset<Subject> Personal::getClassesFailed() {
   return _classesFailed;
@@ -187,7 +188,7 @@ std::multiset<Subject> Personal::getClassesFailed() {
 /**
  * This function add a subject into result.
  *
- * @param Subject
+ * @param  Subject
  */
 void Personal::addSubject(Subject subject) {
   // Count this subject.
@@ -211,7 +212,7 @@ void Personal::addSubject(Subject subject) {
 /**
  * This function return a personal result's vector string.
  *
- * @return std::vector<std::string>
+ * @return  std::vector<std::string>
  */
 std::vector<std::string> Personal::toStringVector() {
   std::stringstream builder;
