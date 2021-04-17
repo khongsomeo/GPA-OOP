@@ -15,49 +15,109 @@ class Personal {
 private:
   // Personal grades.
   int 	  _sumCredits;
-  double  _sumGrades;
-  double  _resultGPA;
+  Grade   _sumGrades;
+  Grade   _resultGPA;
 
   // Classes.
-  int                    _totalClasses;
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
 
-  // Private methods.
-  bool _passed(Subject);
-
 public:
   // Constructor & destructor.
-  Personal(const std::vector<Subject>&);
-  ~Personal();
+  Personal(const std::vector<Subject>& subjectVector) {
+    _sumCredits = 0;
+    _sumGrades = Grade(0.0);
+    _resultGPA = Grade(0.0);
+
+    for (auto subject : subjectVector)
+      addSubject(subject);
+  }
+
+  ~Personal() {
+    // Do nothing;
+  }
 
 public:
-  // Setter
-  void setCredit(int);
-  void setSumGrades(double);
-  void setResultGPA(double);
-  void setTotalClasses(int);
-  void setPassedClass(Subject);
-  void setFailedClass(Subject);
-
   // Getter.
-  int                      getResultCredits();
-  double                   getSumGrades();
-  double                   getResultGPA();
-  double                   getGPAIn10Scale();
-  double                   getGPAIn4Scale();
-  std::string              getGPAInAScale();
-  std::vector<std::string> toStringVector();
+  int sumCredits() {
+    return _sumCredits;
+  }
+
+  Grade sumGrades() {
+    return _sumGrades;
+  }
+
+  Grade resultGPA() {
+    return _resultGPA;
+  }
+
+  // Convert Personal class into a string vector.
+  std::vector<std::string> toStringVector() {
+    std::stringstream builder;
+    std::vector<std::string> resultVector;
+
+    builder << std::fixed << std::setprecision(2);
+
+    builder << "GPA";
+    resultVector.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << _sumCredits;
+    resultVector.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << _resultGPA;
+    resultVector.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << _resultGPA.to4Scale();
+    resultVector.push_back(builder.str());
+    builder.str(std::string());
+
+    builder << _resultGPA.toAScale();
+    resultVector.push_back(builder.str());
+    builder.str(std::string());
+      
+    return resultVector;
+  }
 
   // Classes (passed/failed) related.
-  int getTotalClasses();
-  int getTotalClassesPassed();
-  int getTotalClassesFailed();
+  int getTotalClasses() {
+    return _classesPassed.size() + _classesFailed.size();
+  }
 
-  std::multiset<Subject> getClassesPassed();
-  std::multiset<Subject> getClassesFailed();
+  int getTotalClassesPassed() {
+    return _classesPassed.size();
+  }
 
-  void addSubject(Subject);
+  int getTotalClassesFailed() {
+    return _classesFailed.size();
+  }
+
+  std::multiset<Subject> classesPassed() {
+    return _classesPassed;
+  }
+
+  std::multiset<Subject> classesFailed() {
+    return _classesFailed;
+  }
+
+  // Handling how we add a new subject.
+  void addSubject(Subject subject) {
+    // If not passed, then insert into failed list.
+    if (!subject.passed()) {
+      _classesFailed.insert(subject);
+      return;
+    }
+
+    // Calculate new GPA.
+    _sumCredits += subject.credit();
+    _sumGrades += subject.grade() * Grade(subject.credit());
+    _resultGPA = _sumGrades / Grade(1.0 * _sumCredits);
+
+    // Insert to passed list.
+    _classesPassed.insert(subject);
+  }
 };
 
 #endif

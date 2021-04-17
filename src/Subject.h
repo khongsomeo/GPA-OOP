@@ -11,18 +11,73 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
 
-// Subject structure.
-struct Subject {
-  std::string name;
-  int         credit;
-  double      grade;
-  double      scale4Grade;
-  std::string textGrade;
+class Subject {
+private:
+  std::string _name;
+  int         _credit;
+  Grade       _grade;
+
+public:
+  // Constructors and destructor.
+
+  Subject(const Subject& subject) {
+    _name   = subject._name;
+    _credit = subject._credit;
+    _grade  = subject._grade;
+  }
+
+  // Constructor handling how we can add subject data with a CSV line.
+  Subject(std::string subjectLine) {
+    std::string determiner = ",";
+    std::string token;
+
+    size_t index, currentPoint; index = currentPoint = 0;
+
+    while ((index = subjectLine.find(determiner)) != std::string::npos) {
+      token = subjectLine.substr(0, index);
+
+      if (token.length() > 0) {
+        switch (currentPoint) {
+          case 0:
+           _name = token;
+            break;
+
+          case 1:
+            _credit = stoi(token);
+            break;
+        }
+      }
+
+      ++currentPoint;
+      subjectLine.erase(0, index + determiner.length());
+    }
+
+    // Last token is the grade. Now we must convert it into Grade.
+    _grade = Grade(stod(subjectLine));
+  }
+
+  ~Subject() {
+    // Do nothing
+  }
+
+public:
+  // Getter
+  std::string name() {
+    return _name;
+  }
+
+  int credit() {
+    return _credit;
+  } 
+  
+  Grade grade() {
+    return _grade;
+  }
 
   // Operator overloading for std::multiset sorting since the default is "<" and we need to sort it descending.
   // Also, we really need this since std::multiset doesn't support structs by default.
-  bool operator < (const Subject& subject) const {
-    return (grade > subject.grade) || (grade == subject.grade && credit > subject.credit);
+  bool operator< (const Subject& subject) const {
+    return (_grade > subject._grade) || (_grade == subject._grade && _credit > subject._credit);
   }
 
   // Method to return a vector, containing subject's info in string.
@@ -32,34 +87,33 @@ struct Subject {
 
     std::vector<std::string> subjectString;
 
-    builder << name;
+    builder << _name;
     subjectString.push_back(builder.str());
-    // Clear the stringstream.
     builder.str(std::string());
     
-    builder << credit;
+    builder << _credit;
     subjectString.push_back(builder.str());
     builder.str(std::string());
 
-    builder << grade;
+    builder << _grade;
     subjectString.push_back(builder.str());
     builder.str(std::string());
 
-    builder << scale4Grade;
+    builder << _grade.to4Scale();
     subjectString.push_back(builder.str());
     builder.str(std::string());
 
-    builder << textGrade;
+    builder << _grade.toAScale();
     subjectString.push_back(builder.str());
 
     return subjectString;
   }
+
+  // Check if a subject is passed.
+  bool passed() {
+    return _grade >= 5.0;
+  }
 };
 
 std::vector<Subject>readSubjectsFromCSVFile(std::string);
-Subject readSubject(std::string);
-
-double convertGradeTo4Scale(double);
-std::string convertGradeToAScale(double);
-
 #endif
