@@ -122,7 +122,7 @@ void OutputHelper::printGPATable(Personal* personal) {
   
   OutputHelper::printTableLine();
 
-  for (auto subject : personal->getClassesPassed())
+  for (auto subject : personal->classesPassed())
     OutputHelper::printTableRow(subject);
 
   OutputHelper::printTableLine();
@@ -150,7 +150,7 @@ void OutputHelper::printFailedTable(Personal* personal) {
 
   OutputHelper::printTableLine();
 
-  for (auto subject : personal->getClassesFailed())
+  for (auto subject : personal->classesFailed())
     OutputHelper::printTableRow(subject);
 
   OutputHelper::printTableLine();

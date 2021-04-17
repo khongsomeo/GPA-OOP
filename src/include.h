@@ -16,6 +16,7 @@
 #include<vector>
 
 // Custom header
+#include"Grade.h"
 #include"Subject.h"
 #include"Personal.h"
 #include"Utility.h"

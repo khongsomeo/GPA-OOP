@@ -123,7 +123,7 @@ public:
 
   // Print Grade to the ostream.
   friend std::ostream& operator<<(std::ostream& out, const Grade& grade) {
-    out << _grade;
+    out << grade._grade; 
     return out;
   }
 };
