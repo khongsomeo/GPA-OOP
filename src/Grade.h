@@ -88,36 +88,72 @@ public:
   Grade operator+(const Grade& other) const {
     return Grade(_grade + other._grade);
   }
+
+  Grade operator+(double other) const {
+    return Grade(_grade + other);
+  }
   
   Grade& operator+=(const Grade& other) {
     _grade += other._grade;
+    return *this;
+  }
+
+  Grade& operator+=(double other) {
+    _grade += other;
     return *this;
   }
   
   Grade operator-(const Grade& other) const {
     return Grade(_grade - other._grade);
   }
+
+  Grade operator-(double other) const {
+    return Grade(_grade - other);
+  }
   
   Grade& operator-=(const Grade& other) {
     _grade -= other._grade;
+    return *this;
+  }
+
+  Grade& operator-=(double other) {
+    _grade -= other;
     return *this;
   }
   
   Grade operator*(const Grade& other) const {
     return Grade(_grade * other._grade);
   }
+
+  Grade operator*(double other) const {
+    return Grade(_grade * other);
+  }
   
   Grade& operator*=(const Grade& other) {
     _grade *= other._grade;
+    return *this;
+  }
+
+  Grade& operator*=(double other) {
+    _grade *= other;
     return *this;
   }
   
   Grade operator/(const Grade& other) const {
     return Grade(_grade / other._grade);
   }
+
+  Grade operator/(double other) const {
+    return Grade(_grade / other);
+  }
   
   Grade& operator/=(const Grade& other) {
     _grade /= other._grade;
+    return *this;
+  }
+
+  Grade& operator/=(double other) {
+    _grade /= other;
     return *this;
   }
 
