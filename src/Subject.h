@@ -53,7 +53,7 @@ public:
     }
 
     // Last token is the grade. Now we must convert it into Grade.
-    _grade = Grade(stod(subjectLine));
+    _grade = stod(subjectLine);
   }
 
   ~Subject() {

@@ -76,7 +76,6 @@ public:
 
     builder << _resultGPA.toAScale();
     resultVector.push_back(builder.str());
-    builder.str(std::string());
       
     return resultVector;
   }
