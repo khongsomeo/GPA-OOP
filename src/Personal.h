@@ -26,8 +26,8 @@ public:
   // Constructor & destructor.
   Personal(const std::vector<Subject>& subjectVector) {
     _sumCredits = 0;
-    _sumGrades = Grade(0.0);
-    _resultGPA = Grade(0.0);
+    _sumGrades = 0.0;
+    _resultGPA = 0.0;
 
     for (auto subject : subjectVector)
       addSubject(subject);
@@ -112,8 +112,8 @@ public:
 
     // Calculate new GPA.
     _sumCredits += subject.credit();
-    _sumGrades += subject.grade() * Grade(subject.credit());
-    _resultGPA = _sumGrades / Grade(1.0 * _sumCredits);
+    _sumGrades += subject.grade() * subject.credit();
+    _resultGPA = _sumGrades / (1.0 * _sumCredits);
 
     // Insert to passed list.
     _classesPassed.insert(subject);
