@@ -82,6 +82,4 @@ public:
     return _grade >= 5.0;
   }
 };
-
-std::vector<Subject>readSubjectsFromCSVFile(std::string);
 #endif
