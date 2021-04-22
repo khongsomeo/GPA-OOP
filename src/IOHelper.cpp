@@ -211,8 +211,9 @@ std::vector<Subject> IOHelper::Input::parseSubjectVector(const std::string& file
     ++currentLine;
     try {
       subjectsVector.push_back(IOHelper::Input::parseSubject(buffer));
-    } catch (const std::exception& e) {
-      std::cout << "Error occured in line " << currentLine
+    }
+    catch (const std::exception& e) {
+      std::cout << "Error occurred in line " << currentLine
                 << " of " << fileName
                 << ", code: " << e.what() << '\n';
     }
