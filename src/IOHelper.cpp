@@ -167,7 +167,6 @@ void IOHelper::Output::printFailedTable(Personal* personal) {
  */
 std::vector<std::string> IOHelper::Input::splitTokens(std::string haystack, const std::string& needle) {
   std::vector<std::string>tokens;
-  std::string token;
 
   size_t index = 0;
 
