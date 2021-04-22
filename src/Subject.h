@@ -19,57 +19,25 @@ private:
 
 public:
   // Constructors and destructor.
-
-  Subject(const Subject& subject) {
-    _name   = subject._name;
-    _credit = subject._credit;
-    _grade  = subject._grade;
-  }
-
-  // Constructor handling how we can add subject data with a CSV line.
-  Subject(std::string subjectLine) {
-    std::string determiner = ",";
-    std::string token;
-
-    size_t index, currentPoint; index = currentPoint = 0;
-
-    while ((index = subjectLine.find(determiner)) != std::string::npos) {
-      token = subjectLine.substr(0, index);
-
-      if (token.length() > 0) {
-        switch (currentPoint) {
-          case 0:
-           _name = token;
-            break;
-
-          case 1:
-            _credit = stoi(token);
-            break;
-        }
-      }
-
-      ++currentPoint;
-      subjectLine.erase(0, index + determiner.length());
-    }
-
-    // Last token is the grade. Now we must convert it into Grade.
-    _grade = stod(subjectLine);
+  Subject(std::string name, int credit, double grade) {
+    _name   = name;
+    _credit = credit;
+    _grade  = grade;
   }
 
   ~Subject() {
     // Do nothing
   }
-
 public:
-  // Getter
+  // Getter & setter
   std::string name() {
     return _name;
   }
 
   int credit() {
     return _credit;
-  } 
-  
+  }
+
   Grade grade() {
     return _grade;
   }
