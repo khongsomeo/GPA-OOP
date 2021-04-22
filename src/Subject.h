@@ -29,7 +29,7 @@ public:
     // Do nothing
   }
 public:
-  // Getter & setter
+  // Getter
   std::string name() {
     return _name;
   }
