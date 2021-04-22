@@ -19,7 +19,6 @@
 #include"Grade.h"
 #include"Subject.h"
 #include"Personal.h"
+#include"IOHelper.h"
 #include"Utility.h"
-#include"OutputHelper.h"
-
 #endif

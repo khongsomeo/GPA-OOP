@@ -26,19 +26,19 @@ int main(int argc, char* argv[]) {
   }
 
   // Read subjects into vector.
-  std::vector<Subject> subjects = readSubjectsFromCSVFile(fileName);
+  std::vector<Subject> subjects = IOHelper::Input::parseSubjectVector(fileName);
 
   // Create a new Personal object.
   Personal* chumeochuixoong = new Personal(subjects);
 
   // Print the textart.
-  OutputHelper::printTextart();
+  IOHelper::Output::printTextart();
 
   // Print list of classes passed.
-  OutputHelper::printGPATable(chumeochuixoong);
+  IOHelper::Output::printGPATable(chumeochuixoong);
 
   // Print list of failed classes.
-  OutputHelper::printFailedTable(chumeochuixoong);
+  IOHelper::Output::printFailedTable(chumeochuixoong);
 
   delete chumeochuixoong;
 
