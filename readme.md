@@ -3,12 +3,12 @@ My example OOP project for CSC10003 - Introduction to Object Oriented Programmin
 
 VNUHCM - University of Science, Spring 2021.
 
-## How-to
-### Installation
-1. `git clone`
+## Installation
+ `git clone`
 
-### Running
-2. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
+## Running
+### Calculate overall GPA
+1. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
 
     | Course name | Credits | Grade |
     |-------------|---------|-------|
@@ -18,21 +18,24 @@ VNUHCM - University of Science, Spring 2021.
 
     Example input file: `data/19120338.csv`.
 
-3. In `run.sh`, 
+2. In `run.sh`, 
 
     change `YOUR_GRADE_FILE` to your `.csv` filename from step 2.
 
     change `GPA_FILE` to a nice, awesome filename; or just leave it alone.
-4. Grant permissons for `compile.sh` and `run.sh`:
+3. Grant permissons for `compile.sh` and `run.sh`:
 
     `chmod 0700 compile.sh run.sh`. 
-5. Compile the script: `./compile.sh`
-6. Run the script: `./run.sh`
+4. Compile the script: `./compile.sh`
+5. Run the script: `./run.sh`
 
 ### Don't want to use shell scripts?
 This program use commandline arguments, so you need to compile it to executable file before taken any further actions.
 
 To start the program, `./<PROGRAM_NAME> <path to your .csv data file>` with `<PROGRAM NAME>` replaced with your program name after compile.
+
+### Calculate average grade of custom classes only.
+Let's assuming you're a Computer Science student and you want to know what is your Computer Science courses's average. Assuming your CS classes's code start with "CSC". `./<PROGRAM_NAME> <path to your .csv data file> CSC` will calculate average of CSC classes.
 
 ### Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.

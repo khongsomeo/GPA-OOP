@@ -14,6 +14,7 @@
 class Utility {
 public:
   static bool isFileExist(std::string);
+  static bool isPrefix(std::string, std::string);
   static double percent(int, int);
 };
 

@@ -33,11 +33,11 @@ public:
     static void printTableRow();
     static void printTableRow(const std::vector<std::string>&);
     static void printTableRow(Subject);
-    static void printTableRow(Personal*);
+    static void printTableRow(IPersonal*);
 
     // Print a full table
-    static void printGPATable(Personal*);
-    static void printFailedTable(Personal*);
+    static void printGPATable(IPersonal*);
+    static void printFailedTable(IPersonal*);
   };
 };
 
