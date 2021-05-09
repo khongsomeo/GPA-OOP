@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
   std::cout << std::fixed << std::setprecision(2);
 
   // Input must have the path to input file.
-  if (argc - 1 != 1) {
+  if (argc - 1 == 0) {
     std::cout << "Error: Input file not specified." << '\n';
     return 0;
   }
@@ -28,8 +28,9 @@ int main(int argc, char* argv[]) {
   // Read subjects into vector.
   std::vector<Subject> subjects = IOHelper::Input::parseSubjectVector(fileName);
 
-  // Create a new Personal object.
-  Personal* chumeochuixoong = new Personal(subjects);
+  // Create a new IPersonal instance.
+  // argc - 1 == 2 means the input goes like ./main <inputfile> <class prefix>
+  IPersonal* chumeochuixoong = ((argc - 1 == 2) ? new PersonalSpecific(subjects, std::string(argv[2])) : new PersonalGPA(subjects));
 
   // Print the textart.
   IOHelper::Output::printTextart();

@@ -98,9 +98,9 @@ void IOHelper::Output::printTableRow(Subject subject) {
 /**
  * This function print the personal result as a table row.
  *
- * @param  Personal*
+ * @param  IPersonal*
  */
-void IOHelper::Output::printTableRow(Personal* personal) {
+void IOHelper::Output::printTableRow(IPersonal* personal) {
   std::vector<std::string>personalResultStringVector = personal->toStringVector();
 
   IOHelper::Output::printTableRow(personalResultStringVector);
@@ -109,9 +109,9 @@ void IOHelper::Output::printTableRow(Personal* personal) {
 /**
  * This function print the full GPA Table.
  *
- * @param  Personal*
+ * @param  IPersonal*
  */
-void IOHelper::Output::printGPATable(Personal* personal) {
+void IOHelper::Output::printGPATable(IPersonal* personal) {
   std::cout << "Total classes passed: " << personal->getTotalClassesPassed() 
             << " ("<< Utility::percent(personal->getTotalClassesPassed(), personal->getTotalClasses())
             << " %)" << '\n';
@@ -137,9 +137,9 @@ void IOHelper::Output::printGPATable(Personal* personal) {
 /**
  * This function print the failed table.
  *
- * @param  Personal*
+ * @param  IPersonal*
  */
-void IOHelper::Output::printFailedTable(Personal* personal) {
+void IOHelper::Output::printFailedTable(IPersonal* personal) {
   std::cout << "Total classes failed: " << personal->getTotalClassesFailed() 
             << " ("<< Utility::percent(personal->getTotalClassesFailed(), personal->getTotalClasses())
             << " %)" << '\n';

@@ -11,8 +11,40 @@
 #ifndef PERSONAL_H
 #define PERSONAL_H
 
-class Personal {
-private:
+/**
+ * Personal interface.
+ *
+ */
+class IPersonal {
+public:
+  virtual ~IPersonal() {
+    // Do nothing.
+  }
+
+public:
+  virtual int sumCredits()  = 0;
+  virtual Grade sumGrades() = 0;
+  virtual Grade resultGPA() = 0;
+  
+  virtual std::vector<std::string> toStringVector() = 0;
+  
+  virtual int getTotalClasses() = 0;
+  virtual int getTotalClassesPassed() = 0;
+  virtual int getTotalClassesFailed() = 0;
+
+  virtual std::multiset<Subject> classesPassed() = 0;
+  virtual std::multiset<Subject> classesFailed() = 0;
+
+  virtual void addSubject(Subject) = 0;
+};
+
+/**
+ * Personal GPA class.
+ *
+ * Using this class when we need to calculate overall GPA.
+ */
+class PersonalGPA : public IPersonal {
+protected:
   // Personal grades.
   int 	  _sumCredits;
   Grade   _sumGrades;
@@ -23,17 +55,19 @@ private:
   std::multiset<Subject> _classesFailed;
 
 public:
-  // Constructor & destructor.
-  Personal(const std::vector<Subject>& subjectVector) {
+  PersonalGPA() {
     _sumCredits = 0;
-    _sumGrades = 0.0;
-    _resultGPA = 0.0;
+    _sumGrades  = 0.0;
+    _resultGPA  = 0.0;
+  }
 
+  // Constructor & destructor.
+  PersonalGPA(const std::vector<Subject>& subjectVector) {
     for (auto subject : subjectVector)
       addSubject(subject);
   }
 
-  ~Personal() {
+  ~PersonalGPA() {
     // Do nothing;
   }
 
@@ -116,6 +150,34 @@ public:
 
     // Insert to passed list.
     _classesPassed.insert(subject);
+  }
+};
+
+/**
+ * PersonalSpecific class
+ *
+ * This class is used when we want to calculate average
+ * of some specific classes with default class code only.
+ *
+ * e.g: I want to calculate average of "CSCxxxxx" course.
+ * So I'll use this class, with default subjectVector and classPrefix = "CSC".
+ */
+class PersonalSpecific : public PersonalGPA {
+public:
+  PersonalSpecific(const std::vector<Subject>& subjectVector, const std::string& classPrefix) {
+    _sumCredits = 0;
+    _sumGrades  = 0.0;
+    _resultGPA  = 0.0;
+
+    // Add classes with specific prefix only.
+    for (auto subject : subjectVector) {
+      if (Utility::isPrefix(subject.name(), classPrefix))
+        addSubject(subject);
+    }
+  }
+
+  ~PersonalSpecific() {
+    // Do nothing
   }
 };
 
