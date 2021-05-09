@@ -63,6 +63,10 @@ public:
 
   // Constructor & destructor.
   PersonalGPA(const std::vector<Subject>& subjectVector) {
+    _sumCredits = 0;
+    _sumGrades  = 0.0;
+    _resultGPA  = 0.0;
+    
     for (auto subject : subjectVector)
       addSubject(subject);
   }
