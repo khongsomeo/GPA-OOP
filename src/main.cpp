@@ -25,23 +25,20 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  // Read subjects into vector.
-  std::vector<Subject> subjects = IOHelper::Input::parseSubjectVector(fileName);
-
   // Create a new IPersonal instance.
-  // argc - 1 == 2 means the input goes like ./main <inputfile> <class prefix>
-  IPersonal* chumeochuixoong = ((argc - 1 == 2) ? new PersonalSpecific(subjects, std::string(argv[2])) : new PersonalGPA(subjects));
+  std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::instance()->create(argc, argv);
 
   // Print the textart.
-  IOHelper::Output::printTextart();
+  OutputHelper::printTextart();
 
-  // Print list of classes passed.
-  IOHelper::Output::printGPATable(chumeochuixoong);
+  std::cout << "Total passed classes: " << chumeochuixoong->getTotalClassesPassed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
+  OutputHelper::printTable(chumeochuixoong->toPassedVector());
 
-  // Print list of failed classes.
-  IOHelper::Output::printFailedTable(chumeochuixoong);
+  std::cout << '\n';
+  
+  std::cout << "Total failed classes: " << chumeochuixoong->getTotalClassesFailed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
 
-  delete chumeochuixoong;
+  OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
 
   return 0;
 }

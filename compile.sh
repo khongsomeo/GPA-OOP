@@ -1,1 +1,1 @@
-g++ src/*.cpp -o main
+g++ src/*.cpp -o main --std=c++17

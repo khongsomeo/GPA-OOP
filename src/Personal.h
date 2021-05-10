@@ -4,6 +4,8 @@
  * Code by @trhgquan - https://github.com/trhgquan.
  */
 
+#pragma once
+
 #ifndef INCLUDE_H
 #include"include.h"
 #endif
@@ -16,7 +18,7 @@
  *
  */
 class IPersonal {
-public:
+public: 
   virtual ~IPersonal() {
     // Do nothing.
   }
@@ -27,14 +29,14 @@ public:
   virtual Grade resultGPA() = 0;
   
   virtual std::vector<std::string> toStringVector() = 0;
+  virtual std::vector<std::vector<std::string>> toPassedVector() = 0;
+  virtual std::vector<std::vector<std::string>> toFailedVector() = 0;
   
   virtual int getTotalClasses() = 0;
   virtual int getTotalClassesPassed() = 0;
   virtual int getTotalClassesFailed() = 0;
 
-  virtual std::multiset<Subject> classesPassed() = 0;
-  virtual std::multiset<Subject> classesFailed() = 0;
-
+  virtual std::shared_ptr<IPersonal> parse(const int&, char**) = 0;
   virtual void addSubject(Subject) = 0;
 };
 
@@ -45,51 +47,63 @@ public:
  */
 class PersonalGPA : public IPersonal {
 protected:
-  // Personal grades.
-  int 	  _sumCredits;
-  Grade   _sumGrades;
-  Grade   _resultGPA;
+  // Stores personal grades & credits.
+  int   _sumCredits = 0;
+  Grade _sumGrades  = 0.0;
+  Grade _resultGPA  = 0.0;
 
-  // Classes.
+  // Stores classes passed / failed.
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
 
 public:
   PersonalGPA() {
-    _sumCredits = 0;
-    _sumGrades  = 0.0;
-    _resultGPA  = 0.0;
-  }
-
-  // Constructor & destructor.
-  PersonalGPA(const std::vector<Subject>& subjectVector) {
-    _sumCredits = 0;
-    _sumGrades  = 0.0;
-    _resultGPA  = 0.0;
-    
-    for (auto subject : subjectVector)
-      addSubject(subject);
+    // Do nothing;
   }
 
   ~PersonalGPA() {
     // Do nothing;
   }
 
+  PersonalGPA(const std::vector<Subject>& subjects) {
+    for (int i = 0; i < subjects.size(); ++i) {
+      addSubject(subjects[i]);
+    }
+  }
+
 public:
-  // Getter.
+  /**
+   * Return total credits
+   *
+   * @return int
+   */
   int sumCredits() {
     return _sumCredits;
   }
 
+  /**
+   * Return sum grades.
+   * 
+   * @return Grade
+   */
   Grade sumGrades() {
     return _sumGrades;
   }
 
+  /**
+   * Return GPA
+   *
+   * @return Grade
+   */
   Grade resultGPA() {
     return _resultGPA;
   }
 
-  // Convert Personal class into a string vector.
+  /**
+   * Convert class to string vector.
+   *
+   * @return std::vector<std::string>
+   */
   std::vector<std::string> toStringVector() {
     std::stringstream builder;
     std::vector<std::string> resultVector;
@@ -118,28 +132,84 @@ public:
     return resultVector;
   }
 
-  // Classes (passed/failed) related.
+  /**
+   * Convert to vector of string vectors.
+   *
+   * @return std::vector<std::vector<std::string>>
+   */
+  std::vector<std::vector<std::string>> toPassedVector() {
+    std::vector<std::vector<std::string>> resultVector;
+
+    for (auto subject : _classesPassed) {
+      resultVector.push_back(subject.toStringVector());
+    }
+
+    resultVector.push_back(toStringVector());
+
+    return resultVector;
+  }
+
+  /**
+   * Just like above, but for failed.
+   *
+   * @return std::vector<std::vector<std::string>>
+   */
+  std::vector<std::vector<std::string>> toFailedVector() {
+    std::vector<std::vector<std::string>> resultVector;
+
+    for (auto subject : _classesFailed) {
+      resultVector.push_back(subject.toStringVector());
+    }
+
+    return resultVector;
+  }
+
+  /**
+   * Return total classes.
+   *
+   * @return int
+   */
   int getTotalClasses() {
     return _classesPassed.size() + _classesFailed.size();
   }
 
+  /**
+   * Return total passed classes.
+   *
+   * @return int
+   */
   int getTotalClassesPassed() {
     return _classesPassed.size();
   }
 
+  /**
+   * Return total failed classes.
+   *
+   * @return int
+   */
   int getTotalClassesFailed() {
     return _classesFailed.size();
   }
 
-  std::multiset<Subject> classesPassed() {
-    return _classesPassed;
+  /**
+   * Parse data into Personal
+   *
+   * @param  const int&
+   * @param  char**
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
+  std::shared_ptr<IPersonal> parse(const int& argc, char** argv) {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
+
+    return std::make_shared<PersonalGPA>(subjects);
   }
 
-  std::multiset<Subject> classesFailed() {
-    return _classesFailed;
-  }
-
-  // Handling how we add a new subject.
+  /**
+   * Add a new subject.
+   *
+   * @param  Subject
+   */
   void addSubject(Subject subject) {
     // If not passed, then insert into failed list.
     if (!subject.passed()) {
@@ -168,21 +238,104 @@ public:
  */
 class PersonalSpecific : public PersonalGPA {
 public:
-  PersonalSpecific(const std::vector<Subject>& subjectVector, const std::string& classPrefix) {
-    _sumCredits = 0;
-    _sumGrades  = 0.0;
-    _resultGPA  = 0.0;
-
-    // Add classes with specific prefix only.
-    for (auto subject : subjectVector) {
-      if (Utility::isPrefix(subject.name(), classPrefix))
-        addSubject(subject);
-    }
+  PersonalSpecific() {
+    // Do nothing
   }
 
   ~PersonalSpecific() {
     // Do nothing
   }
+
+  /**
+   * Parameterised constructor.
+   *
+   * @param  std::vector<Subject>
+   * @param  const std::string&
+   */
+  PersonalSpecific(std::vector<Subject> subjects, const std::string& coursePrefix) {
+    for (int i = 0; i < subjects.size(); ++i) {
+      if (Utility::isPrefix(subjects[i].name(), coursePrefix)) {
+          addSubject(subjects[i]);
+      }
+    }
+  }
+
+public:
+  /**
+   * Parse a PersonalSpecific object.
+   *
+   * @param  const int&
+   * @param  char**
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
+  std::shared_ptr<IPersonal> parse(const int& argc, char** argv) override {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
+
+    return std::make_shared<PersonalSpecific>(subjects, std::string(argv[2]));
+  }
 };
 
+
+/**
+ * PersonalFactory class - Singleton pattern
+ *
+ * This class is used to generate Personal interface.
+ */
+class PersonalFactory {
+private:
+  // Singleton
+  inline static PersonalFactory* _instance = NULL;
+
+  // List of prototypes.
+  std::vector<std::shared_ptr<IPersonal>> _prototypes;
+
+  // Setting up.
+  PersonalFactory() {
+    _prototypes.push_back(std::make_shared<PersonalGPA>());
+    _prototypes.push_back(std::make_shared<PersonalSpecific>());
+  }
+public:
+  ~PersonalFactory() {
+    delete _instance;
+  }
+
+public:
+  /**
+   * Init a new instance.
+   *
+   * @return PersonalFactory*
+   */
+  static PersonalFactory* instance() {
+    if (_instance == NULL) {
+      _instance = new PersonalFactory();
+    }
+
+    return _instance;
+  }
+
+  /**
+   * Return total items inside _prototypes.
+   *
+   * @return int
+   */
+  int prototypeSize() {
+    return _prototypes.size();
+  }
+
+  /**
+   * Create a new instacne of IPersonal
+   *
+   * @param  const std::vector<Subject>&
+   * @param  const std::string
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
+  std::shared_ptr<IPersonal> create(const int& argc, char** argv) {
+    // New instance's pointer
+    std::shared_ptr<IPersonal> newPersonal = _prototypes[argc - 2]->parse(argc, argv);
+
+    return newPersonal;
+  }
+};
 #endif

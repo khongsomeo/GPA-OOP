@@ -29,15 +29,29 @@ public:
     // Do nothing
   }
 public:
-  // Getter
+  /**
+   * Subject name
+   *
+   * @return std::string
+   */
   std::string name() {
     return _name;
   }
 
+  /**
+   * Subject credit
+   *
+   * @return int
+   */
   int credit() {
     return _credit;
   }
 
+  /**
+   * Subject grade
+   *
+   * @return Grade
+   */
   Grade grade() {
     return _grade;
   }
@@ -48,7 +62,11 @@ public:
     return (_grade > subject._grade) || (_grade == subject._grade && _credit > subject._credit);
   }
 
-  // Method to return a vector, containing subject's info in string.
+  /**
+   * Convert Subject to a string vector.
+   *
+   * @return std::vector<std::string>
+   */
   std::vector<std::string> toStringVector() {
     std::stringstream builder;
     builder << std::fixed << std::setprecision(2);
@@ -77,9 +95,56 @@ public:
     return subjectString;
   }
 
-  // Check if a subject is passed.
+  /**
+   * Check if subject passed.
+   *
+   * @return bool
+   */
   bool passed() {
     return _grade >= 5.0;
+  }
+
+  /**
+   * This method parse a subject from a CSV line.
+   *
+   * @param  const std::string&
+   *
+   * @return Subject
+   */
+  static Subject parse(const std::string& buffer) {
+    std::vector<std::string> tokens = InputHelper::splitTokens(buffer, ",");
+
+    return Subject(tokens[0], stoi(tokens[1]), stod(tokens[2]));
+  }
+
+  /**
+   * This method parse a vector of Subjects from a CSV file.
+   *
+   * @param  const std::string&
+   *
+   * @return std::vector<Subject>
+   */
+  static std::vector<Subject> parseSubjectVector(const std::string& fileName) {
+    std::vector<Subject> subjects;
+
+    std::ifstream fileOpen(fileName);
+    std::string buffer;
+    int lineIndex = 0;
+
+    // Read csv file by line.
+    while (std::getline(fileOpen, buffer)) {
+      try {
+        ++lineIndex;
+        subjects.push_back(parse(buffer));
+      } catch (const std::exception& e) {
+        std::cout << "Error happened on line " << lineIndex
+                  << ", code: " << e.what() << '\n';
+      }
+    }
+
+    fileOpen.close();
+    
+    return subjects;
   }
 };
 #endif
