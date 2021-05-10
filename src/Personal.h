@@ -47,18 +47,18 @@ public:
  */
 class PersonalGPA : public IPersonal {
 protected:
-  // Personal grades.
+  // Stores personal grades & credits.
   int   _sumCredits = 0;
   Grade _sumGrades  = 0.0;
   Grade _resultGPA  = 0.0;
 
-  // Classes.
+  // Stores classes passed / failed.
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
 
 public:
   PersonalGPA() {
-    // Do nothing
+    // Do nothing;
   }
 
   ~PersonalGPA() {
@@ -72,20 +72,38 @@ public:
   }
 
 public:
-  // Getter.
+  /**
+   * Return total credits
+   *
+   * @return int
+   */
   int sumCredits() {
     return _sumCredits;
   }
 
+  /**
+   * Return sum grades.
+   * 
+   * @return Grade
+   */
   Grade sumGrades() {
     return _sumGrades;
   }
 
+  /**
+   * Return GPA
+   *
+   * @return Grade
+   */
   Grade resultGPA() {
     return _resultGPA;
   }
 
-  // Convert Personal class into a string vector.
+  /**
+   * Convert class to string vector.
+   *
+   * @return std::vector<std::string>
+   */
   std::vector<std::string> toStringVector() {
     std::stringstream builder;
     std::vector<std::string> resultVector;
@@ -114,6 +132,11 @@ public:
     return resultVector;
   }
 
+  /**
+   * Convert to vector of string vectors.
+   *
+   * @return std::vector<std::vector<std::string>>
+   */
   std::vector<std::vector<std::string>> toPassedVector() {
     std::vector<std::vector<std::string>> resultVector;
 
@@ -126,6 +149,11 @@ public:
     return resultVector;
   }
 
+  /**
+   * Just like above, but for failed.
+   *
+   * @return std::vector<std::vector<std::string>>
+   */
   std::vector<std::vector<std::string>> toFailedVector() {
     std::vector<std::vector<std::string>> resultVector;
 
@@ -136,27 +164,52 @@ public:
     return resultVector;
   }
 
-  // Classes (passed/failed) related.
+  /**
+   * Return total classes.
+   *
+   * @return int
+   */
   int getTotalClasses() {
     return _classesPassed.size() + _classesFailed.size();
   }
 
+  /**
+   * Return total passed classes.
+   *
+   * @return int
+   */
   int getTotalClassesPassed() {
     return _classesPassed.size();
   }
 
+  /**
+   * Return total failed classes.
+   *
+   * @return int
+   */
   int getTotalClassesFailed() {
     return _classesFailed.size();
   }
 
-  // Parse data into Personal
+  /**
+   * Parse data into Personal
+   *
+   * @param  const int&
+   * @param  char**
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
   std::shared_ptr<IPersonal> parse(const int& argc, char** argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
 
     return std::make_shared<PersonalGPA>(subjects);
   }
 
-  // Handling how we add a new subject.
+  /**
+   * Add a new subject.
+   *
+   * @param  Subject
+   */
   void addSubject(Subject subject) {
     // If not passed, then insert into failed list.
     if (!subject.passed()) {
@@ -193,6 +246,12 @@ public:
     // Do nothing
   }
 
+  /**
+   * Parameterised constructor.
+   *
+   * @param  std::vector<Subject>
+   * @param  const std::string&
+   */
   PersonalSpecific(std::vector<Subject> subjects, const std::string& coursePrefix) {
     for (int i = 0; i < subjects.size(); ++i) {
       if (Utility::isPrefix(subjects[i].name(), coursePrefix)) {
@@ -202,6 +261,14 @@ public:
   }
 
 public:
+  /**
+   * Parse a PersonalSpecific object.
+   *
+   * @param  const int&
+   * @param  char**
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
   std::shared_ptr<IPersonal> parse(const int& argc, char** argv) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
 
@@ -211,7 +278,7 @@ public:
 
 
 /**
- * PersonalFactory class
+ * PersonalFactory class - Singleton pattern
  *
  * This class is used to generate Personal interface.
  */
@@ -228,6 +295,11 @@ private:
     _prototypes.push_back(std::make_shared<PersonalGPA>());
     _prototypes.push_back(std::make_shared<PersonalSpecific>());
   }
+public:
+  ~PersonalFactory() {
+    delete _instance;
+  }
+
 public:
   /**
    * Init a new instance.

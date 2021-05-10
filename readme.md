@@ -4,7 +4,8 @@ My example OOP project for CSC10003 - Introduction to Object Oriented Programmin
 VNUHCM - University of Science, Spring 2021.
 
 ## Installation
- `git clone`
+- Make sure your C++ version >= C++17.
+- `git clone`
 
 ## Running
 ### Calculate overall GPA
