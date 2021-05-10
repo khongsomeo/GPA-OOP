@@ -81,5 +81,48 @@ public:
   bool passed() {
     return _grade >= 5.0;
   }
+
+  /**
+   * This method parse a subject from a CSV line.
+   *
+   * @param  const std::string&
+   *
+   * @return Subject
+   */
+  static Subject parse(const std::string& buffer) {
+    std::vector<std::string> tokens = InputHelper::splitTokens(buffer, ",");
+
+    return Subject(tokens[0], stoi(tokens[1]), stod(tokens[2]));
+  }
+
+  /**
+   * This method parse a vector of Subjects from a CSV file.
+   *
+   * @param  const std::string&
+   *
+   * @return std::vector<Subject>
+   */
+  static std::vector<Subject> parseSubjectVector(const std::string& fileName) {
+    std::vector<Subject> subjects;
+
+    std::ifstream fileOpen(fileName);
+    std::string buffer;
+    int lineIndex = 0;
+
+    // Read csv file by line.
+    while (std::getline(fileOpen, buffer)) {
+      try {
+        ++lineIndex;
+        subjects.push_back(parse(buffer));
+      } catch (const std::exception& e) {
+        std::cout << "Error happened on line " << lineIndex
+                  << ", code: " << e.what() << '\n';
+      }
+    }
+
+    fileOpen.close();
+    
+    return subjects;
+  }
 };
 #endif

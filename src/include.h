@@ -10,6 +10,7 @@
 #include<iostream>
 #include<iomanip>
 #include<fstream>
+#include<memory>
 #include<sstream>
 #include<string>
 #include<set>
@@ -17,8 +18,9 @@
 
 // Custom header
 #include"Utility.h"
+#include"InputHelper.h"
 #include"Grade.h"
 #include"Subject.h"
 #include"Personal.h"
-#include"IOHelper.h"
+#include"OutputHelper.h"
 #endif
