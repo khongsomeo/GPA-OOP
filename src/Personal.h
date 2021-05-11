@@ -36,7 +36,7 @@ public:
   virtual int getTotalClassesPassed() = 0;
   virtual int getTotalClassesFailed() = 0;
 
-  virtual std::shared_ptr<IPersonal> parse(const int&, char**) = 0;
+  virtual std::shared_ptr<IPersonal> parse(char**) = 0;
   virtual void addSubject(Subject) = 0;
 };
 
@@ -194,12 +194,11 @@ public:
   /**
    * Parse data into Personal
    *
-   * @param  const int&
    * @param  char**
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(const int& argc, char** argv) {
+  std::shared_ptr<IPersonal> parse(char** argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
 
     return std::make_shared<PersonalGPA>(subjects);
@@ -264,12 +263,11 @@ public:
   /**
    * Parse a PersonalSpecific object.
    *
-   * @param  const int&
    * @param  char**
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(const int& argc, char** argv) override {
+  std::shared_ptr<IPersonal> parse(char** argv) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
 
     return std::make_shared<PersonalSpecific>(subjects, std::string(argv[2]));
@@ -333,7 +331,7 @@ public:
    */
   std::shared_ptr<IPersonal> create(const int& argc, char** argv) {
     // New instance's pointer
-    std::shared_ptr<IPersonal> newPersonal = _prototypes[argc - 2]->parse(argc, argv);
+    std::shared_ptr<IPersonal> newPersonal = _prototypes[argc - 2]->parse(argv);
 
     return newPersonal;
   }
