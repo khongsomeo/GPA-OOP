@@ -270,10 +270,65 @@ public:
   std::shared_ptr<IPersonal> parse(char** argv) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
 
-    return std::make_shared<PersonalSpecific>(subjects, std::string(argv[2]));
+    return std::make_shared<PersonalSpecific>(subjects, std::string(argv[3]));
   }
 };
 
+/**
+ * PersonalExcept class
+ *
+ * This class is used when we need to calculate GPA except some classes.
+ *
+ * For example, I need to calculate my GPA except PE, English and National Defense.
+ * So I'll add these courses's code to except.txt, and use this class instead.
+ */
+class PersonalExcept : public PersonalGPA {
+private:
+  std::multiset<std::string> _ignoredCourses;
+
+public:
+  PersonalExcept() {
+    // Do nothing.
+  }
+
+  ~PersonalExcept() {
+    // Do nothing.
+  }
+
+  /**
+   * Parameterised constructor for PersonalExcept
+   *
+   * @param  std::vector<Subject>
+   * @param  const std::vector<std::string>
+   */
+  PersonalExcept(std::vector<Subject> subjects, const std::vector<std::string>& ignoredCourses) {
+    // Insert ignored courses inside a multiset.
+    for (int i = 0; i < ignoredCourses.size(); ++i)
+      _ignoredCourses.insert(ignoredCourses[i]);
+
+    // Add Subject when it doesn't exist inside _ignoredCourses.
+    for (int i = 0; i < subjects.size(); ++i) {
+      if (_ignoredCourses.find(subjects[i].name()) == _ignoredCourses.end()) {
+        addSubject(subjects[i]);
+      }
+    }
+  }
+
+public:
+  /**
+   * Parse a PersonalExcept object.
+   *
+   * @param  char** argv
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
+  std::shared_ptr<IPersonal> parse(char** argv) override {
+    std::vector<Subject> subjectVector = Subject::parseSubjectVector(std::string(argv[1]));
+    std::vector<std::string> ignoredCourses = InputHelper::readFileLines(std::string(argv[3]));
+
+    return std::make_shared<PersonalExcept>(subjectVector, ignoredCourses);
+  }
+};
 
 /**
  * PersonalFactory class - Singleton pattern
@@ -287,11 +342,19 @@ private:
 
   // List of prototypes.
   std::vector<std::shared_ptr<IPersonal>> _prototypes;
+  std::vector<std::string> _optionNames;
 
   // Setting up.
   PersonalFactory() {
+    // Push list of option names.
+    _optionNames.push_back("--gpa");
+    _optionNames.push_back("--specific");
+    _optionNames.push_back("--except");
+
+    // Push list of prototypes.
     _prototypes.push_back(std::make_shared<PersonalGPA>());
     _prototypes.push_back(std::make_shared<PersonalSpecific>());
+    _prototypes.push_back(std::make_shared<PersonalExcept>());
   }
 public:
   ~PersonalFactory() {
@@ -324,14 +387,31 @@ public:
   /**
    * Create a new instacne of IPersonal
    *
-   * @param  const std::vector<Subject>&
-   * @param  const std::string
+   * @param  const int& argc
+   * @param  char** argv
    *
    * @return std::shared_ptr<IPersonal>
    */
   std::shared_ptr<IPersonal> create(const int& argc, char** argv) {
+    // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
+
+    std::shared_ptr<IPersonal> newPersonal = NULL;
+
+    int optionIndex = _optionNames.size() - 1;
+
+    // If there is only 1 arguments.
+    if (argc - 1 == 1) {
+      optionIndex = 0;
+    }
+
+    else {
+      for (; optionIndex > 0; --optionIndex) {
+        if (argv[2] == _optionNames[optionIndex]) break;
+      }
+    }
+
     // New instance's pointer
-    std::shared_ptr<IPersonal> newPersonal = _prototypes[argc - 2]->parse(argv);
+    newPersonal = _prototypes[optionIndex]->parse(argv);
 
     return newPersonal;
   }

@@ -26,19 +26,23 @@ int main(int argc, char* argv[]) {
   }
 
   // Create a new IPersonal instance.
-  std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::instance()->create(argc, argv);
+  try {
+    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::instance()->create(argc, argv);
 
-  // Print the textart.
-  OutputHelper::printTextart();
+    // Print the textart.
+    OutputHelper::printTextart();
 
-  std::cout << "Total passed classes: " << chumeochuixoong->getTotalClassesPassed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
-  OutputHelper::printTable(chumeochuixoong->toPassedVector());
+    std::cout << "Total passed classes: " << chumeochuixoong->getTotalClassesPassed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
+    OutputHelper::printTable(chumeochuixoong->toPassedVector());
 
-  std::cout << '\n';
+    std::cout << '\n';
   
-  std::cout << "Total failed classes: " << chumeochuixoong->getTotalClassesFailed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
+    std::cout << "Total failed classes: " << chumeochuixoong->getTotalClassesFailed() << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) <<  "%)" << '\n';
 
-  OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
+    OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
+  } catch (const std::exception& e) {
+    std::cout << "Error happened, code: " << e.what() << '\n';
+  }
 
   return 0;
 }

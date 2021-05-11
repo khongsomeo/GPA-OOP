@@ -38,6 +38,25 @@ public:
 
     return tokens;
   }
+
+  /**
+   * Read a file to vector of strings.
+   *
+   * @param  const std::string&
+   *
+   * @return std::vector<std::string>
+   */
+  static std::vector<std::string> readFileLines(const std::string& inputFile) {
+    std::ifstream openFile(inputFile);
+    std::string buffer;
+    std::vector<std::string> resultVector;
+
+    while (std::getline(openFile, buffer)) {
+      resultVector.push_back(buffer);
+    }
+
+    return resultVector;
+  }
 };
 
 #endif
