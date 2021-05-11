@@ -8,38 +8,57 @@ VNUHCM - University of Science, Spring 2021.
 - `git clone`
 
 ## Running
-### Some usefull command-line arguments
-Let's think you have compiled the program successfully to <PROGRAM>.exe, then:
-- To calculate overall GPA: `./<PROGRAM> <GRADE_FILE.csv> --gpa`
-- To calculate GPA of courses start with `<COURSE CODE>`: `./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE>`
-- To calculate GPA but ignore some courses inside `EXCEPTION_FILE.txt`: `./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>`
+### Input format
+- The input `.csv` file should looks like this:
 
-### Setting up shell scripts
-1. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
+  |course code|course credit|course grade|
+  |:---------:|:-----------:|:----------:|
+  |CSC10001|4|10
+  |CSC10002|4|8.5
+  |...|...|...
 
-    | Course name | Credits | Grade |
-    |-------------|---------|-------|
-    |First course |   1     |  10.0 |
-    |Second course|   1     |   9.0 |
-    |(continue)   |   ..    |   ..  |
+- The input course ignore `.txt` file should looks like this:
+  ```text
+  CSC10001
+  CSC10002
+  ..(more rows)
+  ```
 
-    Example input file: `data/19120338.csv`.
+### Command-line arguments
+Given that the program has been compiled successfully to <PROGRAM>.exe, then:
+- To calculate overall GPA:
+  ```shell
+  $ ./<PROGRAM> <GRADE_FILE.csv> --gpa
+  ```
+- To calculate GPA of courses start with `<COURSE CODE>`: 
+  ```shell
+  $ ./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE>
+  ```
+- To calculate GPA but ignore some courses defines inside `EXCEPTION_FILE.txt`:
+  ```shell
+  $ ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>
+  ```
 
-2. In `run.sh`, 
+### Shell script
+- Grant permissions:
+  ```shell
+  $ chmod 0700 run.sh compile.sh
+  ```
 
-    change `YOUR_GRADE_FILE` to your `.csv` filename from step 2.
+- Compile:
+  ```shell
+  $ ./compile.sh
+  ```
 
-    change `GPA_FILE` to a nice, awesome filename; or just leave it alone.
-3. Grant permissons for `compile.sh` and `run.sh`:
+- Edit `run.sh`.
 
-    `chmod 0700 compile.sh run.sh`. 
-4. Compile the script: `./compile.sh`
-5. Run the script: `./run.sh`
-
+- Run:
+  ```shell
+  $ ./run.sh
+  ```
 ### Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
 
 ## Attention!
 1. Default grade scale is 10.
 2. 4-scale and A-scale are based on [VNUHCM - University of Science Student Guide 2020-21](https://www.hcmus.edu.vn/component/content/article/124-cong-tac-sinh-vien/thong-tin-danh-cho-tan-sinh-vien/3323-so-tay-sinh-vien-nam-hoc-2020-2021?Itemid=437)
-3. You can place default data file inside `data/` folder.
