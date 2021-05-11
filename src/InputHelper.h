@@ -45,15 +45,28 @@ public:
    * @param  const std::string&
    *
    * @return std::vector<std::string>
+   *
+   * @throw  std::runtime_error
    */
   static std::vector<std::string> readFileLines(const std::string& inputFile) {
+    // If the file DNE, throw new error.
+    if (!Utility::isFileExist(inputFile)) {
+      std::stringstream builder;
+
+      builder << "File not found: ";
+
+      builder << inputFile;
+
+      throw std::runtime_error(builder.str());
+    }
+
     std::ifstream openFile(inputFile);
     std::string buffer;
     std::vector<std::string> resultVector;
 
     while (std::getline(openFile, buffer)) {
       resultVector.push_back(buffer);
-    }
+    };
 
     return resultVector;
   }

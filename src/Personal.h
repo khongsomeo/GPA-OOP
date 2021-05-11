@@ -168,9 +168,18 @@ public:
    * Return total classes.
    *
    * @return int
+   *
+   * @throw  std::runtime_error
    */
   int getTotalClasses() {
-    return _classesPassed.size() + _classesFailed.size();
+    int totalClasses = _classesPassed.size() + _classesFailed.size();
+
+    // Handling the situtation that no class added.
+    if (0 == totalClasses) {
+      throw std::runtime_error("No class was added.");
+    }
+
+    return totalClasses;
   }
 
   /**
