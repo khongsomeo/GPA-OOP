@@ -10,9 +10,9 @@ VNUHCM - University of Science, Spring 2021.
 ## Running
 ### Some usefull command-line arguments
 Let's think you have compiled the program successfully to <PROGRAM>.exe, then:
-- ./<PROGRAM> <GRADE_FILE.csv> --gpa _calculate GPA overall_
-- ./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE> _calculate GPA of courses start with <COURSE CODE>_
-- ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt> _calculate GPA, ignore courses inside EXCEPTION_FILE.txt_
+- `./<PROGRAM> <GRADE_FILE.csv> --gpa` _calculate GPA overall_
+- `./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE>` _calculate GPA of courses start with <COURSE CODE>_
+- `./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>` _calculate GPA, ignore courses inside EXCEPTION_FILE.txt_
 
 ### Setting up shell scripts
 1. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
