@@ -127,23 +127,18 @@ public:
   static std::vector<Subject> parseSubjectVector(const std::string& fileName) {
     std::vector<Subject> subjects;
 
-    std::ifstream fileOpen(fileName);
-    std::string buffer;
-    int lineIndex = 0;
+    std::vector<std::string> lineStrings = InputHelper::readFileLines(fileName);
 
     // Read csv file by line.
-    while (std::getline(fileOpen, buffer)) {
+    for (int i = 0; i < lineStrings.size(); ++i) {
       try {
-        ++lineIndex;
-        subjects.push_back(parse(buffer));
+        subjects.push_back(parse(lineStrings[i]));
       } catch (const std::exception& e) {
-        std::cout << "Error happened on line " << lineIndex
+        std::cout << "Error happened on line " << i + 1
                   << ", code: " << e.what() << '\n';
       }
     }
 
-    fileOpen.close();
-    
     return subjects;
   }
 };

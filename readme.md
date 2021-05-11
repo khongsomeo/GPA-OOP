@@ -8,7 +8,13 @@ VNUHCM - University of Science, Spring 2021.
 - `git clone`
 
 ## Running
-### Calculate overall GPA
+### Some usefull command-line arguments
+Let's think you have compiled the program successfully to <PROGRAM>.exe, then:
+- ./<PROGRAM> <GRADE_FILE.csv> --gpa _calculate GPA overall_
+- ./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE> _calculate GPA of courses start with <COURSE CODE>_
+- ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt> _calculate GPA, ignore courses inside EXCEPTION_FILE.txt_
+
+### Setting up shell scripts
 1. Create `YOUR_GRADE_FILE.csv` with `YOUR_GRADE_FILE` replaced by an awesome name. The file's content should look like this:
 
     | Course name | Credits | Grade |
@@ -29,14 +35,6 @@ VNUHCM - University of Science, Spring 2021.
     `chmod 0700 compile.sh run.sh`. 
 4. Compile the script: `./compile.sh`
 5. Run the script: `./run.sh`
-
-### Don't want to use shell scripts?
-This program use commandline arguments, so you need to compile it to executable file before taken any further actions.
-
-To start the program, `./<PROGRAM_NAME> <path to your .csv data file>` with `<PROGRAM NAME>` replaced with your program name after compile.
-
-### Calculate average grade of custom classes only.
-Let's assuming you're a Computer Science student and you want to know what is your Computer Science courses's average. Assuming your CS classes's code start with "CSC". `./<PROGRAM_NAME> <path to your .csv data file> CSC` will calculate average of CSC classes.
 
 ### Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
