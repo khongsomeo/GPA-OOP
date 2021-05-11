@@ -133,9 +133,12 @@ public:
     for (int i = 0; i < lineStrings.size(); ++i) {
       try {
         subjects.push_back(parse(lineStrings[i]));
-      } catch (const std::exception& e) {
-        std::cout << "Error happened on line " << i + 1
-                  << ", code: " << e.what() << '\n';
+      }
+      
+      catch (const std::exception& e) {
+        std::cout << "Error happened while reading file, on line " << i + 1
+                  << " (" << e.what() << ")" 
+                  << '\n';
       }
     }
 
