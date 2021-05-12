@@ -42,8 +42,8 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 ### 3. Shell scripts
 - Rename `compile.sh.example` and `run.sh.example` to `.sh` extension:
   ```shell
-  $ mv compile.sh.example compile.sh
-  $ mv run.sh.example run.sh
+  $ cp compile.sh.example compile.sh
+  $ cp run.sh.example run.sh
   ```
 
 - Grant permissions:
