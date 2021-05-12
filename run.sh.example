@@ -1,12 +1,15 @@
 # Script execution
 
+## Grade file (path to .csv grade file).
 GRADE_FILE=""
+
+## Result file (path to .txt output result file).
 RESULT_FILE=""
 
-# Specific course
+## Specific course (a string)
 SPECIFIC_COURSE=""
 
-# ignoring some courses
+## ignoring some courses (path to ignore.txt file)
 IGNORE_FILE=""
 
 ## Uncomment this line to calculate overall GPA and print it to $RESULT_FILE.
