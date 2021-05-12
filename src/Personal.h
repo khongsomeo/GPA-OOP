@@ -105,31 +105,10 @@ public:
    * @return std::vector<std::string>
    */
   std::vector<std::string> toStringVector() {
-    std::stringstream builder;
-    std::vector<std::string> resultVector;
+    // Treats GPA is like a subject.
+    Subject GPASubject("GPA", _sumCredits, _resultGPA);
 
-    builder << std::fixed << std::setprecision(2);
-
-    builder << "GPA";
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _sumCredits;
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA;
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA.to4Scale();
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA.toAScale();
-    resultVector.push_back(builder.str());
-      
-    return resultVector;
+    return GPASubject.toStringVector();
   }
 
   /**
