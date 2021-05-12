@@ -14,7 +14,7 @@
 #define PERSONAL_H
 
 /**
- * Personal interface.
+ * IPersonal interface.
  *
  */
 class IPersonal {
@@ -65,6 +65,11 @@ public:
     // Do nothing;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  const std::vector<Subject>&
+   */
   PersonalGPA(const std::vector<Subject>& subjects) {
     for (int i = 0; i < subjects.size(); ++i) {
       addSubject(subjects[i]);
@@ -105,31 +110,10 @@ public:
    * @return std::vector<std::string>
    */
   std::vector<std::string> toStringVector() {
-    std::stringstream builder;
-    std::vector<std::string> resultVector;
+    // Treat GPA like a subject.
+    Subject GPASubject("GPA", _sumCredits, _resultGPA);
 
-    builder << std::fixed << std::setprecision(2);
-
-    builder << "GPA";
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _sumCredits;
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA;
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA.to4Scale();
-    resultVector.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _resultGPA.toAScale();
-    resultVector.push_back(builder.str());
-      
-    return resultVector;
+    return GPASubject.toStringVector();
   }
 
   /**

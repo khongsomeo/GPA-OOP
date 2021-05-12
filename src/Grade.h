@@ -7,12 +7,21 @@
 #ifndef GRADE_H
 #define GRADE_H
 
+/**
+ * Grade class.
+ *
+ * I can implement the grades by a double, yet the conversions needs
+ * to be done in many functions.
+ *
+ * Hence, creating a new class is the most suitable option.
+ */
 class Grade {
 private:
   double _grade;
+
 public:
   Grade() {
-    _grade = 0;
+    _grade = 0.0;
   }
 
   Grade(double grade) {

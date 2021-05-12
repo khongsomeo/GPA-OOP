@@ -18,13 +18,35 @@ private:
   Grade       _grade;
 
 public:
-  // Constructors and destructor.
+  /**
+   * Parameterised constructor
+   *
+   * @param  std::string
+   * @param  int
+   * @param  double
+   */
   Subject(std::string name, int credit, double grade) {
     _name   = name;
     _credit = credit;
     _grade  = grade;
   }
 
+  /**
+   * Parameterised constructor overload.
+   *
+   * @param  std::string
+   * @param  int
+   * @param  Grade
+   */
+  Subject(std::string name, int credit, Grade grade) {
+    _name   = name;
+    _credit = credit;
+    _grade  = grade;
+  }
+
+  /**
+   * Destructor
+   */
   ~Subject() {
     // Do nothing
   }
@@ -76,7 +98,7 @@ public:
     builder << _name;
     subjectString.push_back(builder.str());
     builder.str(std::string());
-    
+ 
     builder << _credit;
     subjectString.push_back(builder.str());
     builder.str(std::string());
