@@ -51,13 +51,7 @@ public:
   static std::vector<std::string> readFileLines(const std::string& inputFile) {
     // If the file DNE, throw new error.
     if (!Utility::isFileExist(inputFile)) {
-      std::stringstream builder;
-
-      builder << "File not found: ";
-
-      builder << inputFile;
-
-      throw std::runtime_error(builder.str());
+      throw std::runtime_error(inputFile);
     }
 
     std::ifstream openFile(inputFile);

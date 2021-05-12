@@ -134,9 +134,10 @@ public:
       try {
         subjects.push_back(parse(lineStrings[i]));
       }
-      
+ 
       catch (const std::exception& e) {
-        std::cout << "Error happened while reading file, on line " << i + 1
+        std::cout << "Error happened while reading file " << fileName
+                  << ", on line " << i + 1
                   << " (" << e.what() << ")" 
                   << '\n';
       }
