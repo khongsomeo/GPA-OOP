@@ -8,7 +8,7 @@ VNUHCM - University of Science, Spring 2021.
 - `git clone`
 
 ## Running
-### Input format
+### 1. Input format
 - The input `.csv` file should looks like this:
 
   |course code|course credit|course grade|
@@ -24,8 +24,8 @@ VNUHCM - University of Science, Spring 2021.
   ..(more rows)
   ```
 
-### Command-line arguments
-Given that the program has been compiled successfully to <PROGRAM>.exe, then:
+### 2. Command-line arguments
+Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate overall GPA:
   ```shell
   $ ./<PROGRAM> <GRADE_FILE.csv> --gpa
@@ -39,7 +39,13 @@ Given that the program has been compiled successfully to <PROGRAM>.exe, then:
   $ ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>
   ```
 
-### Shell script
+### 3. Shell scripts
+- Rename `compile.sh.example` and `run.sh.example` to `.sh` extension:
+  ```shell
+  $ mv compile.sh.example compile.sh
+  $ mv run.sh.example run.sh
+  ```
+
 - Grant permissions:
   ```shell
   $ chmod 0700 run.sh compile.sh
@@ -56,7 +62,7 @@ Given that the program has been compiled successfully to <PROGRAM>.exe, then:
   ```shell
   $ ./run.sh
   ```
-### Custom textart
+### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
 
 ## Attention!
