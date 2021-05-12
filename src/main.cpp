@@ -12,14 +12,15 @@ int main(int argc, char* argv[]) {
   
   // Create a new IPersonal instance.
   try {
-    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::instance()->create(argc, argv);
+    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::getInstance()->create(argc, argv);
 
     // Print the textart.
     OutputHelper::printTextart();
 
     // Print the stats.
     std::cout << "Total passed classes: " << chumeochuixoong->getTotalClassesPassed() 
-              << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(), chumeochuixoong->getTotalClasses()) 
+              << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(),
+                                          chumeochuixoong->getTotalClasses()) 
               <<  "%)" << '\n';
 
     // Print passed table
@@ -29,11 +30,15 @@ int main(int argc, char* argv[]) {
 
     // Print failed stats.
     std::cout << "Total failed classes: " << chumeochuixoong->getTotalClassesFailed() 
-              << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(), chumeochuixoong->getTotalClasses()) 
+              << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(),
+                                          chumeochuixoong->getTotalClasses()) 
               <<  "%)" << '\n';
 
     // Print failed table.
     OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
+
+    // Release created PersonalFactory
+    PersonalFactory::resetInstance();
   }
 
   // And catch exceptions 

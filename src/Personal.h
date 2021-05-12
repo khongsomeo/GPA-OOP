@@ -349,9 +349,13 @@ private:
     _prototypes.push_back(std::make_shared<PersonalSpecific>());
     _prototypes.push_back(std::make_shared<PersonalExcept>());
   }
-public:
+
+  /**
+   * Destructor
+   *
+   */
   ~PersonalFactory() {
-    delete _instance;
+    // Do nothing.
   }
 
 public:
@@ -360,12 +364,21 @@ public:
    *
    * @return PersonalFactory*
    */
-  static PersonalFactory* instance() {
+  static PersonalFactory* getInstance() {
     if (_instance == NULL) {
       _instance = new PersonalFactory();
     }
 
     return _instance;
+  }
+
+  /**
+   * Destroy current instance.
+   *
+   */
+  static void resetInstance() {
+    delete _instance;
+    _instance = NULL;
   }
 
   /**
