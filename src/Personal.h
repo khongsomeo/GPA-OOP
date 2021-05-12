@@ -14,7 +14,7 @@
 #define PERSONAL_H
 
 /**
- * Personal interface.
+ * IPersonal interface.
  *
  */
 class IPersonal {
@@ -65,6 +65,11 @@ public:
     // Do nothing;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  const std::vector<Subject>&
+   */
   PersonalGPA(const std::vector<Subject>& subjects) {
     for (int i = 0; i < subjects.size(); ++i) {
       addSubject(subjects[i]);
@@ -105,7 +110,7 @@ public:
    * @return std::vector<std::string>
    */
   std::vector<std::string> toStringVector() {
-    // Treats GPA is like a subject.
+    // Treat GPA like a subject.
     Subject GPASubject("GPA", _sumCredits, _resultGPA);
 
     return GPASubject.toStringVector();
