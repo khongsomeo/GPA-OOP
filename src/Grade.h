@@ -20,28 +20,60 @@ private:
   double _grade;
 
 public:
+  /**
+   * Default constructor
+   *
+   */
   Grade() {
     _grade = 0.0;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  double
+   */
   Grade(double grade) {
     _grade = grade;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  const Grade&
+   */
   Grade(const Grade& other) {
     _grade = other._grade;
   }
-  
+
+  /**
+   * Overload assign operator
+   *
+   * @param  const Grade&
+   * 
+   * @return Grade&
+   */
   Grade& operator=(const Grade& other) {
     _grade = other._grade;
     return *this;
   }
 
+  /**
+   * Overload assign operator
+   *
+   * @param  double
+   *
+   * @return Grade&
+   */
   Grade& operator=(double grade) {
     _grade = grade;
     return *this;
   }
 
+  /**
+   * Destructor
+   *
+   */
   ~Grade() {
     // Do nothing.
   }
@@ -94,7 +126,10 @@ public:
     return builder.str();
   }
 
-  // Comparision.
+  /**
+   * Arithmetic comparision
+   *
+   */
 
   bool operator<(const Grade& other) const {
     return _grade < other._grade;
@@ -116,7 +151,10 @@ public:
     return _grade == other._grade;
   }
 
-  // Arithmetic
+  /**
+   * Arithmetic operators
+   *
+   */
   Grade operator+(const Grade& other) const {
     return Grade(_grade + other._grade);
   }
@@ -189,7 +227,14 @@ public:
     return *this;
   }
 
-  // Print Grade to the ostream.
+  /**
+   * Cast to ostream.
+   *
+   * @param  std::ostream&
+   * @param  const Grade&
+   *
+   * @return std::ostream&
+   */
   friend std::ostream& operator<<(std::ostream& out, const Grade& grade) {
     out << grade._grade; 
     return out;
