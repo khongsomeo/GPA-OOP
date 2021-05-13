@@ -20,46 +20,86 @@ private:
   double _grade;
 
 public:
+  /**
+   * Default constructor
+   *
+   */
   Grade() {
     _grade = 0.0;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  double
+   */
   Grade(double grade) {
     _grade = grade;
   }
 
+  /**
+   * Parameterised constructor
+   *
+   * @param  const Grade&
+   */
   Grade(const Grade& other) {
     _grade = other._grade;
   }
-  
+
+  /**
+   * Overload assign operator
+   *
+   * @param  const Grade&
+   * 
+   * @return Grade&
+   */
   Grade& operator=(const Grade& other) {
     _grade = other._grade;
     return *this;
   }
 
+  /**
+   * Overload assign operator
+   *
+   * @param  double
+   *
+   * @return Grade&
+   */
   Grade& operator=(double grade) {
     _grade = grade;
     return *this;
   }
 
+  /**
+   * Destructor
+   *
+   */
   ~Grade() {
     // Do nothing.
   }
 
 public:
-  // Convert grade to scales.
-  
-  double to4Scale() {
-    if (_grade < 3.0) return 0.0;
-    if (_grade < 4.0) return 1.0;
-    if (_grade < 5.0) return 1.5;
-    if (_grade < 6.0) return 2.0;
-    if (_grade < 7.0) return 2.5;
-    if (_grade < 8.0) return 3.0;
-    if (_grade < 9.0) return 3.5;
-    return 4.0;
+  /**
+   * Convert grade to 4 scale.
+   *
+   * @return std::string
+   */
+  std::string to4Scale() {
+    if (_grade < 3.0) return "0.0";
+    if (_grade < 4.0) return "1.0";
+    if (_grade < 5.0) return "1.5";
+    if (_grade < 6.0) return "2.0";
+    if (_grade < 7.0) return "2.5";
+    if (_grade < 8.0) return "3.0";
+    if (_grade < 9.0) return "3.5";
+    return "4.0";
   }
 
+  /**
+   * Convert grade to A scale.
+   *
+   * @return std::string
+   */
   std::string toAScale() {
     if (_grade < 3.0) return "F";
     if (_grade < 4.0) return "D";
@@ -71,7 +111,25 @@ public:
     return "A+";
   }
 
-  // Comparision.
+  /**
+   * Convert grade to string.
+   *
+   * @return std::string
+   */
+  std::string toString() {
+    std::stringstream builder;
+
+    builder << std::fixed << std::setprecision(2);
+
+    builder << _grade;
+
+    return builder.str();
+  }
+
+  /**
+   * Arithmetic comparision
+   *
+   */
 
   bool operator<(const Grade& other) const {
     return _grade < other._grade;
@@ -93,7 +151,10 @@ public:
     return _grade == other._grade;
   }
 
-  // Arithmetic
+  /**
+   * Arithmetic operators
+   *
+   */
   Grade operator+(const Grade& other) const {
     return Grade(_grade + other._grade);
   }
@@ -166,7 +227,14 @@ public:
     return *this;
   }
 
-  // Print Grade to the ostream.
+  /**
+   * Cast to ostream.
+   *
+   * @param  std::ostream&
+   * @param  const Grade&
+   *
+   * @return std::ostream&
+   */
   friend std::ostream& operator<<(std::ostream& out, const Grade& grade) {
     out << grade._grade; 
     return out;

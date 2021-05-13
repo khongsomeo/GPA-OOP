@@ -90,31 +90,15 @@ public:
    * @return std::vector<std::string>
    */
   std::vector<std::string> toStringVector() {
-    std::stringstream builder;
-    builder << std::fixed << std::setprecision(2);
+    std::vector<std::string> subjectStringVector;
 
-    std::vector<std::string> subjectString;
+    subjectStringVector.push_back(_name);
+    subjectStringVector.push_back(std::to_string(_credit));
+    subjectStringVector.push_back(_grade.toString());
+    subjectStringVector.push_back(_grade.to4Scale());
+    subjectStringVector.push_back(_grade.toAScale());
 
-    builder << _name;
-    subjectString.push_back(builder.str());
-    builder.str(std::string());
- 
-    builder << _credit;
-    subjectString.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _grade;
-    subjectString.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _grade.to4Scale();
-    subjectString.push_back(builder.str());
-    builder.str(std::string());
-
-    builder << _grade.toAScale();
-    subjectString.push_back(builder.str());
-
-    return subjectString;
+    return subjectStringVector;
   }
 
   /**
