@@ -47,19 +47,27 @@ public:
   }
 
 public:
-  // Convert grade to scales.
-  
-  double to4Scale() {
-    if (_grade < 3.0) return 0.0;
-    if (_grade < 4.0) return 1.0;
-    if (_grade < 5.0) return 1.5;
-    if (_grade < 6.0) return 2.0;
-    if (_grade < 7.0) return 2.5;
-    if (_grade < 8.0) return 3.0;
-    if (_grade < 9.0) return 3.5;
-    return 4.0;
+  /**
+   * Convert grade to 4 scale.
+   *
+   * @return std::string
+   */
+  std::string to4Scale() {
+    if (_grade < 3.0) return "0.0";
+    if (_grade < 4.0) return "1.0";
+    if (_grade < 5.0) return "1.5";
+    if (_grade < 6.0) return "2.0";
+    if (_grade < 7.0) return "2.5";
+    if (_grade < 8.0) return "3.0";
+    if (_grade < 9.0) return "3.5";
+    return "4.0";
   }
 
+  /**
+   * Convert grade to A scale.
+   *
+   * @return std::string
+   */
   std::string toAScale() {
     if (_grade < 3.0) return "F";
     if (_grade < 4.0) return "D";
@@ -69,6 +77,21 @@ public:
     if (_grade < 8.0) return "B+";
     if (_grade < 9.0) return "A";
     return "A+";
+  }
+
+  /**
+   * Convert grade to string.
+   *
+   * @return std::string
+   */
+  std::string toString() {
+    std::stringstream builder;
+
+    builder << std::fixed << std::setprecision(2);
+
+    builder << _grade;
+
+    return builder.str();
   }
 
   // Comparision.
