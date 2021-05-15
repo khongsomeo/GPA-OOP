@@ -28,39 +28,39 @@ VNUHCM - University of Science, Spring 2021.
 Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate overall GPA:
   ```shell
-  $ ./<PROGRAM> <GRADE_FILE.csv> --gpa
+  ./<PROGRAM> <GRADE_FILE.csv> --gpa
   ```
 - To calculate GPA of courses start with `<COURSE CODE>`: 
   ```shell
-  $ ./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE>
+  ./<PROGRAM> <GRADE_FILE.csv> --specific <COURSE CODE>
   ```
 - To calculate GPA but ignore some courses defines inside `EXCEPTION_FILE.txt`:
   ```shell
-  $ ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>
+  ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>
   ```
 
 ### 3. Shell scripts
 - Rename `compile.sh.example` and `run.sh.example` to `.sh` extension:
   ```shell
-  $ cp compile.sh.example compile.sh
-  $ cp run.sh.example run.sh
+  cp compile.sh.example compile.sh
+  cp run.sh.example run.sh
   ```
 
 - Grant permissions:
   ```shell
-  $ chmod 0700 run.sh compile.sh
+  chmod 0700 run.sh compile.sh
   ```
 
 - Compile:
   ```shell
-  $ ./compile.sh
+  ./compile.sh
   ```
 
 - Edit `run.sh`.
 
 - Run:
   ```shell
-  $ ./run.sh
+  ./run.sh
   ```
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.

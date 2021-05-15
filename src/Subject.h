@@ -95,7 +95,7 @@ public:
     subjectStringVector.push_back(_name);
     subjectStringVector.push_back(std::to_string(_credit));
     subjectStringVector.push_back(_grade.toString());
-    subjectStringVector.push_back(_grade.to4Scale());
+    subjectStringVector.push_back(_grade.to4Scale().toString());
     subjectStringVector.push_back(_grade.toAScale());
 
     return subjectStringVector;

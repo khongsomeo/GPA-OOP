@@ -112,10 +112,10 @@ public:
   std::vector<std::string> toStringVector() {
     std::vector<std::string> stringVector;
 
-    stringVector.push_back("GPA");
+    stringVector.push_back("Overall");
     stringVector.push_back(std::to_string(_sumCredits));
     stringVector.push_back(_resultGPA.toString());
-    stringVector.push_back(_resultGPA.to4Scale());
+    stringVector.push_back(_resultGPA.to4Scale().toString());
     stringVector.push_back(_resultGPA.toAScale());
 
     return stringVector;
@@ -133,6 +133,7 @@ public:
       resultVector.push_back(subject.toStringVector());
     }
 
+    // Push overall.
     resultVector.push_back(toStringVector());
 
     return resultVector;
