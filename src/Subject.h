@@ -21,11 +21,11 @@ public:
   /**
    * Parameterised constructor
    *
-   * @param  std::string
+   * @param  const std::string&
    * @param  int
    * @param  double
    */
-  Subject(std::string name, int credit, double grade) {
+  Subject(const std::string& name, int credit, double grade) {
     _name   = name;
     _credit = credit;
     _grade  = grade;
@@ -34,11 +34,11 @@ public:
   /**
    * Parameterised constructor overload.
    *
-   * @param  std::string
+   * @param  const std::string&
    * @param  int
-   * @param  Grade
+   * @param  const Grade&
    */
-  Subject(std::string name, int credit, Grade grade) {
+  Subject(const std::string& name, int credit, const Grade& grade) {
     _name   = name;
     _credit = credit;
     _grade  = grade;
@@ -56,7 +56,7 @@ public:
    *
    * @return std::string
    */
-  std::string name() {
+  std::string name() const {
     return _name;
   }
 
@@ -65,7 +65,7 @@ public:
    *
    * @return int
    */
-  int credit() {
+  int credit() const {
     return _credit;
   }
 
@@ -74,7 +74,7 @@ public:
    *
    * @return Grade
    */
-  Grade grade() {
+  Grade grade() const {
     return _grade;
   }
 
@@ -106,7 +106,7 @@ public:
    *
    * @return bool
    */
-  bool passed() {
+  bool passed() const {
     return _grade >= 5.0;
   }
 
