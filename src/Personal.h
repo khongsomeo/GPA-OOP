@@ -37,7 +37,7 @@ public:
   virtual int getTotalClassesFailed() = 0;
 
   virtual std::shared_ptr<IPersonal> parse(char**) = 0;
-  virtual void addSubject(Subject) = 0;
+  virtual void addSubject(const Subject&) = 0;
 };
 
 /**
@@ -206,9 +206,9 @@ public:
   /**
    * Add a new subject.
    *
-   * @param  Subject
+   * @param  const Subject&
    */
-  void addSubject(Subject subject) {
+  void addSubject(const Subject& subject) {
     // If not passed, then insert into failed list.
     if (!subject.passed()) {
       _classesFailed.insert(subject);
@@ -247,7 +247,7 @@ public:
   /**
    * Parameterised constructor.
    *
-   * @param  std::vector<Subject>
+   * @param  const std::vector<Subject>&
    * @param  const std::string&
    */
   PersonalSpecific(std::vector<Subject> subjects, const std::string& coursePrefix) {
@@ -297,10 +297,10 @@ public:
   /**
    * Parameterised constructor for PersonalExcept
    *
-   * @param  std::vector<Subject>
-   * @param  const std::vector<std::string>
+   * @param  const std::vector<Subject>&
+   * @param  const std::vector<std::string>&
    */
-  PersonalExcept(std::vector<Subject> subjects, const std::vector<std::string>& ignoredCourses) {
+  PersonalExcept(const std::vector<Subject>& subjects, const std::vector<std::string>& ignoredCourses) {
     // Insert ignored courses inside a multiset.
     for (int i = 0; i < ignoredCourses.size(); ++i)
       _ignoredCourses.insert(ignoredCourses[i]);
@@ -399,12 +399,12 @@ public:
   /**
    * Create a new instacne of IPersonal
    *
-   * @param  const int& argc
+   * @param  int argc
    * @param  char** argv
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> create(const int& argc, char** argv) {
+  std::shared_ptr<IPersonal> create(int argc, char** argv) {
     // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
 
     std::shared_ptr<IPersonal> newPersonal = NULL;
