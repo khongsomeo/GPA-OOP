@@ -18,34 +18,6 @@
  *
  */
 class IPersonal {
-public: 
-  virtual ~IPersonal() {
-    // Do nothing.
-  }
-
-public:
-  virtual int sumCredits()  = 0;
-  virtual Grade sumGrades() = 0;
-  virtual Grade resultGPA() = 0;
-  
-  virtual std::vector<std::string> toStringVector() = 0;
-  virtual std::vector<std::vector<std::string>> toPassedVector() = 0;
-  virtual std::vector<std::vector<std::string>> toFailedVector() = 0;
-  
-  virtual int getTotalClasses() = 0;
-  virtual int getTotalClassesPassed() = 0;
-  virtual int getTotalClassesFailed() = 0;
-
-  virtual std::shared_ptr<IPersonal> parse(char**) = 0;
-  virtual void addSubject(const Subject&) = 0;
-};
-
-/**
- * Personal GPA class.
- *
- * Using this class when we need to calculate overall GPA.
- */
-class PersonalGPA : public IPersonal {
 protected:
   // Stores personal grades & credits.
   int   _sumCredits = 0;
@@ -55,25 +27,10 @@ protected:
   // Stores classes passed / failed.
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
-
-public:
-  PersonalGPA() {
-    // Do nothing;
-  }
-
-  ~PersonalGPA() {
-    // Do nothing;
-  }
-
-  /**
-   * Parameterised constructor
-   *
-   * @param  const std::vector<Subject>&
-   */
-  PersonalGPA(const std::vector<Subject>& subjects) {
-    for (int i = 0; i < subjects.size(); ++i) {
-      addSubject(subjects[i]);
-    }
+  
+public: 
+  virtual ~IPersonal() {
+    // Do nothing.
   }
 
 public:
@@ -191,19 +148,6 @@ public:
   }
 
   /**
-   * Parse data into Personal
-   *
-   * @param  char**
-   *
-   * @return std::shared_ptr<IPersonal>
-   */
-  std::shared_ptr<IPersonal> parse(char** argv) {
-    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
-
-    return std::make_shared<PersonalGPA>(subjects);
-  }
-
-  /**
    * Add a new subject.
    *
    * @param  const Subject&
@@ -223,6 +167,50 @@ public:
     // Insert to passed list.
     _classesPassed.insert(subject);
   }
+
+public:
+  virtual std::shared_ptr<IPersonal> parse(char**) = 0;
+};
+
+/**
+ * Personal GPA class.
+ *
+ * Using this class when we need to calculate overall GPA.
+ */
+class PersonalGPA : public IPersonal {
+public:
+  PersonalGPA() {
+    // Do nothing;
+  }
+
+  ~PersonalGPA() {
+    // Do nothing;
+  }
+
+  /**
+   * Parameterised constructor
+   *
+   * @param  const std::vector<Subject>&
+   */
+  PersonalGPA(const std::vector<Subject>& subjects) {
+    for (int i = 0; i < subjects.size(); ++i) {
+      addSubject(subjects[i]);
+    }
+  }
+
+public:
+  /**
+   * Parse data into Personal
+   *
+   * @param  char**
+   *
+   * @return std::shared_ptr<IPersonal>
+   */
+  std::shared_ptr<IPersonal> parse(char** argv) {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
+
+    return std::make_shared<PersonalGPA>(subjects);
+  }
 };
 
 /**
@@ -234,7 +222,7 @@ public:
  * e.g: I want to calculate average of "CSCxxxxx" course.
  * So I'll use this class, with default subjectVector and classPrefix = "CSC".
  */
-class PersonalSpecific : public PersonalGPA {
+class PersonalSpecific : public IPersonal {
 public:
   PersonalSpecific() {
     // Do nothing
@@ -281,7 +269,7 @@ public:
  * For example, I need to calculate my GPA except PE, English and National Defense.
  * So I'll add these courses's code to except.txt, and use this class instead.
  */
-class PersonalExcept : public PersonalGPA {
+class PersonalExcept : public IPersonal {
 private:
   std::multiset<std::string> _ignoredCourses;
 
