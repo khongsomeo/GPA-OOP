@@ -51,9 +51,9 @@ public:
    *
    * @param  const Grade&
    * 
-   * @return Grade&
+   * @return const Grade&
    */
-  Grade& operator=(const Grade& other) {
+  const Grade& operator=(const Grade& other) {
     _grade = other._grade;
     return *this;
   }
@@ -63,9 +63,9 @@ public:
    *
    * @param  double
    *
-   * @return Grade&
+   * @return const Grade&
    */
-  Grade& operator=(double grade) {
+  const Grade& operator=(double grade) {
     _grade = grade;
     return *this;
   }
@@ -163,12 +163,12 @@ public:
     return Grade(_grade + other);
   }
   
-  Grade& operator+=(const Grade& other) {
+  const Grade& operator+=(const Grade& other) {
     _grade += other._grade;
     return *this;
   }
 
-  Grade& operator+=(double other) {
+  const Grade& operator+=(double other) {
     _grade += other;
     return *this;
   }
@@ -181,12 +181,12 @@ public:
     return Grade(_grade - other);
   }
   
-  Grade& operator-=(const Grade& other) {
+  const Grade& operator-=(const Grade& other) {
     _grade -= other._grade;
     return *this;
   }
 
-  Grade& operator-=(double other) {
+  const Grade& operator-=(double other) {
     _grade -= other;
     return *this;
   }
@@ -199,12 +199,12 @@ public:
     return Grade(_grade * other);
   }
   
-  Grade& operator*=(const Grade& other) {
+  const Grade& operator*=(const Grade& other) {
     _grade *= other._grade;
     return *this;
   }
 
-  Grade& operator*=(double other) {
+  const Grade& operator*=(double other) {
     _grade *= other;
     return *this;
   }
@@ -217,12 +217,12 @@ public:
     return Grade(_grade / other);
   }
   
-  Grade& operator/=(const Grade& other) {
+  const Grade& operator/=(const Grade& other) {
     _grade /= other._grade;
     return *this;
   }
 
-  Grade& operator/=(double other) {
+  const Grade& operator/=(double other) {
     _grade /= other;
     return *this;
   }
