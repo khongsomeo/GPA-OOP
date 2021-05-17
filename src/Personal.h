@@ -250,7 +250,7 @@ public:
    * @param  const std::vector<Subject>&
    * @param  const std::string&
    */
-  PersonalSpecific(const std::vector<Subject>& subjects, const std::string& coursePrefix) {
+  PersonalSpecific(std::vector<Subject> subjects, const std::string& coursePrefix) {
     for (int i = 0; i < subjects.size(); ++i) {
       if (Utility::isPrefix(subjects[i].name(), coursePrefix)) {
           addSubject(subjects[i]);
