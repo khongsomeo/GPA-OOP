@@ -120,7 +120,11 @@ public:
   static Subject parse(const std::string& buffer) {
     std::vector<std::string> tokens = InputHelper::splitTokens(buffer, ",");
 
-    return Subject(tokens[0], stoi(tokens[1]), stod(tokens[2]));
+    return Subject(
+      tokens.at(0),
+      stoi(tokens.at(1)),
+      stod(tokens.at(2))
+    );
   }
 
   /**
