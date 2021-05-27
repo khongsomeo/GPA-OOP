@@ -409,9 +409,17 @@ public:
 
     std::shared_ptr<IPersonal> newPersonal = NULL;
 
+    // Get index of prototype.
     int optionIndex = _optionNames.size() - 1;
 
-    // If there is only 1 arguments.
+    // If there are no arguments.
+    if (argc - 1 == 0) {
+      throw std::runtime_error(
+        std::string("No input file specified")    
+      );
+    }
+
+    // If there is only 1 argument.
     if (argc - 1 == 1) {
       optionIndex = 0;
     }
