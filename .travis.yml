@@ -5,4 +5,4 @@ dist: bionic
 script:
     - sudo cp compile.sh.example compile.sh
     - sudo chmod 0700 compile.sh
-    - ./compile.sh
+    - sudo ./compile.sh
