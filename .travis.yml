@@ -1,0 +1,21 @@
+dist: trusty
+sudo: require
+
+language: cpp
+compiler:
+    - gcc
+    
+os: linux
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - g++-7
+            
+script:
+    - export CC=gcc-7
+    - export CXX=g++-7
+    - sudo cp compile.sh.example compile.sh
+    - sudo chmod 0700 compile.sh
+    - sudo ./compile.sh
