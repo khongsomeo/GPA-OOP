@@ -1,19 +1,55 @@
 language: cpp
 compiler: gcc
     
-os: linux
-addons:
-    apt:
-        sources:
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
             - ubuntu-toolchain-r-test
-        packages:
+          packages:
+            - g++-4.9
+      env:
+         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env:
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
             - g++-7
-    
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
 before_install:
-    - export CC=gcc-7
-    - export CXX=g++-7
-    - eval "CC=gcc-7 && GXX=g++-7"    
-    
+    - eval "${MATRIX_EVAL}"
+
 script:
     - sudo cp compile.sh.example compile.sh
     - sudo chmod 0700 compile.sh
