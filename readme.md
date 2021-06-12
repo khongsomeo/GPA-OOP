@@ -1,4 +1,7 @@
 # GPA-OOP
+
+[![Build Status](https://travis-ci.com/trhgquan/GPA-OOP.svg?branch=master)](https://travis-ci.com/trhgquan/GPA-OOP)
+
 My example OOP project for CSC10003 - Introduction to Object Oriented Programming.
 
 VNUHCM - University of Science, Spring 2021.
