@@ -9,10 +9,12 @@ addons:
         packages:
             - g++-7
     
-script:
+before_script:
     - export CC=gcc-7
     - export CXX=g++-7
-    - eval "CC=gcc-7 && GXX=g++-7"
+    - eval "CC=gcc-7 && GXX=g++-7"    
+    
+script:
     - sudo cp compile.sh.example compile.sh
     - sudo chmod 0700 compile.sh
     - sudo ./compile.sh
