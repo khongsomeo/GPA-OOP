@@ -1,9 +1,5 @@
-dist: trusty
-sudo: require
-
 language: cpp
-compiler:
-    - gcc
+compiler: gcc
     
 os: linux
 addons:
@@ -12,7 +8,7 @@ addons:
             - ubuntu-toolchain-r-test
         packages:
             - g++-7
-            
+    
 script:
     - export CC=gcc-7
     - export CXX=g++-7
