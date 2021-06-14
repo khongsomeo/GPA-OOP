@@ -58,7 +58,7 @@ public:
 
     // Print last column.
     std::cout << "+"
-              << std::setw(OutputConstants::COLUMNS.back().length() + 4)
+              << std::setw(OutputConstants::COLUMNS.back().length() + 3)
               << "+" << '\n';
   }
 
@@ -78,7 +78,7 @@ public:
     }
 
     std::cout << "|"
-              << std::setw(OutputConstants::COLUMNS.back().length() + 2)
+              << std::setw(OutputConstants::COLUMNS.back().length() + 1)
               << lineData[OutputConstants::COLUMNS.size() - 1]
               << " |" << '\n';
   }
