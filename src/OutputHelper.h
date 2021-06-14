@@ -21,7 +21,7 @@ namespace OutputConstants {
     "grade (10 - scale)",
     "grade (4 - scale)",
     "grade (A - scale)"
-  }
+  };
 }
 
 class OutputHelper {
