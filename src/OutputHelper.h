@@ -13,16 +13,16 @@
 #ifndef OUTPUT_HELPER_H
 #define OUTPUT_HELPER_H
 
-const std::string TEXTART_FILE = "data/textart.txt";
-const int         COLUMN_COUNT = 5;
-const std::vector<int> COLUMN_WIDTH = {12, 9, 20, 19, 19};
-const std::vector<std::string> COLUMN_TITLE = {
-  "class code",
-  "credits",
-  "grade (10 - scale)",
-  "grade (4 - scale)",
-  "grade (A - scale)"
-};
+namespace OutputConstants {
+  const std::string TEXTART_FILE = "data/textart.txt";
+  const std::vector<std::string> COLUMNS = {
+    "class code",
+    "credits",
+    "grade (10 - scale)",
+    "grade (4 - scale)",
+    "grade (A - scale)"
+  };
+}
 
 class OutputHelper {
 public:
@@ -31,7 +31,7 @@ public:
    *
    */
   static void printTextart() {
-    std::ifstream textartFile(TEXTART_FILE);
+    std::ifstream textartFile(OutputConstants::TEXTART_FILE);
 
     std::string buffer;
     while (std::getline(textartFile, buffer)) {
@@ -51,14 +51,14 @@ public:
     std::cout << std::setfill('-');
 
     // Print first n - 1 column
-    for (int i = 0; i < COLUMN_COUNT - 1; ++i) {
+    for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "+"
-                << std::setw(COLUMN_WIDTH[i] + 1);
+                << std::setw(OutputConstants::COLUMNS[i].length() + 3);
     }
 
     // Print last column.
     std::cout << "+"
-              << std::setw(COLUMN_WIDTH[COLUMN_COUNT - 1] + 2)
+              << std::setw(OutputConstants::COLUMNS.back().length() + 4)
               << "+" << '\n';
   }
 
@@ -70,16 +70,16 @@ public:
   static void printTableRow(const std::vector<std::string>& lineData) {
     std::cout << std::setfill(' ');
 
-    for (int i = 0; i < COLUMN_COUNT - 1; ++i) {
+    for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "|"
-                << std::setw(COLUMN_WIDTH[i] - 1)
+                << std::setw(OutputConstants::COLUMNS[i].length() + 1)
                 << lineData[i]
                 << " ";
     }
 
     std::cout << "|"
-              << std::setw(COLUMN_WIDTH[COLUMN_COUNT - 1])
-              << lineData[COLUMN_COUNT - 1]
+              << std::setw(OutputConstants::COLUMNS.back().length() + 2)
+              << lineData[OutputConstants::COLUMNS.size() - 1]
               << " |" << '\n';
   }
 
@@ -89,12 +89,15 @@ public:
    * @param  const std::vector<std::vector<std::string>>>&
    * @param  bool (default = true)
    */
-  static void printTable(const std::vector<std::vector<std::string>>& tableData, bool hasConclusion = true) {
+  static void printTable(const std::vector<std::vector<std::string>>& tableData, 
+                         bool hasConclusion = true) {
+    // Print table line (separator).
     printSeparator();
   
     // Print table title.
-    printTableRow(COLUMN_TITLE);
+    printTableRow(OutputConstants::COLUMNS);
   
+    // Print table line (separator).
     printSeparator();
 
     // Print table content.
@@ -102,12 +105,15 @@ public:
       printTableRow(tableData[i]);
     }
 
-    if (hasConclusion)
+    // Print conclusion row.
+    if (hasConclusion) {
       printSeparator();
+    }
 
     // Print last row.
     printTableRow(tableData[tableData.size() - 1]);
 
+    // Print table line (separator).
     printSeparator();
   }
 };
