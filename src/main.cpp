@@ -12,7 +12,8 @@ int main(int argc, char* argv[]) {
   
   // Create a new IPersonal instance.
   try {
-    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::getInstance()->create(argc, argv);
+    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::getInstance()
+                                                                  ->create(argc, argv);
 
     // Print the textart.
     OutputHelper::printTextart();
