@@ -37,9 +37,6 @@ int main(int argc, char* argv[]) {
 
     // Print failed table.
     OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
-
-    // Release created PersonalFactory
-    PersonalFactory::resetInstance();
   }
 
   // And catch exceptions 
