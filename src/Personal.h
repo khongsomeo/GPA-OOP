@@ -336,9 +336,6 @@ public:
  */
 class PersonalFactory {
 private:
-  // Singleton
-  inline static PersonalFactory* _instance = NULL;
-
   // List of prototypes.
   std::vector<std::shared_ptr<IPersonal>> _prototypes;
   std::vector<std::string> _optionNames;
@@ -356,6 +353,7 @@ private:
     _prototypes.push_back(std::make_shared<PersonalExcept>());
   }
 
+public:
   /**
    * Destructor
    *
@@ -370,23 +368,14 @@ public:
    *
    * @return PersonalFactory*
    */
-  static PersonalFactory* getInstance() {
-    if (_instance == NULL) {
-      _instance = new PersonalFactory();
-    }
+  static std::shared_ptr<PersonalFactory> getInstance() {
+    static std::shared_ptr<PersonalFactory> instance(
+      new PersonalFactory()
+    );
 
-    return _instance;
+    return instance;
   }
-
-  /**
-   * Destroy current instance.
-   *
-   */
-  static void resetInstance() {
-    delete _instance;
-    _instance = NULL;
-  }
-
+ 
   /**
    * Return total items inside _prototypes.
    *
