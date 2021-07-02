@@ -11,6 +11,6 @@ script:
   # Copy executable and test.
   - sudo cp main tests/main
   - sudo cp data tests/data -r -f
-  - sudo cd tests
+  - cd tests
   - sudo chmod 0700 run_test.sh
   - sudo ./run_test.sh
