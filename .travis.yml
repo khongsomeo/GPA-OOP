@@ -3,7 +3,14 @@ compiler: gcc
 dist: bionic
 
 script:
-    - sudo cp compile.sh.example compile.sh
-    - sudo chmod 0700 compile.sh
-    - sudo ./compile.sh
-    - sudo ./main data/19120338.csv
+  # Create compile file, set permissions and run
+  - sudo cp compile.sh.example compile.sh
+  - sudo chmod 0700 compile.sh
+  - sudo ./compile.sh
+
+  # Copy executable and test.
+  - sudo cp main tests/main
+  - sudo cp data tests/data -r -f
+  - sudo cd tests
+  - sudo chmod 0700 run_test.sh
+  - sudo ./run_test.sh
