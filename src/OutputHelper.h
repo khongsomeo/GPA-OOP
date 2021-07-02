@@ -53,12 +53,14 @@ public:
     // Print first n - 1 column
     for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "+"
-                << std::setw(OutputConstants::COLUMNS[i].length() + 3);
+                << std::setw(
+                    OutputConstants::COLUMNS[i].length() + 3);
     }
 
     // Print last column.
     std::cout << "+"
-              << std::setw(OutputConstants::COLUMNS.back().length() + 3)
+              << std::setw(
+                  OutputConstants::COLUMNS.back().length() + 3)
               << "+" << '\n';
   }
 
@@ -67,20 +69,51 @@ public:
    *
    * @param  const std::vector<std::string>&
    */
-  static void printTableRow(const std::vector<std::string>& lineData) {
+  static void printTableRow(
+    const std::vector<std::string>& lineData) {
     std::cout << std::setfill(' ');
 
     for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "|"
-                << std::setw(OutputConstants::COLUMNS[i].length() + 1)
+                << std::setw(
+                    OutputConstants::COLUMNS[i].length() + 1)
                 << lineData[i]
                 << " ";
     }
 
     std::cout << "|"
-              << std::setw(OutputConstants::COLUMNS.back().length() + 1)
+              << std::setw(
+                  OutputConstants::COLUMNS.back().length() + 1)
               << lineData[OutputConstants::COLUMNS.size() - 1]
               << " |" << '\n';
+  }
+
+  /**
+   * Print a CSV Line, given a vector of string.
+   *
+   * @param  const std::vector<std::string>
+   */
+  static void printCSVLine(
+    const std::vector<std::string>& tableLine) {
+    for (int i = 0; i < (int)tableLine.size() - 1; ++i) {
+      std::cout << tableLine[i] << ',';
+    }
+
+    std::cout << tableLine.back() << '\n';
+  }
+
+  /**
+   * Print result as a CSV table.
+   *
+   * @param  const std::vector<std::string>&
+   */
+  static void printCSVTable(
+    const std::vector<std::vector<std::string>>& tableData) {
+    printCSVLine(OutputConstants::COLUMNS);
+
+    for (const std::vector<std::string>& line : tableData) {
+      printCSVLine(line);
+    }
   }
 
   /**
@@ -89,8 +122,9 @@ public:
    * @param  const std::vector<std::vector<std::string>>>&
    * @param  bool (default = true)
    */
-  static void printTable(const std::vector<std::vector<std::string>>& tableData, 
-                         bool hasConclusion = true) {
+  static void printTable(
+    const std::vector<std::vector<std::string>>& tableData, 
+    bool hasConclusion = true) {
     // Print table line (separator).
     printSeparator();
   

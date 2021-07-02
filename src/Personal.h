@@ -27,7 +27,8 @@ public:
   virtual int sumCredits()  = 0;
   virtual Grade sumGrades() = 0;
   virtual Grade resultGPA() = 0;
-  
+  virtual std::string option() = 0;
+
   virtual std::vector<std::string> toStringVector() = 0;
   virtual std::vector<std::vector<std::string>> toPassedVector() = 0;
   virtual std::vector<std::vector<std::string>> toFailedVector() = 0;
@@ -36,7 +37,8 @@ public:
   virtual int getTotalClassesPassed() = 0;
   virtual int getTotalClassesFailed() = 0;
 
-  virtual std::shared_ptr<IPersonal> parse(char**) = 0;
+  virtual std::shared_ptr<IPersonal> parse(
+    const std::vector<std::string>&) = 0;
   virtual void addSubject(const Subject&) = 0;
 };
 
@@ -77,6 +79,15 @@ public:
   }
 
 public:
+  /**
+   * Return option.
+   *
+   * @return std::string
+   */
+  std::string option() {
+    return "--gpa";
+  }
+
   /**
    * Return total credits
    *
@@ -193,12 +204,15 @@ public:
   /**
    * Parse data into Personal
    *
-   * @param  char**
+   * @param  const std::vector<std::string>&
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(char** argv) {
-    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
+  std::shared_ptr<IPersonal> parse(
+    const std::vector<std::string>& argv) {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(
+      argv[1]
+    );
 
     return std::make_shared<PersonalGPA>(subjects);
   }
@@ -250,26 +264,43 @@ public:
    * @param  const std::vector<Subject>&
    * @param  const std::string&
    */
-  PersonalSpecific(const std::vector<Subject>& subjects, const std::string& coursePrefix) {
+  PersonalSpecific(
+    const std::vector<Subject>& subjects,
+    const std::string& coursePrefix) {
     for (int i = 0; i < subjects.size(); ++i) {
       if (Utility::isPrefix(subjects[i].name(), coursePrefix)) {
-          addSubject(subjects[i]);
+        addSubject(subjects[i]);
       }
     }
   }
 
 public:
   /**
+   * Return option
+   *
+   * @return std::string
+   */
+  std::string option() override {
+    return "--specific";
+  }
+
+  /**
    * Parse a PersonalSpecific object.
    *
-   * @param  char**
+   * @param  const std::vector<std::string>&
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(char** argv) override {
-    std::vector<Subject> subjects = Subject::parseSubjectVector(std::string(argv[1]));
+  std::shared_ptr<IPersonal> parse(
+    const std::vector<std::string>& argv) {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(
+      argv[1]
+    );
 
-    return std::make_shared<PersonalSpecific>(subjects, std::string(argv[3]));
+    return std::make_shared<PersonalSpecific>(
+      subjects,
+      argv[3]
+    );
   }
 };
 
@@ -300,14 +331,17 @@ public:
    * @param  const std::vector<Subject>&
    * @param  const std::vector<std::string>&
    */
-  PersonalExcept(const std::vector<Subject>& subjects, const std::vector<std::string>& ignoredCourses) {
+  PersonalExcept(
+    const std::vector<Subject>& subjects,
+    const std::vector<std::string>& ignoredCourses) {
     // Insert ignored courses inside a multiset.
     for (int i = 0; i < ignoredCourses.size(); ++i)
       _ignoredCourses.insert(ignoredCourses[i]);
 
     // Add Subject when it doesn't exist inside _ignoredCourses.
     for (int i = 0; i < subjects.size(); ++i) {
-      if (_ignoredCourses.find(subjects[i].name()) == _ignoredCourses.end()) {
+      if (_ignoredCourses.find(subjects[i].name()) == 
+          _ignoredCourses.end()) {
         addSubject(subjects[i]);
       }
     }
@@ -315,17 +349,32 @@ public:
 
 public:
   /**
+   * Return option.
+   *
+   * @return std::string
+   */
+  std::string option() {
+    return "--ignore";
+  }
+
+  /**
    * Parse a PersonalExcept object.
    *
-   * @param  char** argv
+   * @param  const std::vector<std::string>&
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(char** argv) override {
-    std::vector<Subject> subjectVector = Subject::parseSubjectVector(std::string(argv[1]));
-    std::vector<std::string> ignoredCourses = InputHelper::readFileLines(std::string(argv[3]));
+  std::shared_ptr<IPersonal> parse(
+    const std::vector<std::string>& argv) {
+    std::vector<Subject> subjectVector = Subject
+      ::parseSubjectVector(argv[1]);
+    std::vector<std::string> ignoredCourses = InputHelper
+      ::readFileLines(argv[3]);
 
-    return std::make_shared<PersonalExcept>(subjectVector, ignoredCourses);
+    return std::make_shared<PersonalExcept>(
+      subjectVector,
+      ignoredCourses
+    );
   }
 };
 
@@ -338,15 +387,9 @@ class PersonalFactory {
 private:
   // List of prototypes.
   std::vector<std::shared_ptr<IPersonal>> _prototypes;
-  std::vector<std::string> _optionNames;
 
   // Setting up.
   PersonalFactory() {
-    // Push list of option names.
-    _optionNames.push_back("--gpa");
-    _optionNames.push_back("--specific");
-    _optionNames.push_back("--except");
-
     // Push list of prototypes.
     _prototypes.push_back(std::make_shared<PersonalGPA>());
     _prototypes.push_back(std::make_shared<PersonalSpecific>());
@@ -366,7 +409,7 @@ public:
   /**
    * Init a new instance.
    *
-   * @return PersonalFactory*
+   * @return std::shared_ptr<PersonalFactory>
    */
   static std::shared_ptr<PersonalFactory> getInstance() {
     static std::shared_ptr<PersonalFactory> instance(
@@ -388,41 +431,32 @@ public:
   /**
    * Create a new instacne of IPersonal
    *
-   * @param  int argc
-   * @param  char** argv
+   * @param  const std::string&
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> create(int argc, char** argv) {
+  std::shared_ptr<IPersonal> create(
+    int argc,
+    char** argv) {
     // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
 
-    std::shared_ptr<IPersonal> newPersonal = NULL;
-
-    // Get index of prototype.
-    int optionIndex = _optionNames.size() - 1;
-
-    // If there are no arguments.
-    if (argc - 1 == 0) {
-      throw std::runtime_error(
-        std::string("No input file specified")    
+    std::vector<std::string> arguments;
+    for (int i = 0; i < argc; ++i) {
+      arguments.push_back(
+        std::string(argv[i])
       );
     }
 
-    // If there is only 1 argument.
-    if (argc - 1 == 1) {
-      optionIndex = 0;
-    }
-
-    else {
-      for (; optionIndex > 0; --optionIndex) {
-        if (argv[2] == _optionNames[optionIndex]) break;
+    if (argc - 1 > 1) {
+      // Detect prototype to use.
+      for (const auto& it : _prototypes) {
+        if (it->option() == std::string(argv[2])) {
+          return it->parse(arguments);
+        }
       }
     }
 
-    // New instance's pointer
-    newPersonal = _prototypes[optionIndex]->parse(argv);
-
-    return newPersonal;
+    return _prototypes[0]->parse(arguments);
   }
 };
 #endif

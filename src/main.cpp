@@ -12,31 +12,78 @@ int main(int argc, char* argv[]) {
   
   // Create a new IPersonal instance.
   try {
-    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory::getInstance()
-                                                                  ->create(argc, argv);
+    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory
+      ::getInstance()
+      ->create(argc, argv);
 
-    // Print the textart.
-    OutputHelper::printTextart();
+    /**
+     * These lines check if user needs to output to .csv file.
+     *
+     */
+
+    bool isOutputCSV = 0;
+
+    for (int i = 0; i < argc; ++i) {
+      if (std::string(argv[i]) == "--csv") {
+        isOutputCSV = 1;
+        break;
+      }
+    }
+
+    /**
+     * Outputing
+     *
+     */
+
+    if (!isOutputCSV) {
+      // Print the textart.
+      OutputHelper::printTextart();
+    }
 
     // Print the stats.
-    std::cout << "Total passed classes: " << chumeochuixoong->getTotalClassesPassed() 
-              << " (" << Utility::percent(chumeochuixoong->getTotalClassesPassed(),
-                                          chumeochuixoong->getTotalClasses()) 
-              <<  "%)" << '\n';
+    std::cout << "Total passed classes: " 
+              << chumeochuixoong->getTotalClassesPassed() 
+              << " (" 
+              << Utility::percent(
+                  chumeochuixoong->getTotalClassesPassed(),
+                  chumeochuixoong->getTotalClasses()) 
+              << "%)"
+              << '\n';
 
-    // Print passed table
-    OutputHelper::printTable(chumeochuixoong->toPassedVector());
+    if (!isOutputCSV) {
+      // Print passed table
+      OutputHelper::printTable(chumeochuixoong->toPassedVector());
+    }
+
+    else {
+      OutputHelper::printCSVTable(chumeochuixoong->toPassedVector());
+    }
 
     std::cout << '\n';
 
     // Print failed stats.
-    std::cout << "Total failed classes: " << chumeochuixoong->getTotalClassesFailed() 
-              << " (" << Utility::percent(chumeochuixoong->getTotalClassesFailed(),
-                                          chumeochuixoong->getTotalClasses()) 
-              <<  "%)" << '\n';
+    std::cout << "Total failed classes: " 
+              << chumeochuixoong->getTotalClassesFailed() 
+              << " (" 
+              << Utility::percent(
+                  chumeochuixoong->getTotalClassesFailed(),
+                  chumeochuixoong->getTotalClasses()) 
+              << "%)" 
+              << '\n';
 
-    // Print failed table.
-    OutputHelper::printTable(chumeochuixoong->toFailedVector(), false);
+    if (!isOutputCSV) {
+      // Print failed table.
+      OutputHelper::printTable(
+        chumeochuixoong->toFailedVector(), 
+        false
+      );
+    }
+
+    else {
+      OutputHelper::printCSVTable(
+        chumeochuixoong->toFailedVector()
+      );
+    }
   }
 
   // And catch exceptions 
