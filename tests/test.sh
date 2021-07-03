@@ -1,48 +1,24 @@
-echo -e "Formatted GPA:\n"
-./main data/19120338.csv
+declare -a test_seeds
 
-echo -e "\n"
+test_seeds[0]="./main data/19120338.csv"
+test_seeds[1]="./main data/19120338.csv --gpa"
+test_seeds[2]="./main data/19120338.csv --specific CSC"
+test_seeds[3]="./main data/19120338.csv --ignore data/ignore.txt"
+test_seeds[4]="./main data/19120338.csv --csv"
+test_seeds[5]="./main data/19120338.csv --gpa --csv"
+test_seeds[6]="./main data/19120338.csv --specific CSC --csv"
+test_seeds[7]="./main data/19120338.csv --ignore data/ignore.txt --csv"
 
-echo -e "Formatted GPA, with flag:\n"
+for i in "${!test_seeds[@]}" 
+do
+  printf "Testcase #%d: %s\n" "$i" "${test_seeds[$i]}"
 
-./main data/19120338.csv --gpa
+  check=$(${test_seeds[$i]})
 
-echo -e "\n"
-
-echo -e "Formatted specific GPA:\n"
-
-./main data/19120338.csv --specific CSC
-
-echo -e "\n"
-
-echo -e "Formatted ignored GPA:\n"
-
-./main data/19120338.csv --ignore data/ignore.txt
-
-echo -e "\n"
-
-echo -e "CSV GPA:\n"
-
-./main data/19120338.csv --csv
-
-echo -e "\n"
-
-echo -e "CSV GPA, with flag:\n"
-
-./main data/19120338.csv --gpa --csv
-
-echo -e "\n"
-
-echo -e "CSV specific GPA:\n"
-
-./main data/19120338.csv --specific CSC --csv
-
-echo -e "\n"
-
-echo -e "CSV ignored GPA:\n"
-
-./main data/19120338.csv --ignore data/ignore.txt --csv
-
-echo -e "\n"
-
-echo -e "Finished!"
+  if [[ $(< output/$i.out) != "$check"  ]]; then
+    echo "failed."
+    exit 1
+  else
+    echo "passed."
+  fi
+done
