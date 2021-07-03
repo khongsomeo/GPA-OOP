@@ -2,15 +2,22 @@ language: cpp
 compiler: gcc
 dist: bionic
 
-script:
-  # Create compile file, set permissions and run
-  - sudo cp compile.sh.example compile.sh
-  - sudo chmod 0700 compile.sh
-  - sudo ./compile.sh
+jobs:
+  include:
+    # Create compile file, set permissions and run 
+    - stage: "Build"
+      name: "Build to executable"
+      script:
+        - sudo cp compile.sh.example compile.sh
+        - sudo chmod 0700 compile.sh
+        - sudo ./compile.sh
 
-  # Copy executable and test.
-  - sudo cp main tests/main
-  - sudo cp data tests/data -r -f
-  - cd tests
-  - sudo chmod 0700 test.sh
-  - sudo ./test.sh
+    # Copy executable and test.
+    - stage: "Test"
+      name: "Test running commands"
+      script:
+        - sudo cp main tests/main
+        - sudo cp data tests/data -r -f
+        - cd tests
+        - sudo chmod 0700 test.sh
+        - sudo ./test.sh
