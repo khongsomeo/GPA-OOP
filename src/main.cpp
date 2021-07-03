@@ -20,24 +20,19 @@ int main(int argc, char* argv[]) {
      * These lines check if user needs to output to .csv file.
      *
      */
-
-    bool isOutputCSV = 0;
-
-    for (int i = 0; i < argc; ++i) {
-      if (std::string(argv[i]) == "--csv") {
-        isOutputCSV = 1;
-        break;
-      }
-    }
+    OutputHelper::instance()->setOutputFormat(
+      Utility::hasParameter(argc, argv, "--csv") ?
+        OutputConstants::FORMAT_CSV :
+        OutputConstants::FORMAT_TABLE    
+    );
 
     /**
      * Outputing
      *
      */
-
-    if (!isOutputCSV) {
+    if (!OutputHelper::instance()->isCSVOutput()) {
       // Print the textart.
-      OutputHelper::printTextart();
+      OutputHelper::instance()->printTextart();
     }
 
     // Print the stats.
@@ -50,14 +45,9 @@ int main(int argc, char* argv[]) {
               << "%)"
               << '\n';
 
-    if (!isOutputCSV) {
-      // Print passed table
-      OutputHelper::printTable(chumeochuixoong->toPassedVector());
-    }
-
-    else {
-      OutputHelper::printCSVTable(chumeochuixoong->toPassedVector());
-    }
+    // Print passed table
+    OutputHelper::instance()
+      ->printTable(chumeochuixoong->toPassedVector());
 
     std::cout << '\n';
 
@@ -71,19 +61,12 @@ int main(int argc, char* argv[]) {
               << "%)" 
               << '\n';
 
-    if (!isOutputCSV) {
-      // Print failed table.
-      OutputHelper::printTable(
+    // Print failed table.
+    OutputHelper::instance()
+      ->printTable(
         chumeochuixoong->toFailedVector(), 
         false
       );
-    }
-
-    else {
-      OutputHelper::printCSVTable(
-        chumeochuixoong->toFailedVector()
-      );
-    }
   }
 
   // And catch exceptions 

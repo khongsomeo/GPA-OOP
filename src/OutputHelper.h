@@ -22,15 +22,62 @@ namespace OutputConstants {
     "grade (4 - scale)",
     "grade (A - scale)"
   };
+  enum {
+    FORMAT_TABLE = 1 << 0,
+    FORMAT_CSV = 1 << 1
+  };
 }
 
 class OutputHelper {
+private:
+  int outputType = 0;
+  
+  OutputHelper() {
+    // Do nothing
+  }
+
 public:
+  ~OutputHelper() {
+    // Do nothing
+  }
+
+  /**
+   * Get instance of OutputHelper
+   *
+   * @return std::shared_ptr<OutputHelper>
+   */
+  static std::shared_ptr<OutputHelper> instance() {
+    static std::shared_ptr<OutputHelper> instance(
+      new OutputHelper()
+    );
+
+    return instance;
+  }
+
+public:
+  /**
+   * Check if outputing in CSV format.
+   *
+   * @return bool
+   */
+  bool isCSVOutput() {
+    return outputType & OutputConstants::FORMAT_CSV;
+  }
+
+  /**
+   * Set output format
+   *
+   * @param  int
+   */
+  void setOutputFormat(int flag) {
+    outputType |= flag;
+  }
+
   /**
    * Print the textart
    *
    */
-  static void printTextart() {
+  void printTextart() {
     std::ifstream textartFile(OutputConstants::TEXTART_FILE);
 
     std::string buffer;
@@ -47,7 +94,7 @@ public:
    * Print a separator line.
    *
    */
-  static void printSeparator() {
+  void printSeparator() {
     std::cout << std::setfill('-');
 
     // Print first n - 1 column
@@ -69,7 +116,7 @@ public:
    *
    * @param  const std::vector<std::string>&
    */
-  static void printTableRow(
+  void printTableRow(
     const std::vector<std::string>& lineData) {
     std::cout << std::setfill(' ');
 
@@ -93,7 +140,7 @@ public:
    *
    * @param  const std::vector<std::string>
    */
-  static void printCSVLine(
+  void printCSVLine(
     const std::vector<std::string>& tableLine) {
     for (int i = 0; i < (int)tableLine.size() - 1; ++i) {
       std::cout << tableLine[i] << ',';
@@ -103,52 +150,59 @@ public:
   }
 
   /**
-   * Print result as a CSV table.
-   *
-   * @param  const std::vector<std::string>&
-   */
-  static void printCSVTable(
-    const std::vector<std::vector<std::string>>& tableData) {
-    printCSVLine(OutputConstants::COLUMNS);
-
-    for (const std::vector<std::string>& line : tableData) {
-      printCSVLine(line);
-    }
-  }
-
-  /**
    * Print the full table.
    *
    * @param  const std::vector<std::vector<std::string>>>&
    * @param  bool (default = true)
    */
-  static void printTable(
+  void printTable(
     const std::vector<std::vector<std::string>>& tableData, 
     bool hasConclusion = true) {
-    // Print table line (separator).
-    printSeparator();
+    
+    /**
+     * Output in table format
+     *
+     */
+    if (outputType & OutputConstants::FORMAT_TABLE) {
+      // Print table line (separator).
+      printSeparator();
   
-    // Print table title.
-    printTableRow(OutputConstants::COLUMNS);
+      // Print table title.
+      printTableRow(OutputConstants::COLUMNS);
   
-    // Print table line (separator).
-    printSeparator();
+      // Print table line (separator).
+      printSeparator();
 
-    // Print table content.
-    for (int i = 0; i < tableData.size() - 1; ++i) {
-      printTableRow(tableData[i]);
-    }
+      // Print table content.
+      for (int i = 0; i < tableData.size() - 1; ++i) {
+        printTableRow(tableData[i]);
+      }
 
-    // Print conclusion row.
-    if (hasConclusion) {
+      // Print conclusion row.
+      if (hasConclusion) {
+        printSeparator();
+      }
+
+      // Print last row.
+      printTableRow(tableData[tableData.size() - 1]);
+
+      // Print table line (separator).
       printSeparator();
     }
 
-    // Print last row.
-    printTableRow(tableData[tableData.size() - 1]);
+    /**
+     * Output in CSV format
+     *
+     */
+    if (outputType & OutputConstants::FORMAT_CSV) {
+      // Print head
+      printCSVLine(OutputConstants::COLUMNS);
 
-    // Print table line (separator).
-    printSeparator();
+      // Print data
+      for (const std::vector<std::string>& s : tableData) {
+        printCSVLine(s);
+      }
+    }
   }
 };
 #endif

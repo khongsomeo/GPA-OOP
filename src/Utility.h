@@ -37,9 +37,35 @@ public:
    * @return bool
    */
   static bool isPrefix(std::string haystack, std::string needle) {
-    auto check = std::mismatch(needle.begin(), needle.end(), haystack.begin());
+    auto check = std::mismatch(
+      needle.begin(), 
+      needle.end(), 
+      haystack.begin()
+    );
 
     return check.first == needle.end();
+  }
+
+  /**
+   * Check if a parameter exist in list of parameters parsed.
+   *
+   * @param  int
+   * @param  char**
+   * @param  const std::string&
+   *
+   * @return bool
+   */
+  static bool hasParameter(
+    int argc,
+    char** argv,
+    const std::string& param) {
+    for (int i = 0; i < argc; ++i) {
+      if (std::string(argv[i]) == param) {
+        return 1;
+      }
+    }
+
+    return 0;
   }
 
   /**
