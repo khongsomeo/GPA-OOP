@@ -23,7 +23,9 @@ public:
    *
    * @return std::vector<std::string>
    */
-  static std::vector<std::string> splitTokens(std::string haystack, const std::string& needle) {
+  static std::vector<std::string> splitTokens(
+    std::string haystack, 
+    const std::string& needle) {
     std::vector<std::string> tokens;
 
     size_t index = 0;
@@ -48,7 +50,8 @@ public:
    *
    * @throw  std::runtime_error
    */
-  static std::vector<std::string> readFileLines(const std::string& inputFile) {
+  static std::vector<std::string> readFileLines(
+    const std::string& inputFile) {
     // If the file DNE, throw new error.
     if (!Utility::isFileExist(inputFile)) {
       throw std::runtime_error("Input file does not exist");

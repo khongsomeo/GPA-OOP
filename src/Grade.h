@@ -84,7 +84,7 @@ public:
    *
    * @return Grade
    */
-  Grade to4Scale() {
+  Grade to4Scale() const {
     if (_grade < 3.0) return Grade(0.0);
     if (_grade < 4.0) return Grade(1.0);
     if (_grade < 5.0) return Grade(1.5);
@@ -100,7 +100,7 @@ public:
    *
    * @return std::string
    */
-  std::string toAScale() {
+  std::string toAScale() const {
     if (_grade < 3.0) return "F";
     if (_grade < 4.0) return "D";
     if (_grade < 5.0) return "D+";
@@ -116,7 +116,7 @@ public:
    *
    * @return std::string
    */
-  std::string toString() {
+  std::string toString() const {
     std::stringstream builder;
 
     builder << std::fixed << std::setprecision(2);

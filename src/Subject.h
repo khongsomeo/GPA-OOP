@@ -81,7 +81,8 @@ public:
   // Operator overloading for std::multiset sorting since the default is "<" and we need to sort it descending.
   // Also, we really need this since std::multiset doesn't support structs by default.
   bool operator< (const Subject& subject) const {
-    return (_grade > subject._grade) || (_grade == subject._grade && _credit > subject._credit);
+    return (_grade > subject._grade) || 
+      (_grade == subject._grade && _credit > subject._credit);
   }
 
   /**
@@ -89,7 +90,7 @@ public:
    *
    * @return std::vector<std::string>
    */
-  std::vector<std::string> toStringVector() {
+  std::vector<std::string> toStringVector() const {
     std::vector<std::string> subjectStringVector;
 
     subjectStringVector.push_back(_name);
@@ -118,7 +119,8 @@ public:
    * @return Subject
    */
   static Subject parse(const std::string& buffer) {
-    std::vector<std::string> tokens = InputHelper::splitTokens(buffer, ",");
+    std::vector<std::string> tokens = InputHelper
+      ::splitTokens(buffer, ",");
 
     return Subject(
       tokens.at(0),
@@ -134,10 +136,12 @@ public:
    *
    * @return std::vector<Subject>
    */
-  static std::vector<Subject> parseSubjectVector(const std::string& fileName) {
+  static std::vector<Subject> parseSubjectVector(
+    const std::string& fileName) {
     std::vector<Subject> subjects;
 
-    std::vector<std::string> lineStrings = InputHelper::readFileLines(fileName);
+    std::vector<std::string> lineStrings = InputHelper
+      ::readFileLines(fileName);
 
     // Read csv file by line.
     for (int i = 0; i < lineStrings.size(); ++i) {
@@ -146,7 +150,8 @@ public:
       }
  
       catch (const std::exception& e) {
-        std::cout << "Error happened while reading file " << fileName
+        std::cout << "Error happened while reading file " 
+                  << fileName
                   << ", on line " << i + 1
                   << " (" << e.what() << ")" 
                   << '\n';

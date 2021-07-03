@@ -69,6 +69,11 @@ int main(int argc, char* argv[]) {
       );
   }
 
+  // Catch exception if arguments went wrong
+  catch (const std::out_of_range& oor) {
+    std::cout << "Error happened (missing arguments)" << '\n';
+  }
+
   // And catch exceptions 
   catch (const std::exception& e) {
     std::cout << "Error happened (" 
