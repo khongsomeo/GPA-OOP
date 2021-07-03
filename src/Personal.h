@@ -73,8 +73,8 @@ public:
    * @param  const std::vector<Subject>&
    */
   PersonalGPA(const std::vector<Subject>& subjects) {
-    for (int i = 0; i < subjects.size(); ++i) {
-      addSubject(subjects[i]);
+    for (const Subject& subject : subjects) {
+      addSubject(subject);
     }
   }
 
@@ -140,7 +140,7 @@ public:
   std::vector<std::vector<std::string>> toPassedVector() {
     std::vector<std::vector<std::string>> resultVector;
 
-    for (auto subject : _classesPassed) {
+    for (const Subject& subject : _classesPassed) {
       resultVector.push_back(subject.toStringVector());
     }
 
@@ -158,7 +158,7 @@ public:
   std::vector<std::vector<std::string>> toFailedVector() {
     std::vector<std::vector<std::string>> resultVector;
 
-    for (auto subject : _classesFailed) {
+    for (const Subject& subject : _classesFailed) {
       resultVector.push_back(subject.toStringVector());
     }
 
@@ -211,7 +211,7 @@ public:
   std::shared_ptr<IPersonal> parse(
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv[1]
+      argv.at(1)
     );
 
     return std::make_shared<PersonalGPA>(subjects);
@@ -267,9 +267,9 @@ public:
   PersonalSpecific(
     const std::vector<Subject>& subjects,
     const std::string& coursePrefix) {
-    for (int i = 0; i < subjects.size(); ++i) {
-      if (Utility::isPrefix(subjects[i].name(), coursePrefix)) {
-        addSubject(subjects[i]);
+    for (const Subject& subject : subjects) {
+      if (Utility::isPrefix(subject.name(), coursePrefix)) {
+        addSubject(subject);
       }
     }
   }
@@ -294,12 +294,12 @@ public:
   std::shared_ptr<IPersonal> parse(
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv[1]
+      argv.at(1)
     );
 
     return std::make_shared<PersonalSpecific>(
       subjects,
-      argv[3]
+      argv.at(3)
     );
   }
 };
@@ -335,14 +335,15 @@ public:
     const std::vector<Subject>& subjects,
     const std::vector<std::string>& ignoredCourses) {
     // Insert ignored courses inside a multiset.
-    for (int i = 0; i < ignoredCourses.size(); ++i)
-      _ignoredCourses.insert(ignoredCourses[i]);
+    for (const std::string& course : ignoredCourses) {
+      _ignoredCourses.insert(course);
+    }
 
     // Add Subject when it doesn't exist inside _ignoredCourses.
-    for (int i = 0; i < subjects.size(); ++i) {
-      if (_ignoredCourses.find(subjects[i].name()) == 
+    for (const Subject& subject : subjects) {
+      if (_ignoredCourses.find(subject.name()) ==
           _ignoredCourses.end()) {
-        addSubject(subjects[i]);
+        addSubject(subject);
       }
     }
   }
@@ -367,9 +368,9 @@ public:
   std::shared_ptr<IPersonal> parse(
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjectVector = Subject
-      ::parseSubjectVector(argv[1]);
+      ::parseSubjectVector(argv.at(1));
     std::vector<std::string> ignoredCourses = InputHelper
-      ::readFileLines(argv[3]);
+      ::readFileLines(argv.at(3));
 
     return std::make_shared<PersonalExcept>(
       subjectVector,
@@ -450,13 +451,13 @@ public:
     if (argc - 1 > 1) {
       // Detect prototype to use.
       for (const auto& it : _prototypes) {
-        if (it->option() == std::string(argv[2])) {
+        if (it->option() == std::string(arguments.at(2))) {
           return it->parse(arguments);
         }
       }
     }
 
-    return _prototypes[0]->parse(arguments);
+    return _prototypes.at(0)->parse(arguments);
   }
 };
 #endif
