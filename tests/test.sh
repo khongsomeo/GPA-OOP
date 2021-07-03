@@ -1,3 +1,9 @@
+##
+## Simple bash script to check if the program give correct outputs
+##
+## @trhgquan - https://github.com/trhgquan
+##
+
 declare -a test_seeds
 
 test_seeds[0]="./main data/19120338.csv"
