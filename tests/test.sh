@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##
 ## Simple bash script to check if the program give correct outputs
 ##
