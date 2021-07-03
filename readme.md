@@ -41,6 +41,10 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```shell
   ./<PROGRAM> <GRADE_FILE.csv> --except <EXCEPTION_FILE.txt>
   ```
+- Export to `.csv` format:
+  ```shell
+  ./<PROGRAM> <GRADE_FILE.csv> [--gpa / --specific <COURSE CODE> / --except <EXCEPTION_FILE>] --csv
+  ```
 
 ### 3. Shell scripts
 - Rename `compile.sh.example` and `run.sh.example` to `.sh` extension:

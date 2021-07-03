@@ -27,6 +27,8 @@ test_seeds[9]="./main data/19120338.csv --specific --csv"
 test_seeds[10]="./main data/19120338.csv --specific"
 test_seeds[11]="./main data/19120338.csv --ignore"
 test_seeds[12]="./main data/19120338.csv --ignore --csv"
+test_seeds[13]="./main"
+test_seeds[14]="./main --csv"
 
 for i in "${!test_seeds[@]}" 
 do
