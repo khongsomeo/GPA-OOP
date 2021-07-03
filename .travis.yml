@@ -32,21 +32,21 @@ jobs:
     - stage: "Build on Windows"
       name: "Build to executable"
       script:
-        - sudo cp compile.sh.example compile.sh
-        - sudo chmod 0700 compile.sh
-        - sudo ./compile.sh
+        - cp compile.sh.example compile.sh
+        - chmod 0700 compile.sh
+        - ./compile.sh
       os: windows
 
     # Copy executable and test on Windows.
     - stage: "Test on Windows"
       name: "Test running commands"
       script:
-        - sudo cp compile.sh.example compile.sh
-        - sudo chmod 0700 compile.sh
-        - sudo ./compile.sh
-        - sudo cp main tests/main
-        - sudo cp data tests/data -r -f
+        - cp compile.sh.example compile.sh
+        - chmod 0700 compile.sh
+        - ./compile.sh
+        - cp main tests/main
+        - cp data tests/data -r -f
         - cd tests
-        - sudo chmod 0700 test.sh
-        - sudo ./test.sh
+        - chmod 0700 test.sh
+        - ./test.sh
       os: windows
