@@ -13,15 +13,6 @@ jobs:
       os: linux
       dist: bionic
 
-    # Create compile file, set permissions and run on Windows
-    - stage: "Build on Windows"
-      name: "Build to executable"
-      script:
-        - sudo cp compile.sh.example compile.sh
-        - sudo chmod 0700 compile.sh
-        - sudo ./compile.sh
-      os: windows
-
     # Copy executable and test on Linux.
     - stage: "Test on Linux"
       name: "Test running commands"
@@ -36,6 +27,15 @@ jobs:
         - sudo ./test.sh
       os: linux
       dist: bionic
+
+    # Create compile file, set permissions and run on Windows
+    - stage: "Build on Windows"
+      name: "Build to executable"
+      script:
+        - sudo cp compile.sh.example compile.sh
+        - sudo chmod 0700 compile.sh
+        - sudo ./compile.sh
+      os: windows
 
     # Copy executable and test on Windows.
     - stage: "Test on Windows"
