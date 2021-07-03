@@ -16,6 +16,9 @@ jobs:
     - stage: "Test"
       name: "Test running commands"
       script:
+        - sudo cp compile.sh.example compile.sh
+        - sudo chmod 0700 compile.sh
+        - sudo ./compile.sh
         - sudo cp main tests/main
         - sudo cp data tests/data -r -f
         - cd tests
