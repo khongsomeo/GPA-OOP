@@ -1,48 +1,53 @@
-echo -e "Formatted GPA:\n"
-./main data/19120338.csv
+#!/bin/bash
 
-echo -e "\n"
+##
+## Simple bash script to check if the program give correct outputs
+##
+## @trhgquan - https://github.com/trhgquan
+##
 
-echo -e "Formatted GPA, with flag:\n"
+# Colors
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-./main data/19120338.csv --gpa
+declare -a test_seeds
 
-echo -e "\n"
+test_seeds[0]="./main data/19120338.csv"
+test_seeds[1]="./main data/19120338.csv --gpa"
+test_seeds[2]="./main data/19120338.csv --specific CSC"
+test_seeds[3]="./main data/19120338.csv --ignore data/ignore.txt"
+test_seeds[4]="./main data/19120338.csv --csv"
+test_seeds[5]="./main data/19120338.csv --gpa --csv"
+test_seeds[6]="./main data/19120338.csv --specific CSC --csv"
+test_seeds[7]="./main data/19120338.csv --ignore data/ignore.txt --csv"
+test_seeds[8]="./main --gpa"
+test_seeds[9]="./main data/19120338.csv --specific --csv"
+test_seeds[10]="./main data/19120338.csv --specific"
+test_seeds[11]="./main data/19120338.csv --ignore"
+test_seeds[12]="./main data/19120338.csv --ignore --csv"
 
-echo -e "Formatted specific GPA:\n"
+for i in "${!test_seeds[@]}" 
+do
+  printf "${BLUE}Testcase #%d: %s\n" "$i" "${test_seeds[$i]}"
 
-./main data/19120338.csv --specific CSC
+  check=$(${test_seeds[$i]})
 
-echo -e "\n"
+  printf "${BLUE}%s${NC}\n" "Expected:"
 
-echo -e "Formatted ignored GPA:\n"
+  printf "%s\n" "$(< output/$i.out)"
 
-./main data/19120338.csv --ignore data/ignore.txt
+  printf "${BLUE}%s${NC}\n" "Runtime:"
 
-echo -e "\n"
+  printf "%s\n" "$check"
 
-echo -e "CSV GPA:\n"
+  if [[ $(< output/$i.out) != "$check"  ]]; then
+    printf "${BLUE}Result: ${RED}%s${NC}\n" "failed"
+    exit 1
+  else
+    printf "${BLUE}Result: ${GREEN}%s${NC}\n" "passed"
+  fi
 
-./main data/19120338.csv --csv
-
-echo -e "\n"
-
-echo -e "CSV GPA, with flag:\n"
-
-./main data/19120338.csv --gpa --csv
-
-echo -e "\n"
-
-echo -e "CSV specific GPA:\n"
-
-./main data/19120338.csv --specific CSC --csv
-
-echo -e "\n"
-
-echo -e "CSV ignored GPA:\n"
-
-./main data/19120338.csv --ignore data/ignore.txt --csv
-
-echo -e "\n"
-
-echo -e "Finished!"
+  printf "\n"
+done
