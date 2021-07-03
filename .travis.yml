@@ -3,21 +3,27 @@ compiler: gcc
 
 jobs:
   include:
-    # Using different os to test.
-    - os: linux
-      dist: bionic
-    - os: windows
-
-    # Create compile file, set permissions and run
-    - stage: "Build"
+    # Create compile file, set permissions and run on Linux
+    - stage: "Build on Linux"
       name: "Build to executable"
       script:
         - sudo cp compile.sh.example compile.sh
         - sudo chmod 0700 compile.sh
         - sudo ./compile.sh
+      os: linux
+      dist: bionic
 
-    # Copy executable and test.
-    - stage: "Test"
+    # Create compile file, set permissions and run on Windows
+    - stage: "Build on Windows"
+      name: "Build to executable"
+      script:
+        - sudo cp compile.sh.example compile.sh
+        - sudo chmod 0700 compile.sh
+        - sudo ./compile.sh
+      os: windows
+
+    # Copy executable and test on Linux.
+    - stage: "Test on Linux"
       name: "Test running commands"
       script:
         - sudo cp compile.sh.example compile.sh
@@ -28,3 +34,19 @@ jobs:
         - cd tests
         - sudo chmod 0700 test.sh
         - sudo ./test.sh
+      os: linux
+      dist: bionic
+
+    # Copy executable and test on Windows.
+    - stage: "Test on Windows"
+      name: "Test running commands"
+      script:
+        - sudo cp compile.sh.example compile.sh
+        - sudo chmod 0700 compile.sh
+        - sudo ./compile.sh
+        - sudo cp main tests/main
+        - sudo cp data tests/data -r -f
+        - cd tests
+        - sudo chmod 0700 test.sh
+        - sudo ./test.sh
+      os: windows
