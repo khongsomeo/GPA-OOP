@@ -4,7 +4,12 @@ dist: bionic
 
 jobs:
   include:
-    # Create compile file, set permissions and run 
+    # Using different os to test.
+    - os: linux
+      dist: bionic
+    - os: windows
+
+    # Create compile file, set permissions and run
     - stage: "Build"
       name: "Build to executable"
       script:
