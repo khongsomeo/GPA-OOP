@@ -3,19 +3,9 @@ compiler: gcc
 
 jobs:
   include:
-    # Create compile file, set permissions and run on Linux
-    - stage: "Build on Linux"
-      name: "Build to executable"
-      script:
-        - sudo cp compile.sh.example compile.sh
-        - sudo chmod 0700 compile.sh
-        - sudo ./compile.sh
-      os: linux
-      dist: bionic
-
-    # Copy executable and test on Linux.
-    - stage: "Test on Linux"
-      name: "Test running commands"
+    # Build and test on Linux.
+    - stage: "Build and Test on Linux"
+      name: "Build and Test on Linux"
       script:
         - sudo cp compile.sh.example compile.sh
         - sudo chmod 0700 compile.sh
@@ -28,18 +18,9 @@ jobs:
       os: linux
       dist: bionic
 
-    # Create compile file, set permissions and run on Windows
-    - stage: "Build on Windows"
-      name: "Build to executable"
-      script:
-        - cp compile.sh.example compile.sh
-        - chmod 0700 compile.sh
-        - ./compile.sh
-      os: windows
-
-    # Copy executable and test on Windows.
-    - stage: "Test on Windows"
-      name: "Test running commands"
+    # Build and test on Windows.
+    - stage: "Build and Test on Windows"
+      name: "Build and Test on Windows"
       script:
         - cp compile.sh.example compile.sh
         - chmod 0700 compile.sh
