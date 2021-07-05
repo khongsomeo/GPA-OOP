@@ -261,16 +261,42 @@ public:
   /**
    * Parameterised constructor.
    *
-   * @param  const std::vector<Subject>&
-   * @param  const std::string&
+   * @param  std::vector<Subject>&
+   * @param  const std::vector<string>&
    */
   PersonalSpecific(
-    const std::vector<Subject>& subjects,
-    const std::string& coursePrefix) {
-    for (const Subject& subject : subjects) {
-      if (Utility::isPrefix(subject.name(), coursePrefix)) {
-        addSubject(subject);
+    std::vector<Subject>& subjects,
+    const std::vector<std::string>& coursePrefixes) {
+    for (const std::string& prefix : coursePrefixes) {
+      addSpecific(subjects, prefix);
+    }
+  }
+
+  /**
+   * Add a specific course starting with "prefix".
+   *
+   * @param  std::vector<Subject>&
+   * @param  const std::string&
+   */
+  void addSpecific(
+    std::vector<Subject>& subjects,
+    const std::string& prefix) {
+
+    std::vector<int> positions;
+    
+    for (int i = 0; i < subjects.size(); ++i) {
+      if (Utility::isPrefix(subjects.at(i).name(), prefix)) {
+        // Add subject.
+        addSubject(subjects.at(i));
+
+        // Add to remove list.
+        positions.push_back(i);
       }
+    }
+
+    // Remove subjects to prevent re-adding them.
+    for (const int& i : positions) {
+      subjects.erase(subjects.begin() + i);
     }
   }
 
@@ -297,11 +323,16 @@ public:
       argv.at(1)
     );
 
-    return std::make_shared<PersonalSpecific>(
-      subjects,
+    std::vector<std::string> prefixes = InputHelper::readFileLines(
       argv.at(3)
     );
+
+    return std::make_shared<PersonalSpecific>(
+      subjects,
+      prefixes
+    );
   }
+
 };
 
 /**
@@ -441,8 +472,8 @@ public:
     int argc,
     char** argv) {
     // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
-
     std::vector<std::string> arguments;
+
     for (int i = 0; i < argc; ++i) {
       arguments.push_back(
         std::string(argv[i])
