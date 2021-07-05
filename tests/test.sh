@@ -36,15 +36,15 @@ do
 
   check=$(${test_seeds[$i]})
 
-  printf "${BLUE}%s${NC}\n" "Expected:"
+  if [[ $(< output/$i.out) != "$check" ]]; then
+    printf "${BLUE}%s${NC}\n" "Expected:"
 
-  printf "%s\n" "$(< output/$i.out)"
+    printf "%s\n" "$(< output/$i.out)"
 
-  printf "${BLUE}%s${NC}\n" "Runtime:"
+    printf "${BLUE}%s${NC}\n" "Runtime:"
 
-  printf "%s\n" "$check"
+    printf "%s\n" "$check"
 
-  if [[ $(< output/$i.out) != "$check"  ]]; then
     printf "${BLUE}Result: ${RED}%s${NC}\n" "failed"
     exit 1
   else
