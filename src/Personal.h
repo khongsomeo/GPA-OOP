@@ -369,6 +369,7 @@ public:
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjectVector = Subject
       ::parseSubjectVector(argv.at(1));
+    
     std::vector<std::string> ignoredCourses = InputHelper
       ::readFileLines(argv.at(3));
 
