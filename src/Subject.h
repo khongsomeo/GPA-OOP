@@ -78,8 +78,13 @@ public:
     return _grade;
   }
 
-  // Operator overloading for std::multiset sorting since the default is "<" and we need to sort it descending.
-  // Also, we really need this since std::multiset doesn't support structs by default.
+  /**
+   * Operator overloading for std::multiset sorting.
+   *
+   * @param  const Subject&
+   * 
+   * @return bool
+   */
   bool operator< (const Subject& subject) const {
     return (_grade > subject._grade) || 
       (_grade == subject._grade && _credit > subject._credit);
