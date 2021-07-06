@@ -18,13 +18,6 @@ Caculating my GPA, in an OOP way.
   |CSC10002|4|8.5
   |...|...|...
 
-- The input course ignore `.txt` file should looks like this:
-  ```text
-  CSC10001
-  CSC10002
-  ..(more rows)
-  ```
-
 ### 2. Command-line arguments
 Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate overall GPA:
