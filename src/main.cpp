@@ -10,9 +10,8 @@ int main(int argc, char* argv[]) {
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
   
-  // Create a new IPersonal instance.
   try {
-    std::shared_ptr<IPersonal> chumeochuixoong = PersonalFactory
+    std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
       ::getInstance()
       ->create(argc, argv);
 

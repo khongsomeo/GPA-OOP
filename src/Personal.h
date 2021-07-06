@@ -14,40 +14,11 @@
 #define PERSONAL_H
 
 /**
- * IPersonal interface.
- *
- */
-class IPersonal {
-public: 
-  virtual ~IPersonal() {
-    // Do nothing.
-  }
-
-public:
-  virtual int sumCredits()  = 0;
-  virtual Grade sumGrades() = 0;
-  virtual Grade resultGPA() = 0;
-  virtual std::string option() = 0;
-
-  virtual std::vector<std::string> toStringVector() = 0;
-  virtual std::vector<std::vector<std::string>> toPassedVector() = 0;
-  virtual std::vector<std::vector<std::string>> toFailedVector() = 0;
-  
-  virtual int getTotalClasses() = 0;
-  virtual int getTotalClassesPassed() = 0;
-  virtual int getTotalClassesFailed() = 0;
-
-  virtual std::shared_ptr<IPersonal> parse(
-    const std::vector<std::string>&) = 0;
-  virtual void addSubject(const Subject&) = 0;
-};
-
-/**
- * Personal GPA class.
+ * Personal GPA abstract class.
  *
  * Using this class when we need to calculate overall GPA.
  */
-class PersonalGPA : public IPersonal {
+class PersonalGPA {
 protected:
   // Stores personal grades & credits.
   int   _sumCredits = 0;
@@ -84,7 +55,7 @@ public:
    *
    * @return std::string
    */
-  std::string option() {
+  virtual std::string option() {
     return "--gpa";
   }
 
@@ -208,7 +179,7 @@ public:
    *
    * @return std::shared_ptr<IPersonal>
    */
-  std::shared_ptr<IPersonal> parse(
+  virtual std::shared_ptr<PersonalGPA> parse(
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
       argv.at(1)
@@ -315,10 +286,10 @@ public:
    *
    * @param  const std::vector<std::string>&
    *
-   * @return std::shared_ptr<IPersonal>
+   * @return std::shared_ptr<PersonalGPA>
    */
-  std::shared_ptr<IPersonal> parse(
-    const std::vector<std::string>& argv) {
+  virtual std::shared_ptr<PersonalGPA> parse(
+    const std::vector<std::string>& argv) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
       argv.at(1)
     );
@@ -385,7 +356,7 @@ public:
    *
    * @return std::string
    */
-  std::string option() {
+  std::string option() override {
     return "--ignore";
   }
 
@@ -394,10 +365,10 @@ public:
    *
    * @param  const std::vector<std::string>&
    *
-   * @return std::shared_ptr<IPersonal>
+   * @return std::shared_ptr<PersonalGPA>
    */
-  std::shared_ptr<IPersonal> parse(
-    const std::vector<std::string>& argv) {
+  virtual std::shared_ptr<PersonalGPA> parse(
+    const std::vector<std::string>& argv) override {
     std::vector<Subject> subjectVector = Subject
       ::parseSubjectVector(argv.at(1));
     
@@ -419,7 +390,7 @@ public:
 class PersonalFactory {
 private:
   // List of prototypes.
-  std::vector<std::shared_ptr<IPersonal>> _prototypes;
+  std::vector<std::shared_ptr<PersonalGPA>> _prototypes;
 
   // Setting up.
   PersonalFactory() {
@@ -462,13 +433,13 @@ public:
   }
 
   /**
-   * Create a new instacne of IPersonal
+   * Create a new instance of PersonalGPA
    *
    * @param  const std::string&
    *
-   * @return std::shared_ptr<IPersonal>
+   * @return std::shared_ptr<PersonalGPA>
    */
-  std::shared_ptr<IPersonal> create(
+  std::shared_ptr<PersonalGPA> create(
     int argc,
     char** argv) {
     // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
