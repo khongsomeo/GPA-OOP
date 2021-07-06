@@ -48,7 +48,7 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate GPA but ignore some courses defines inside 
   `<IGNORED_COURSES.txt>`:
   ```shell
-  ./<PROGRAM> <GRADE_FILE.csv> --except <IGNORED_COURSES.txt>
+  ./<PROGRAM> <GRADE_FILE.csv> --ignore <IGNORED_COURSES.txt>
   ```
 
   `IGNORED_COURSES.txt` content should looks like this:
@@ -64,8 +64,8 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```shell
   ./<PROGRAM> <GRADE_FILE.csv> 
     [--gpa / 
-     --specific <COURSE CODE> / 
-     --except <EXCEPTION_FILE>] --csv
+     --specific <SPECIFIC_COURSES.txt> / 
+     --ignore <IGNORED_COURSES.txt>] --csv
   ```
 
 ### 3. Shell scripts
