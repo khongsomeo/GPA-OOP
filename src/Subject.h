@@ -82,11 +82,11 @@ public:
    * Operator overloading for std::multiset sorting.
    *
    * @param  const Subject&
-   * 
+   *
    * @return bool
    */
   bool operator< (const Subject& subject) const {
-    return (_grade > subject._grade) || 
+    return (_grade > subject._grade) ||
       (_grade == subject._grade && _credit > subject._credit);
   }
 
@@ -153,12 +153,12 @@ public:
       try {
         subjects.push_back(parse(lineStrings[i]));
       }
- 
+
       catch (const std::exception& e) {
-        std::cout << "Error happened while reading file " 
+        std::cout << "Error happened while reading file "
                   << fileName
                   << ", on line " << i + 1
-                  << " (" << e.what() << ")" 
+                  << " (" << e.what() << ")"
                   << '\n';
       }
     }

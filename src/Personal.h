@@ -70,7 +70,7 @@ public:
 
   /**
    * Return sum grades.
-   * 
+   *
    * @return Grade
    */
   Grade sumGrades() {
@@ -254,7 +254,7 @@ public:
     const std::string& prefix) {
 
     std::vector<int> positions;
-    
+
     for (int i = 0; i < subjects.size(); ++i) {
       if (Utility::isPrefix(subjects.at(i).name(), prefix)) {
         // Add subject.
@@ -371,7 +371,7 @@ public:
     const std::vector<std::string>& argv) override {
     std::vector<Subject> subjectVector = Subject
       ::parseSubjectVector(argv.at(1));
-    
+
     std::vector<std::string> ignoredCourses = InputHelper
       ::readFileLines(argv.at(3));
 
@@ -422,7 +422,7 @@ public:
 
     return instance;
   }
- 
+
   /**
    * Return total items inside _prototypes.
    *

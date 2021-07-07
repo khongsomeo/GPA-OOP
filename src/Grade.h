@@ -50,7 +50,7 @@ public:
    * Overload assign operator
    *
    * @param  const Grade&
-   * 
+   *
    * @return const Grade&
    */
   const Grade& operator=(const Grade& other) {
@@ -162,7 +162,7 @@ public:
   Grade operator+(double other) const {
     return Grade(_grade + other);
   }
-  
+
   const Grade& operator+=(const Grade& other) {
     _grade += other._grade;
     return *this;
@@ -172,7 +172,7 @@ public:
     _grade += other;
     return *this;
   }
-  
+
   Grade operator-(const Grade& other) const {
     return Grade(_grade - other._grade);
   }
@@ -180,7 +180,7 @@ public:
   Grade operator-(double other) const {
     return Grade(_grade - other);
   }
-  
+
   const Grade& operator-=(const Grade& other) {
     _grade -= other._grade;
     return *this;
@@ -190,7 +190,7 @@ public:
     _grade -= other;
     return *this;
   }
-  
+
   Grade operator*(const Grade& other) const {
     return Grade(_grade * other._grade);
   }
@@ -198,7 +198,7 @@ public:
   Grade operator*(double other) const {
     return Grade(_grade * other);
   }
-  
+
   const Grade& operator*=(const Grade& other) {
     _grade *= other._grade;
     return *this;
@@ -208,7 +208,7 @@ public:
     _grade *= other;
     return *this;
   }
-  
+
   Grade operator/(const Grade& other) const {
     return Grade(_grade / other._grade);
   }
@@ -216,7 +216,7 @@ public:
   Grade operator/(double other) const {
     return Grade(_grade / other);
   }
-  
+
   const Grade& operator/=(const Grade& other) {
     _grade /= other._grade;
     return *this;
@@ -236,7 +236,7 @@ public:
    * @return std::ostream&
    */
   friend std::ostream& operator<<(std::ostream& out, const Grade& grade) {
-    out << grade._grade; 
+    out << grade._grade;
     return out;
   }
 };

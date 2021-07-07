@@ -38,8 +38,8 @@ public:
    */
   static bool isPrefix(std::string haystack, std::string needle) {
     auto check = std::mismatch(
-      needle.begin(), 
-      needle.end(), 
+      needle.begin(),
+      needle.end(),
       haystack.begin()
     );
 

@@ -21,19 +21,18 @@ IGNORE_COURSE=""
 ## and print it to $RESULT_FILE.
 # ./main $GRADE_FILE --specific $SPECIFIC_COURSE > $RESULT_FILE
 
-## Uncomment this line to calculate GPA, ignoring some courses 
+## Uncomment this line to calculate GPA, ignoring some courses
 ## and print it to $RESULT_FILE.
 # ./main $GRADE_FILE --ignore $IGNORE_COURSE > $RESULT_FILE
 
-## Uncomment this line to calculate overall GPA 
+## Uncomment this line to calculate overall GPA
 ## and print it in CSV format to $RESULT_FILE.
 # ./main $GRADE_FILE --gpa --csv > $RESULT_FILE
 
-## Uncomment this line to calculate GPA with specific course name 
+## Uncomment this line to calculate GPA with specific course name
 ## and print it in CSV format to $RESULT_FILE.
 # ./main $GRADE_FILE --specific $SPECIFIC_COURSE --csv > $RESULT_FILE
 
-## Uncomment this line to calculate GPA, ignoring some courses 
+## Uncomment this line to calculate GPA, ignoring some courses
 ## and print it in CSV format to $RESULT_FILE.
 # ./main $GRADE_FILE --ignore $IGNORE_COURSE --csv > $RESULT_FILE
-
