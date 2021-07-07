@@ -24,7 +24,7 @@ public:
    * @return std::vector<std::string>
    */
   static std::vector<std::string> splitTokens(
-    std::string haystack, 
+    std::string haystack,
     const std::string& needle) {
     std::vector<std::string> tokens;
 

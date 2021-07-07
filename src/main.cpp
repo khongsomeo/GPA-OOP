@@ -9,7 +9,7 @@
 int main(int argc, char* argv[]) {
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
-  
+
   try {
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
       ::getInstance()
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     OutputHelper::instance()->setOutputFormat(
       Utility::hasParameter(argc, argv, "--csv") ?
         OutputConstants::FORMAT_CSV :
-        OutputConstants::FORMAT_TABLE    
+        OutputConstants::FORMAT_TABLE
     );
 
     /**
@@ -35,12 +35,12 @@ int main(int argc, char* argv[]) {
     }
 
     // Print the stats.
-    std::cout << "Total passed classes: " 
-              << chumeochuixoong->getTotalClassesPassed() 
-              << " (" 
+    std::cout << "Total passed classes: "
+              << chumeochuixoong->getTotalClassesPassed()
+              << " ("
               << Utility::percent(
                   chumeochuixoong->getTotalClassesPassed(),
-                  chumeochuixoong->getTotalClasses()) 
+                  chumeochuixoong->getTotalClasses())
               << "%)"
               << '\n';
 
@@ -51,19 +51,19 @@ int main(int argc, char* argv[]) {
     std::cout << '\n';
 
     // Print failed stats.
-    std::cout << "Total failed classes: " 
-              << chumeochuixoong->getTotalClassesFailed() 
-              << " (" 
+    std::cout << "Total failed classes: "
+              << chumeochuixoong->getTotalClassesFailed()
+              << " ("
               << Utility::percent(
                   chumeochuixoong->getTotalClassesFailed(),
-                  chumeochuixoong->getTotalClasses()) 
-              << "%)" 
+                  chumeochuixoong->getTotalClasses())
+              << "%)"
               << '\n';
 
     // Print failed table.
     OutputHelper::instance()
       ->printTable(
-        chumeochuixoong->toFailedVector(), 
+        chumeochuixoong->toFailedVector(),
         false
       );
   }
@@ -73,10 +73,10 @@ int main(int argc, char* argv[]) {
     std::cout << "Error happened (missing arguments)" << '\n';
   }
 
-  // And catch exceptions 
+  // And catch exceptions
   catch (const std::exception& e) {
-    std::cout << "Error happened (" 
-              << e.what() << ")" 
+    std::cout << "Error happened ("
+              << e.what() << ")"
               << '\n';
   }
 

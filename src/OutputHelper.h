@@ -31,7 +31,7 @@ namespace OutputConstants {
 class OutputHelper {
 private:
   int outputType = 0;
-  
+
   OutputHelper() {
     // Do nothing
   }
@@ -87,7 +87,7 @@ public:
 
     std::cout << '\n';
 
-    textartFile.close(); 
+    textartFile.close();
   }
 
   /**
@@ -156,9 +156,9 @@ public:
    * @param  bool (default = true)
    */
   void printTable(
-    const std::vector<std::vector<std::string>>& tableData, 
+    const std::vector<std::vector<std::string>>& tableData,
     bool hasConclusion = true) {
-    
+
     /**
      * Output in table format
      *
@@ -166,10 +166,10 @@ public:
     if (outputType & OutputConstants::FORMAT_TABLE) {
       // Print table line (separator).
       printSeparator();
-  
+
       // Print table title.
       printTableRow(OutputConstants::COLUMNS);
-  
+
       // Print table line (separator).
       printSeparator();
 

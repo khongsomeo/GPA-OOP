@@ -30,7 +30,7 @@ test_seeds[12]="./main data/19120338.csv --ignore --csv"
 test_seeds[13]="./main"
 test_seeds[14]="./main --csv"
 
-for i in "${!test_seeds[@]}" 
+for i in "${!test_seeds[@]}"
 do
   printf "${BLUE}Testcase #%d: %s\n" "$i" "${test_seeds[$i]}"
 
