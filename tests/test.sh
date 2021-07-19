@@ -32,23 +32,24 @@ test_seeds[14]="./main --csv"
 
 for i in "${!test_seeds[@]}"
 do
-  printf "${BLUE}Testcase #%d: %s\n" "$i" "${test_seeds[$i]}"
+  echo -e "${BLUE}Testcase #$i: ${test_seeds[$i]}"
 
   check=$(${test_seeds[$i]})
 
   if [[ $(< output/$i.out) != "$check" ]]; then
-    printf "${BLUE}%s${NC}\n" "Expected:"
+    echo -e "${RED}✘ Testcase failed.${NC}"
 
-    printf "%s\n" "$(< output/$i.out)"
+    echo -e "${BLUE}Expected:${NC}"
 
-    printf "${BLUE}%s${NC}\n" "Runtime:"
+    echo "$(< output/$i.out)"
 
-    printf "%s\n" "$check"
+    echo -e "${BLUE}Runtime:${NC}"
 
-    printf "${BLUE}Result: ${RED}%s${NC}\n" "failed"
+    echo "$check"
+
     exit 1
   else
-    printf "${BLUE}Result: ${GREEN}%s${NC}\n" "passed"
+    echo -e "${GREEN}✔ Testcase passed.${NC}"
   fi
 
   printf "\n"
