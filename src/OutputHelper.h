@@ -160,6 +160,14 @@ public:
     bool hasConclusion = true) {
 
     /**
+     * If no data, don't print!
+     *
+     */
+    if (tableData.size() == 0) {
+      return;
+    }
+
+    /**
      * Output in table format
      *
      */
