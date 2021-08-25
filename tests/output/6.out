@@ -1,6 +1,6 @@
-Error happened while reading file data/19120338.csv, on line 8 (stod)
-Error happened while reading file data/19120338.csv, on line 16 (stod)
-Error happened while reading file data/19120338.csv, on line 25 (stod)
+Error happened while reading file data/has_fail.csv, on line 8 (stod)
+Error happened while reading file data/has_fail.csv, on line 16 (stod)
+Error happened while reading file data/has_fail.csv, on line 25 (stod)
 Total passed classes: 5 (62.50%)
 class code,credits,grade (10 - scale),grade (4 - scale),grade (A - scale)
 CSC10001,4,10.00,4.00,A+
