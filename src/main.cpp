@@ -7,20 +7,23 @@
 #include"include.h"
 
 int main(int argc, char* argv[]) {
+  // Copy all arguments to a std::vector<std::string>
+  std::vector<std::string> args(argv + 1, argc + argv);
+
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
 
   try {
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
       ::getInstance()
-      ->create(argc, argv);
+      ->create(args);
 
     /**
      * These lines check if user needs to output to .csv file.
      *
      */
     OutputHelper::instance()->setOutputFormat(
-      Utility::hasParameter(argc, argv, "--csv") ?
+      Utility::hasParameter(args, "--csv") ?
         OutputConstants::FORMAT_CSV :
         OutputConstants::FORMAT_TABLE
     );
