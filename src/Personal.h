@@ -182,7 +182,7 @@ public:
   virtual std::shared_ptr<PersonalGPA> parse(
     const std::vector<std::string>& argv) {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv.at(1)
+      argv.at(0)
     );
 
     return std::make_shared<PersonalGPA>(subjects);
@@ -291,11 +291,11 @@ public:
   virtual std::shared_ptr<PersonalGPA> parse(
     const std::vector<std::string>& argv) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv.at(1)
+      argv.at(0)
     );
 
     std::vector<std::string> prefixes = InputHelper::readFileLines(
-      argv.at(3)
+      argv.at(2)
     );
 
     return std::make_shared<PersonalSpecific>(
@@ -370,10 +370,10 @@ public:
   virtual std::shared_ptr<PersonalGPA> parse(
     const std::vector<std::string>& argv) override {
     std::vector<Subject> subjectVector = Subject
-      ::parseSubjectVector(argv.at(1));
+      ::parseSubjectVector(argv.at(0));
 
     std::vector<std::string> ignoredCourses = InputHelper
-      ::readFileLines(argv.at(3));
+      ::readFileLines(argv.at(2));
 
     return std::make_shared<PersonalExcept>(
       subjectVector,
@@ -435,26 +435,16 @@ public:
   /**
    * Create a new instance of PersonalGPA
    *
-   * @param  const std::string&
+   * @param  const std::vector<std::string>&
    *
    * @return std::shared_ptr<PersonalGPA>
    */
   std::shared_ptr<PersonalGPA> create(
-    int argc,
-    char** argv) {
-    // So the idea is maintaining the input line ./<program name> <input csv> <option> <parameter>
-    std::vector<std::string> arguments;
-
-    for (int i = 0; i < argc; ++i) {
-      arguments.push_back(
-        std::string(argv[i])
-      );
-    }
-
-    if (argc - 1 > 1) {
+    const std::vector<std::string>& arguments) {
+    if (arguments.size() > 1) {
       // Detect prototype to use.
       for (const auto& it : _prototypes) {
-        if (it->option() == std::string(arguments.at(2))) {
+        if (it->option() == arguments.at(1)) {
           return it->parse(arguments);
         }
       }

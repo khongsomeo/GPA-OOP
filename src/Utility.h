@@ -49,22 +49,17 @@ public:
   /**
    * Check if a parameter exist in list of parameters parsed.
    *
-   * @param  int
-   * @param  char**
+   * @param  const std::vector<std::string>
    * @param  const std::string&
    *
    * @return bool
    */
   static bool hasParameter(
-    int argc,
-    char** argv,
+    const std::vector<std::string> args,
     const std::string& param) {
-    for (int i = 0; i < argc; ++i) {
-      if (std::string(argv[i]) == param) {
-        return 1;
-      }
+    for (auto it = args.begin(); it != args.end(); ++it) {
+      if (*it == param) return 1;
     }
-
     return 0;
   }
 
