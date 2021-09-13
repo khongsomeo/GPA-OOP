@@ -20,10 +20,10 @@ public:
   /**
    * This function check if a file exist.
    *
-   * @param  std::string
+   * @param  const std::string&
    * @return bool
    */
-  static bool isFileExist(std::string fileName) {
+  static bool isFileExist(const std::string& fileName) {
     std::ifstream fileTest(fileName);
     return fileTest.good();
   }
@@ -31,12 +31,14 @@ public:
   /**
    * This function check if a string is a prefix of another string.
    *
-   * @param  std::string
-   * @param  std::string
+   * @param  const std::string&
+   * @param  const std::string&
    *
    * @return bool
    */
-  static bool isPrefix(std::string haystack, std::string needle) {
+  static bool isPrefix(
+    const std::string& haystack,
+    const std::string& needle) {
     auto check = std::mismatch(
       needle.begin(),
       needle.end(),
@@ -49,13 +51,13 @@ public:
   /**
    * Check if a parameter exist in list of parameters parsed.
    *
-   * @param  const std::vector<std::string>
+   * @param  const std::vector<std::string>&
    * @param  const std::string&
    *
    * @return bool
    */
   static bool hasParameter(
-    const std::vector<std::string> args,
+    const std::vector<std::string>& args,
     const std::string& param) {
     for (auto it = args.begin(); it != args.end(); ++it) {
       if (*it == param) return 1;
