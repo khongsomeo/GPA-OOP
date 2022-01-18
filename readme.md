@@ -66,6 +66,8 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 
 ### 3. Shell scripts
+Example commands are in `run.sh.example`
+
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
 
