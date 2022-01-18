@@ -1,12 +1,16 @@
 # GPA-OOP
 
-[![Build Status](https://travis-ci.com/trhgquan/GPA-OOP.svg?branch=master)](https://travis-ci.com/trhgquan/GPA-OOP)
-
 Caculating my GPA, in an OOP way.
 
 ## Installation
 - Make sure your C++ version >= C++17.
 - `git clone`
+- Compile using Makefile:
+```
+make
+```
+
+So simple, right?
 
 ## Running
 ### 1. Input format
@@ -62,28 +66,6 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 
 ### 3. Shell scripts
-- Rename `compile.sh.example` and `run.sh.example` to `.sh` extension:
-  ```shell
-  cp compile.sh.example compile.sh
-  cp run.sh.example run.sh
-  ```
-
-- Grant permissions:
-  ```shell
-  chmod 0700 run.sh compile.sh
-  ```
-
-- Compile:
-  ```shell
-  ./compile.sh
-  ```
-
-- Edit `run.sh`.
-
-- Run:
-  ```shell
-  ./run.sh
-  ```
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
 
