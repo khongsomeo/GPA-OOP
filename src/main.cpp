@@ -9,7 +9,7 @@
 int main(int argc, char* argv[]) {
   // Copy all arguments to a std::vector<std::string>
   std::vector<std::string> args(argv + 1, argc + argv);
-123
+  
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
 
