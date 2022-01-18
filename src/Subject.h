@@ -149,7 +149,7 @@ public:
       ::readFileLines(fileName);
 
     // Read csv file by line.
-    for (int i = 0; i < lineStrings.size(); ++i) {
+    for (int i = 0; i < (int)lineStrings.size(); ++i) {
       try {
         subjects.push_back(parse(lineStrings[i]));
       }

@@ -98,7 +98,7 @@ public:
     std::cout << std::setfill('-');
 
     // Print first n - 1 column
-    for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
+    for (int i = 0; i < (int)OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "+"
                 << std::setw(
                     OutputConstants::COLUMNS[i].length() + 3);
@@ -120,7 +120,7 @@ public:
     const std::vector<std::string>& lineData) {
     std::cout << std::setfill(' ');
 
-    for (int i = 0; i < OutputConstants::COLUMNS.size() - 1; ++i) {
+    for (int i = 0; i < (int)OutputConstants::COLUMNS.size() - 1; ++i) {
       std::cout << "|"
                 << std::setw(
                     OutputConstants::COLUMNS[i].length() + 1)
@@ -182,7 +182,7 @@ public:
       printSeparator();
 
       // Print table content.
-      for (int i = 0; i < tableData.size() - 1; ++i) {
+      for (int i = 0; i < (int)tableData.size() - 1; ++i) {
         printTableRow(tableData[i]);
       }
 
