@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -19,3 +18,5 @@ jobs:
       run: make init_test
     - name: make test
       run: make test
+    - name: cleaning afterworks
+      run: make clean
