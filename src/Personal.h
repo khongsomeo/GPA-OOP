@@ -255,7 +255,7 @@ public:
 
     std::vector<int> positions;
 
-    for (int i = 0; i < subjects.size(); ++i) {
+    for (int i = 0; i < (int)subjects.size(); ++i) {
       if (Utility::isPrefix(subjects.at(i).name(), prefix)) {
         // Add subject.
         addSubject(subjects.at(i));

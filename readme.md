@@ -3,12 +3,21 @@
 Caculating my GPA, in an OOP way.
 
 ## Installation
+### Prerequisites
 - Make sure your C++ version >= C++17.
-- `git clone`
-- Compile using Makefile:
-```
-make
-```
+
+### How-to:
+1. `git clone`
+2. Compile:
+    - using Makefile:
+      ```
+      make
+      ```
+
+    - On Windows:
+      ```
+      g++ src/main.cpp main -std=c++17
+      ```
 
 So simple, right?
 

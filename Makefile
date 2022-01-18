@@ -1,8 +1,11 @@
-output: main.o
-	g++ main.o -o main
+CXX=g++
+CXXFLAGS=-Wall -std=c++17
+
+main: main.o
+	$(CXX) $(CXXFLAGS) main.o -o main
 
 main.o: src/main.cpp
-	g++ -c src/main.cpp
+	$(CXX) $(CXXFLAGS) -c src/main.cpp
 
 clean:
 	rm *.o main tests/main
