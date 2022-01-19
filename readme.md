@@ -1,4 +1,5 @@
 # GPA-OOP
+[![C/C++ CI](https://github.com/trhgquan/GPA-OOP/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/trhgquan/GPA-OOP/actions/workflows/c-cpp.yml)
 
 Caculating my GPA, in an OOP way.
 
@@ -7,7 +8,7 @@ Caculating my GPA, in an OOP way.
 - Make sure your C++ version >= C++17.
 
 ### How-to:
-1. `git clone`
+1. `git clone` the project.
 2. Compile:
     - using Makefile:
       ```
@@ -35,11 +36,11 @@ So simple, right?
 Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate overall GPA:
   ```shell
-  ./<PROGRAM> <GRADE_FILE.csv> --gpa
+  ./<PROGRAM> --input <GRADE_FILE.csv> --gpa
   ```
 - To calculate GPA of courses start with a prefix:
   ```shell
-  ./<PROGRAM> <GRADE_FILE.csv> --specific <SPECIFIC_COURSES.txt>
+  ./<PROGRAM> --input <GRADE_FILE.csv> --specific <SPECIFIC_COURSES.txt>
   ```
 
   `<SPECIFIC_COURSES.txt>` content should looks like this:
@@ -54,7 +55,7 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate GPA but ignore some courses defines inside
   `<IGNORED_COURSES.txt>`:
   ```shell
-  ./<PROGRAM> <GRADE_FILE.csv> --ignore <IGNORED_COURSES.txt>
+  ./<PROGRAM> --input <GRADE_FILE.csv> --ignore <IGNORED_COURSES.txt>
   ```
 
   `IGNORED_COURSES.txt` content should looks like this:
@@ -68,14 +69,14 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 - Export to `.csv` format:
   ```shell
-  ./<PROGRAM> <GRADE_FILE.csv>
-    [--gpa /
-     --specific <SPECIFIC_COURSES.txt> /
+  ./<PROGRAM> --input <GRADE_FILE.csv>
+    [--specific <SPECIFIC_COURSES.txt> /
      --ignore <IGNORED_COURSES.txt>] --csv
   ```
 
 ### 3. Shell scripts
-Example commands are in `run.sh.example`
+Example commands for running are in `run.sh.example`,
+for compiling are in `compile.sh.example`.
 
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.

@@ -8,7 +8,7 @@ main.o: src/main.cpp
 	$(CXX) $(CXXFLAGS) -c src/main.cpp
 
 clean:
-	rm *.o main tests/main
+	rm -f *.o main tests/main
 
 init_test:
 	cp main tests/main

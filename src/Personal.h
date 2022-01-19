@@ -51,15 +51,6 @@ public:
 
 public:
   /**
-   * Return option.
-   *
-   * @return std::string
-   */
-  virtual std::string option() {
-    return "--gpa";
-  }
-
-  /**
    * Return total credits
    *
    * @return int
@@ -180,10 +171,8 @@ public:
    * @return std::shared_ptr<IPersonal>
    */
   virtual std::shared_ptr<PersonalGPA> parse(
-    const std::vector<std::string>& argv) {
-    std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv.at(0)
-    );
+    const std::vector<std::string>& input) {
+    std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
     return std::make_shared<PersonalGPA>(subjects);
   }
@@ -273,15 +262,6 @@ public:
 
 public:
   /**
-   * Return option
-   *
-   * @return std::string
-   */
-  std::string option() override {
-    return "--specific";
-  }
-
-  /**
    * Parse a PersonalSpecific object.
    *
    * @param  const std::vector<std::string>&
@@ -289,13 +269,13 @@ public:
    * @return std::shared_ptr<PersonalGPA>
    */
   virtual std::shared_ptr<PersonalGPA> parse(
-    const std::vector<std::string>& argv) override {
+    const std::vector<std::string>& input) override {
     std::vector<Subject> subjects = Subject::parseSubjectVector(
-      argv.at(0)
+      input.at(0)
     );
 
     std::vector<std::string> prefixes = InputHelper::readFileLines(
-      argv.at(2)
+      input.at(1)
     );
 
     return std::make_shared<PersonalSpecific>(
@@ -352,15 +332,6 @@ public:
 
 public:
   /**
-   * Return option.
-   *
-   * @return std::string
-   */
-  std::string option() override {
-    return "--ignore";
-  }
-
-  /**
    * Parse a PersonalExcept object.
    *
    * @param  const std::vector<std::string>&
@@ -368,12 +339,12 @@ public:
    * @return std::shared_ptr<PersonalGPA>
    */
   virtual std::shared_ptr<PersonalGPA> parse(
-    const std::vector<std::string>& argv) override {
+    const std::vector<std::string>& input) override {
     std::vector<Subject> subjectVector = Subject
-      ::parseSubjectVector(argv.at(0));
+      ::parseSubjectVector(input.at(0));
 
     std::vector<std::string> ignoredCourses = InputHelper
-      ::readFileLines(argv.at(2));
+      ::readFileLines(input.at(1));
 
     return std::make_shared<PersonalExcept>(
       subjectVector,
@@ -440,17 +411,8 @@ public:
    * @return std::shared_ptr<PersonalGPA>
    */
   std::shared_ptr<PersonalGPA> create(
-    const std::vector<std::string>& arguments) {
-    if (arguments.size() > 1) {
-      // Detect prototype to use.
-      for (const auto& it : _prototypes) {
-        if (it->option() == arguments.at(1)) {
-          return it->parse(arguments);
-        }
-      }
-    }
-
-    return _prototypes.at(0)->parse(arguments);
+    int option, const std::vector<std::string>& arguments) {
+    return _prototypes.at(option)->parse(arguments);
   }
 };
 #endif
