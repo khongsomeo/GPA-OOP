@@ -49,23 +49,6 @@ public:
   }
 
   /**
-   * Check if a parameter exist in list of parameters parsed.
-   *
-   * @param  const std::vector<std::string>&
-   * @param  const std::string&
-   *
-   * @return bool
-   */
-  static bool hasParameter(
-    const std::vector<std::string>& args,
-    const std::string& param) {
-    for (auto it = args.begin(); it != args.end(); ++it) {
-      if (*it == param) return 1;
-    }
-    return 0;
-  }
-
-  /**
    * This function calculate percentage.
    *
    * @param  int

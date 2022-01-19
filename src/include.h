@@ -7,6 +7,7 @@
 #ifndef INCLUDE_H
 #define INCLUDE_H
 
+#include<algorithm>
 #include<iostream>
 #include<iomanip>
 #include<fstream>
@@ -18,6 +19,7 @@
 
 // Custom header
 #include"Utility.h"
+#include"CommandLineParser.h"
 #include"InputHelper.h"
 #include"Grade.h"
 #include"Subject.h"

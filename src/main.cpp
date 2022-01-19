@@ -7,23 +7,45 @@
 #include"include.h"
 
 int main(int argc, char* argv[]) {
-  // Copy all arguments to a std::vector<std::string>
-  std::vector<std::string> args(argv + 1, argc + argv);
-  
+  // Create a Command Line Parser with giving argc and argv
+  CommandLineParser CLP(argc, argv);
+
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
 
+  // Input arguments vector.
+  std::vector<std::string> input;
+
+  // Mode (zero by default)
+  int mode = 0;
+
   try {
+    // Get input file.
+    input.push_back(CLP.getCmdOption("--input"));
+
+    // Specific mode.
+    if (CLP.cmdOptionExists("--specific")) {
+      input.push_back(CLP.getCmdOption("--specific"));
+      mode = 1;
+    }  
+
+    // Ignore mode.
+    else if (CLP.cmdOptionExists("--ignore")) {
+      input.push_back(CLP.getCmdOption("--ignore"));
+      mode = 2;
+    }
+
+    // Create new GPA calculator.
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
       ::getInstance()
-      ->create(args);
+      ->create(mode, input);
 
     /**
      * These lines check if user needs to output to .csv file.
      *
      */
     OutputHelper::instance()->setOutputFormat(
-      Utility::hasParameter(args, "--csv") ?
+      CLP.cmdOptionExists("--csv") ?
         OutputConstants::FORMAT_CSV :
         OutputConstants::FORMAT_TABLE
     );
@@ -69,11 +91,6 @@ int main(int argc, char* argv[]) {
         chumeochuixoong->toFailedVector(),
         false
       );
-  }
-
-  // Catch exception if arguments went wrong
-  catch (const std::out_of_range& oor) {
-    std::cout << "Error happened (missing arguments)" << '\n';
   }
 
   // And catch exceptions
