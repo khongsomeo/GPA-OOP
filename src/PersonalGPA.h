@@ -24,17 +24,26 @@
 class PersonalGPA {
 protected:
   // Stores personal grades & credits.
-  int   _sumCredits = 0;
-  Grade _sumGrades  = 0.0;
-  Grade _resultGPA  = 0.0;
+  int   _passedCredits = 0;
+  int   _failedCredits = 0;
+  Grade _sumGrades = 0.0;
+  Grade _resultGPA = 0.0;
 
   // Stores classes passed / failed.
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
 
 public:
+  /**
+   * Constructor for PersonalGPA
+   *
+   */
   PersonalGPA();
 
+  /**
+   * Destructor for PersonalGPA
+   *
+   */
   ~PersonalGPA();
 
   /**
@@ -45,11 +54,18 @@ public:
   PersonalGPA(const std::vector<Subject>&);
 
   /**
-   * Return total credits
+   * Return total passed credits
    *
    * @return int
    */
-  int sumCredits();
+  int passedCredits();
+
+  /**
+   * Return total failed credits
+   *
+   * @return int
+   */
+  int failedCredits();
 
   /**
    * Return sum grades.
@@ -66,11 +82,18 @@ public:
   Grade resultGPA();
 
   /**
-   * Convert class to string vector.
+   * Convert passed list to string vector.
    *
    * @return std::vector<std::string>
    */
-  std::vector<std::string> toStringVector();
+  std::vector<std::string> passedListToStringVector();
+
+  /**
+   * Convert failed list to string vector.
+   *
+   * @return std::vector<std::string>>
+   */
+  std::vector<std::string> failedListToStringVector();
 
   /**
    * Convert to vector of string vectors.
@@ -85,6 +108,13 @@ public:
    * @return std::vector<std::vector<std::string>>
    */
   std::vector<std::vector<std::string>> toFailedVector();
+
+  /**
+   * Return total credits
+   *
+   * @return int
+   */
+  int getTotalPassedCredits();
 
   /**
    * Return total classes.

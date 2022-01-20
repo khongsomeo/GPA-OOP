@@ -90,10 +90,7 @@ int main(int argc, char* argv[]) {
 
     // Print failed table.
     OutputHelper::instance()
-      ->printTable(
-        chumeochuixoong->toFailedVector(),
-        false
-      );
+      ->printTable(chumeochuixoong->toFailedVector());
   }
 
   // And catch exceptions
