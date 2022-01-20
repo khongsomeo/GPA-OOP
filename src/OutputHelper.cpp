@@ -126,10 +126,8 @@ void OutputHelper::printCSVLine(
  */
 void OutputHelper::printTable(
     const std::vector<std::vector<std::string>>& tableData) {
-  /**
-   * If no data, don't print!
-   *
-   */
+  // If no data, don't print!
+  // tableData.size() == 1 when there is only a conclusion row (zero course!)
   if (tableData.size() <= 1) {
     return;
   }
