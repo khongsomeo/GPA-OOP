@@ -130,7 +130,7 @@ void OutputHelper::printTable(
    * If no data, don't print!
    *
    */
-  if (tableData.size() == 0) {
+  if (tableData.size() <= 1) {
     return;
   }
 
@@ -140,44 +140,8 @@ void OutputHelper::printTable(
    *
    */
   if (_outputType & OutputConstants::FORMAT_TABLE) {
-    printTableFormat(tableData, true);
+    printTableFormat(tableData);
   }
-
-  /**
-   * Output in CSV format
-   *
-   */
-  if (_outputType & OutputConstants::FORMAT_CSV) {
-    printTableCSV(tableData);
-  }
-}
-
-/**
- * Print table, with conclusion
- *
- * @param  const std::vector<std::vector<std::string>>&
- * @param  bool
- */
-void OutputHelper::printTable(
-    const std::vector<std::vector<std::string>>& tableData,
-    bool conclusionIgnored) {
-  /**
-   * If no data, don't print!
-   *
-   */
-  if (tableData.size() == 0) {
-    return;
-  }
-
-  /**
-   * Output in table format
-   * (without last conclusion row)
-   *
-   */
-  if (_outputType & OutputConstants::FORMAT_TABLE) {
-    printTableFormat(tableData, false);
-  }
-
 
   /**
    * Output in CSV format
@@ -192,11 +156,9 @@ void OutputHelper::printTable(
  * Print a table, with format.
  *
  * @param  const std::vector<std::vector<std::string>>&
- * @param  bool
  */
 void OutputHelper::printTableFormat(
-    const std::vector<std::vector<std::string>>& tableData,
-    bool hasConclusion) {
+    const std::vector<std::vector<std::string>>& tableData) {
   // Print table line (separator).
   printSeparator();
 
@@ -211,10 +173,8 @@ void OutputHelper::printTableFormat(
     printTableRow(tableData[i]);
   }
 
-  // Print conclusion row.
-  if (hasConclusion) {
-    printSeparator();
-  }
+  // Print conclusion separating line.
+  printSeparator();
 
   // Print last row.
   printTableRow(tableData[tableData.size() - 1]);

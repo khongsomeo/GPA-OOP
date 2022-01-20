@@ -35,12 +35,21 @@ PersonalGPA::PersonalGPA(
 }
 
 /**
- * Return total credits
+ * Return total passed credits
  *
  * @return int
  */
-int PersonalGPA::sumCredits() {
-  return _sumCredits;
+int PersonalGPA::passedCredits() {
+  return _passedCredits;
+}
+
+/**
+ * Return total failed credits
+ *
+ * @return int
+ */
+int PersonalGPA::failedCredits() {
+  return _failedCredits;
 }
 
 /**
@@ -62,18 +71,35 @@ Grade PersonalGPA::resultGPA() {
 }
 
 /**
- * Convert class to string vector.
+ * Convert passed list to string vector.
  *
  * @return std::vector<std::string>
  */
-std::vector<std::string> PersonalGPA::toStringVector() {
+std::vector<std::string> PersonalGPA::passedListToStringVector() {
   std::vector<std::string> stringVector;
 
   stringVector.push_back("Overall");
-  stringVector.push_back(std::to_string(_sumCredits));
+  stringVector.push_back(std::to_string(_passedCredits));
   stringVector.push_back(_resultGPA.toString());
   stringVector.push_back(_resultGPA.to4Scale().toString());
   stringVector.push_back(_resultGPA.toAScale());
+
+  return stringVector;
+}
+
+/**
+ * Convert failed list to string vector
+ *
+ * @return std::vector<std::string>
+ */
+std::vector<std::string> PersonalGPA::failedListToStringVector() {
+  std::vector<std::string> stringVector;
+
+  stringVector.push_back("Overall");
+  stringVector.push_back(std::to_string(_failedCredits));
+  stringVector.push_back("None");
+  stringVector.push_back("None");
+  stringVector.push_back("None");
 
   return stringVector;
 }
@@ -91,7 +117,7 @@ std::vector<std::vector<std::string>> PersonalGPA::toPassedVector() {
   }
 
   // Push overall.
-  resultVector.push_back(toStringVector());
+  resultVector.push_back(passedListToStringVector());
 
   return resultVector;
 }
@@ -107,6 +133,8 @@ std::vector<std::vector<std::string>> PersonalGPA::toFailedVector() {
   for (const Subject& subject : _classesFailed) {
     resultVector.push_back(subject.toStringVector());
   }
+
+  resultVector.push_back(failedListToStringVector());
 
   return resultVector;
 }
@@ -170,15 +198,15 @@ void PersonalGPA::addSubject(const Subject& subject) {
   // If not passed, then insert into failed list.
   if (!subject.passed()) {
     _classesFailed.insert(subject);
+    _failedCredits += subject.credit();
     return;
   }
 
   // Calculate new GPA.
-  _sumCredits += subject.credit();
+  _passedCredits += subject.credit();
   _sumGrades += subject.grade() * subject.credit();
-  _resultGPA = _sumGrades / (1.0 * _sumCredits);
+  _resultGPA = _sumGrades / (1.0 * _passedCredits);
 
   // Insert to passed list.
   _classesPassed.insert(subject);
 }
-

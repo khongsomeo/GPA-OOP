@@ -71,9 +71,8 @@ private:
    * Print table in format.
    *
    * @param  const std::vector<std::vector<std::string>>&
-   * @param  bool (default = true: has conclusion)
    */
-  void printTableFormat(const std::vector<std::vector<std::string>>&, bool);
+  void printTableFormat(const std::vector<std::vector<std::string>>&);
 
 public:
   ~OutputHelper();
@@ -112,13 +111,5 @@ public:
    * @param  const std::vector<std::vector<std::string>>>&
    */
   void printTable(const std::vector<std::vector<std::string>>&);
-
-  /**
-   * Print the full table.
-   *
-   * @param  const std::vector<std::vector<std::string>>>&
-   * @param  bool (default = conclusion ignored)
-   */
-  void printTable(const std::vector<std::vector<std::string>>&, bool);
 };
 #endif
