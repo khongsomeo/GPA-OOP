@@ -4,7 +4,10 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"include.h"
+#include"CommandLineParser.h"
+#include"InputHelper.h"
+#include"OutputHelper.h"
+#include"PersonalFactory.h"
 
 int main(int argc, char* argv[]) {
   // Create a Command Line Parser with giving argc and argv

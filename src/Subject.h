@@ -4,12 +4,14 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#ifndef INCLUDE_H
-#include"include.h"
-#endif
-
 #ifndef SUBJECT_H
 #define SUBJECT_H
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include"InputHelper.h"
+#include"Grade.h"
 
 class Subject {
 private:
@@ -25,12 +27,8 @@ public:
    * @param  int
    * @param  double
    */
-  Subject(const std::string& name, int credit, double grade) {
-    _name   = name;
-    _credit = credit;
-    _grade  = grade;
-  }
-
+  Subject(const std::string&, int, double);
+  
   /**
    * Parameterised constructor overload.
    *
@@ -38,45 +36,35 @@ public:
    * @param  int
    * @param  const Grade&
    */
-  Subject(const std::string& name, int credit, const Grade& grade) {
-    _name   = name;
-    _credit = credit;
-    _grade  = grade;
-  }
+  Subject(const std::string&, int, const Grade&);
 
   /**
    * Destructor
+   *
    */
-  ~Subject() {
-    // Do nothing
-  }
+  ~Subject();
+
 public:
   /**
    * Subject name
    *
    * @return std::string
    */
-  std::string name() const {
-    return _name;
-  }
+  std::string name() const;
 
   /**
    * Subject credit
    *
    * @return int
    */
-  int credit() const {
-    return _credit;
-  }
+  int credit() const;
 
   /**
    * Subject grade
    *
    * @return Grade
    */
-  Grade grade() const {
-    return _grade;
-  }
+  Grade grade() const;
 
   /**
    * Operator overloading for std::multiset sorting.
@@ -85,36 +73,21 @@ public:
    *
    * @return bool
    */
-  bool operator< (const Subject& subject) const {
-    return (_grade > subject._grade) ||
-      (_grade == subject._grade && _credit > subject._credit);
-  }
+  bool operator<(const Subject&) const;
 
   /**
    * Convert Subject to a string vector.
    *
    * @return std::vector<std::string>
    */
-  std::vector<std::string> toStringVector() const {
-    std::vector<std::string> subjectStringVector;
-
-    subjectStringVector.push_back(_name);
-    subjectStringVector.push_back(std::to_string(_credit));
-    subjectStringVector.push_back(_grade.toString());
-    subjectStringVector.push_back(_grade.to4Scale().toString());
-    subjectStringVector.push_back(_grade.toAScale());
-
-    return subjectStringVector;
-  }
+  std::vector<std::string> toStringVector() const;
 
   /**
    * Check if subject passed.
    *
    * @return bool
    */
-  bool passed() const {
-    return _grade >= 5.0;
-  }
+  bool passed() const;
 
   /**
    * This method parse a subject from a CSV line.
@@ -123,16 +96,7 @@ public:
    *
    * @return Subject
    */
-  static Subject parse(const std::string& buffer) {
-    std::vector<std::string> tokens = InputHelper
-      ::splitTokens(buffer, ",");
-
-    return Subject(
-      tokens.at(0),
-      stoi(tokens.at(1)),
-      stod(tokens.at(2))
-    );
-  }
+  static Subject parse(const std::string&);
 
   /**
    * This method parse a vector of Subjects from a CSV file.
@@ -142,28 +106,6 @@ public:
    * @return std::vector<Subject>
    */
   static std::vector<Subject> parseSubjectVector(
-    const std::string& fileName) {
-    std::vector<Subject> subjects;
-
-    std::vector<std::string> lineStrings = InputHelper
-      ::readFileLines(fileName);
-
-    // Read csv file by line.
-    for (int i = 0; i < (int)lineStrings.size(); ++i) {
-      try {
-        subjects.push_back(parse(lineStrings[i]));
-      }
-
-      catch (const std::exception& e) {
-        std::cout << "Error happened while reading file "
-                  << fileName
-                  << ", on line " << i + 1
-                  << " (" << e.what() << ")"
-                  << '\n';
-      }
-    }
-
-    return subjects;
-  }
+    const std::string& fileName);
 };
 #endif

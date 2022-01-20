@@ -7,6 +7,11 @@
 #ifndef COMMAND_LINE_PARSER
 #define COMMAND_LINE_PARSER
 
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<stdexcept>
+
 class CommandLineParser {
 private:
   std::vector<std::string> _tokens;
@@ -21,11 +26,7 @@ public:
    *
    * @return void
    */
-  CommandLineParser(int& argc, char** argv) {
-    for (int i = 1; i < argc; ++i) {
-      _tokens.push_back(std::string(argv[i]));
-    }
-  }
+  CommandLineParser(int&, char**);
 
 public:
   /**
@@ -35,18 +36,7 @@ public:
    *
    * @return std::string
    */
-  const std::string& getCmdOption(const std::string& option) const {
-    std::vector<std::string>::const_iterator itr;
-
-    itr = std::find(_tokens.begin(), _tokens.end(), option);
-
-    if (itr != _tokens.end() && ++itr != _tokens.end()) {
-      return *itr;
-    }
-
-    throw std::runtime_error("missing arguments");
-  }
-
+  const std::string& getCmdOption(const std::string&) const;
   
   /**
    * Check if an option exist.
@@ -55,9 +45,7 @@ public:
    *
    * @return bool
    */
-  bool cmdOptionExists(const std::string& option) const {
-    return std::find(_tokens.begin(), _tokens.end(), option) != _tokens.end();
-  }
+  bool cmdOptionExists(const std::string&) const;
 };
 
 #endif
