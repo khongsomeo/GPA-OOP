@@ -4,12 +4,12 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#ifndef INCLUDE_H
-#include"include.h"
-#endif
-
 #ifndef UTILITY_H
 #define UTILITY_H
+
+#include<algorithm>
+#include<string>
+#include<fstream>
 
 /**
  * Utility class.
@@ -23,10 +23,7 @@ public:
    * @param  const std::string&
    * @return bool
    */
-  static bool isFileExist(const std::string& fileName) {
-    std::ifstream fileTest(fileName);
-    return fileTest.good();
-  }
+  static bool isFileExist(const std::string&);
 
   /**
    * This function check if a string is a prefix of another string.
@@ -36,17 +33,7 @@ public:
    *
    * @return bool
    */
-  static bool isPrefix(
-    const std::string& haystack,
-    const std::string& needle) {
-    auto check = std::mismatch(
-      needle.begin(),
-      needle.end(),
-      haystack.begin()
-    );
-
-    return check.first == needle.end();
-  }
+  static bool isPrefix(const std::string&, const std::string&);
 
   /**
    * This function calculate percentage.
@@ -56,9 +43,7 @@ public:
    *
    * @return double
    */
-  static double percent(int x, int y) {
-    return x * 100.0 / y;
-  }
+  static double percent(int, int);
 };
 
 #endif

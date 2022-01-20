@@ -6,12 +6,15 @@
 
 #pragma once
 
-#ifndef INCLUDE_H
-#include"include.h"
-#endif
-
 #ifndef INPUT_HELPER_H
 #define INPUT_HELPER_H
+
+#include<string>
+#include<vector>
+#include<stdexcept>
+#include<fstream>
+
+#include"Utility.h"
 
 class InputHelper {
 public:
@@ -23,23 +26,7 @@ public:
    *
    * @return std::vector<std::string>
    */
-  static std::vector<std::string> splitTokens(
-    std::string haystack,
-    const std::string& needle) {
-    std::vector<std::string> tokens;
-
-    size_t index = 0;
-
-    while ((index = haystack.find(needle)) != std::string::npos) {
-      tokens.push_back(haystack.substr(0, index));
-
-      haystack.erase(0, index + needle.length());
-    }
-
-    tokens.push_back(haystack);
-
-    return tokens;
-  }
+  static std::vector<std::string> splitTokens(std::string, const std::string&);
 
   /**
    * Read a file to vector of strings.
@@ -50,23 +37,7 @@ public:
    *
    * @throw  std::runtime_error
    */
-  static std::vector<std::string> readFileLines(
-    const std::string& inputFile) {
-    // If the file DNE, throw new error.
-    if (!Utility::isFileExist(inputFile)) {
-      throw std::runtime_error("Input file does not exist");
-    }
-
-    std::ifstream openFile(inputFile);
-    std::string buffer;
-    std::vector<std::string> resultVector;
-
-    while (std::getline(openFile, buffer)) {
-      resultVector.push_back(buffer);
-    };
-
-    return resultVector;
-  }
+  static std::vector<std::string> readFileLines(const std::string&);
 };
 
 #endif
