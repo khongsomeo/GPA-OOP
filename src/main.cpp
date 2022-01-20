@@ -5,7 +5,6 @@
  */
 
 #include"CommandLineParser.h"
-#include"InputHelper.h"
 #include"OutputHelper.h"
 #include"PersonalFactory.h"
 
