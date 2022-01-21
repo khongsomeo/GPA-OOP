@@ -6,6 +6,43 @@
 
 #include"InputHelper.h"
 
+InputHelper::InputHelper() {
+  // Do nothing
+}
+
+InputHelper::~InputHelper() {
+  // Do nothing
+}
+
+/**
+ * Get an instance of InputHelper
+ *
+ * @return std::shared_ptr<InputHelper>
+ */
+std::shared_ptr<InputHelper> InputHelper::instance() {
+  static std::shared_ptr<InputHelper> instance(new InputHelper());
+
+  return instance;
+}
+
+/**
+ * Set input flags
+ *
+ * @param  int
+ */
+void InputHelper::setInputFlag(int flag) {
+  _inputFlag |= flag;
+}
+
+/**
+ * Check if errors while reading input is logged out.
+ *
+ * @return bool
+ */
+bool InputHelper::isLoggingErrors() {
+  return _inputFlag & InputConstants::ALLOW_INPUT_ERROR;
+}
+
 /**
  * Split a haystack to tokens by needle.
  *

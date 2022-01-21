@@ -49,8 +49,8 @@ std::shared_ptr<PersonalGPA> PersonalExcept::parse(
   std::vector<Subject> subjectVector = Subject
     ::parseSubjectVector(input.at(0));
 
-  std::vector<std::string> ignoredCourses = InputHelper
-    ::readFileLines(input.at(1));
+  std::vector<std::string> ignoredCourses = InputHelper::instance()
+    ->readFileLines(input.at(1));
 
   return std::make_shared<PersonalExcept>(
       subjectVector,

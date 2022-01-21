@@ -31,7 +31,7 @@ std::shared_ptr<OutputHelper> OutputHelper::instance() {
  * @return bool
  */
 bool OutputHelper::isCSVOutput() {
-  return _outputType & OutputConstants::FORMAT_CSV;
+  return _outputFlag & OutputConstants::FORMAT_CSV;
 }
 
 /**
@@ -39,8 +39,8 @@ bool OutputHelper::isCSVOutput() {
  *
  * @param  int
  */
-void OutputHelper::setOutputFormat(int flag) {
-  _outputType |= flag;
+void OutputHelper::setOutputFlag(int flag) {
+  _outputFlag |= flag;
 }
 
 /**
@@ -137,7 +137,7 @@ void OutputHelper::printTable(
    * (without last conclusion row)
    *
    */
-  if (_outputType & OutputConstants::FORMAT_TABLE) {
+  if (!isCSVOutput()) {
     printTableFormat(tableData);
   }
 
@@ -145,7 +145,7 @@ void OutputHelper::printTable(
    * Output in CSV format
    *
    */
-  if (_outputType & OutputConstants::FORMAT_CSV) {
+  if (isCSVOutput()) {
     printTableCSV(tableData);
   }
 }

@@ -17,6 +17,10 @@ IGNORE_COURSE=""
 ## Uncomment this line to calculate overall GPA and print it to $RESULT_FILE.
 # ./main --input $GRADE_FILE --gpa > $RESULT_FILE
 
+## Uncomment this line to calculate overall GPA and print it to $RESULT_FILE.
+## Notice that this line will ignore all input errors.
+# ./main --input $GRADE_FILE --gpa --ignore-input-error > $RESULT_FILE
+
 ## Uncomment this line to calculate GPA with specific course name
 ## and print it to $RESULT_FILE.
 # ./main --input $GRADE_FILE --specific $SPECIFIC_COURSE > $RESULT_FILE

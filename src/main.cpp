@@ -5,12 +5,27 @@
  */
 
 #include"CommandLineParser.h"
+#include"InputHelper.h"
 #include"OutputHelper.h"
 #include"PersonalFactory.h"
 
 int main(int argc, char* argv[]) {
   // Create a Command Line Parser with giving argc and argv
   CommandLineParser CLP(argc, argv);
+  
+  // These lines check if user needs to ignore input errors
+  InputHelper::instance()->setInputFlag(
+    CLP.cmdOptionExists("--ignore-input-error") ?
+      InputConstants::IGNORE_INPUT_ERROR :
+      InputConstants::ALLOW_INPUT_ERROR
+  );
+
+  // These lines check if user needs to output to .csv file.
+  OutputHelper::instance()->setOutputFlag(
+    CLP.cmdOptionExists("--csv") ?
+      OutputConstants::FORMAT_CSV :
+      OutputConstants::FORMAT_TABLE
+  );
 
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
@@ -41,16 +56,6 @@ int main(int argc, char* argv[]) {
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
       ::getInstance()
       ->create(mode, input);
-
-    /**
-     * These lines check if user needs to output to .csv file.
-     *
-     */
-    OutputHelper::instance()->setOutputFormat(
-      CLP.cmdOptionExists("--csv") ?
-        OutputConstants::FORMAT_CSV :
-        OutputConstants::FORMAT_TABLE
-    );
 
     /**
      * Outputing

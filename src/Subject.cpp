@@ -115,14 +115,14 @@ bool Subject::passed() const {
  * @return Subject
  */
 Subject Subject::parse(const std::string& buffer) {
-  std::vector<std::string> tokens = InputHelper
-    ::splitTokens(buffer, ",");
+  std::vector<std::string> tokens = InputHelper::instance()
+    ->splitTokens(buffer, ",");
 
   return Subject(
       tokens.at(0),
       stoi(tokens.at(1)),
       stod(tokens.at(2))
-      );
+  );
 }
 
 /**
@@ -136,8 +136,8 @@ std::vector<Subject> Subject::parseSubjectVector(
     const std::string& fileName) {
   std::vector<Subject> subjects;
 
-  std::vector<std::string> lineStrings = InputHelper
-    ::readFileLines(fileName);
+  std::vector<std::string> lineStrings = InputHelper::instance()
+    ->readFileLines(fileName);
 
   // Read csv file by line.
   for (int i = 0; i < (int)lineStrings.size(); ++i) {
@@ -146,11 +146,13 @@ std::vector<Subject> Subject::parseSubjectVector(
     }
 
     catch (const std::exception& e) {
-      std::cout << "Error happened while reading file "
-        << fileName
-        << ", on line " << i + 1
-        << " (" << e.what() << ")"
-        << '\n';
+      if (InputHelper::instance()->isLoggingErrors()) {
+        std::cout << "Error happened while reading file "
+          << fileName
+          << ", on line " << i + 1
+          << " (" << e.what() << ")"
+          << '\n';
+      }
     }
   }
 
