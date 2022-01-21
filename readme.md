@@ -73,10 +73,27 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
     [--specific <SPECIFIC_COURSES.txt> /
      --ignore <IGNORED_COURSES.txt>] --csv
   ```
+- Ignore input errors
+With .csv files created by Microsoft Excel, sometimes there will be blank lines
+marked by two colons between data blocks:
+```
+CSC10001,4,10
+,,
+CSC10002,4,8.5
+```
+And eventually this will cause an error message logging to the screen.
+
+To ignore this: simply adding `--ignore-input-error` option:
+```shell
+./<PROGRAM> --input <GRADE_FILE.csv>
+[--specific <SPECIFIC_COURSES.txt> /
+--ignore <IGNORED_COURSES.txt>] [ --csv ]
+--ignore-input-error
+```
 
 ### 3. Shell scripts
-Example commands for running are in `run.sh.example`,
-for compiling are in `compile.sh.example`.
+Example commands for running are in `example/run.sh.example`,
+for compiling are in `example/compile.sh.example`.
 
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
