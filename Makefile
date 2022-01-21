@@ -1,21 +1,25 @@
-CXX=g++
-CXXFLAGS=-Wall -std=c++17
+CXX := g++
+CXXFLAGS := -Wall -std=c++17
 
-main: main.o CommandLineParser.o InputHelper.o OutputHelper.o \
-	Utility.o Grade.o Subject.o PersonalGPA.o PersonalExcept.o \
-	PersonalSpecific.o PersonalFactory.o
-	$(CXX) $(CXXFLAGS) main.o CommandLineParser.o InputHelper.o OutputHelper.o \
-		Utility.o Grade.o Subject.o PersonalGPA.o PersonalExcept.o \
-		PersonalSpecific.o PersonalFactory.o -o main
+SRC_DIR := src
+OBJ_DIR := obj
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-%.o: src/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+TEST_DIR := tests
+
+main: $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@ mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o main tests/main
+	rm -rf $(OBJ_DIR) main $(TEST_DIR)/main
 
 init_test:
-	cp main tests/main
+	cp main $(TEST_DIR)/main
 
 test:
-	cd tests && pwd && bash test.sh
+	cd $(TEST_DIR) && pwd && bash test.sh
