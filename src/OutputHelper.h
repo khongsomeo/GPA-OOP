@@ -93,11 +93,11 @@ public:
   bool isCSVOutput();
 
   /**
-   * Set output format
+   * Set output flag
    *
    * @param  int
    */
-  void setOutputFormat(int);
+  void setOutputFlag(int);
   
   /**
    * Print the textart

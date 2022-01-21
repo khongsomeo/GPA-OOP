@@ -39,7 +39,7 @@ bool OutputHelper::isCSVOutput() {
  *
  * @param  int
  */
-void OutputHelper::setOutputFormat(int flag) {
+void OutputHelper::setOutputFlag(int flag) {
   _outputType |= flag;
 }
 

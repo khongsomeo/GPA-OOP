@@ -65,13 +65,10 @@ void PersonalSpecific::addSpecific(
  */
 std::shared_ptr<PersonalGPA> PersonalSpecific::parse(
     const std::vector<std::string>& input) {
-  std::vector<Subject> subjects = Subject::parseSubjectVector(
-      input.at(0)
-      );
+  std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
-  std::vector<std::string> prefixes = InputHelper::readFileLines(
-      input.at(1)
-      );
+  std::vector<std::string> prefixes = InputHelper::instance()
+    ->readFileLines(input.at(1));
 
   return std::make_shared<PersonalSpecific>(
       subjects, prefixes
