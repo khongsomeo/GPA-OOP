@@ -19,7 +19,10 @@
  *
  */
 namespace OutputConstants {
+  // Default path for the textart file.
   const std::string TEXTART_FILE = "data/textart.txt";
+
+  // Default column name
   const std::vector<std::string> COLUMNS = {
     "class code",
     "credits",
@@ -27,6 +30,8 @@ namespace OutputConstants {
     "grade (4 - scale)",
     "grade (A - scale)"
   };
+
+  // Flags for input.
   enum {
     FORMAT_TABLE = 1 << 0,
     FORMAT_CSV = 1 << 1
@@ -35,7 +40,7 @@ namespace OutputConstants {
 
 class OutputHelper {
 private:
-  int _outputType = 0;
+  int _outputFlag = 0;
 
   OutputHelper();
 
