@@ -46,4 +46,4 @@ public:
   static double percent(int, int);
 };
 
-#endif
+#endif  //UTILITY_H

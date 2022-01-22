@@ -54,4 +54,4 @@ public:
   std::shared_ptr<PersonalGPA> create(
     int, const std::vector<std::string>&);
 };
-#endif
+#endif  //PERSONAL_FACTORY_H

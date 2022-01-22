@@ -53,4 +53,4 @@ public:
   virtual std::shared_ptr<PersonalGPA> parse(
     const std::vector<std::string>&) override;
 };
-#endif
+#endif  //PERSONAL_SPECIFIC_H

@@ -48,4 +48,4 @@ public:
   bool cmdOptionExists(const std::string&) const;
 };
 
-#endif
+#endif  //COMMAND_LINE_PARSER_H
