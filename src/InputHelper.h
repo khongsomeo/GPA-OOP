@@ -4,8 +4,6 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#pragma once
-
 #ifndef INPUT_HELPER_H
 #define INPUT_HELPER_H
 
@@ -85,4 +83,4 @@ public:
   std::vector<std::string> readFileLines(const std::string&);
 };
 
-#endif
+#endif  //INPUT_HELPER_H

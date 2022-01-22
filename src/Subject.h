@@ -108,4 +108,4 @@ public:
   static std::vector<Subject> parseSubjectVector(
     const std::string& fileName);
 };
-#endif
+#endif  //SUBJECT_H

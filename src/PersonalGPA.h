@@ -4,8 +4,8 @@
  * Code by @trhgquan - https://github.com/trhgquan.
  */
 
-#ifndef PERSONAL_H
-#define PERSONAL_H
+#ifndef PERSONAL_GPA_H
+#define PERSONAL_GPA_H
 
 #include<string>
 #include<vector>
@@ -156,4 +156,4 @@ public:
    */
   void addSubject(const Subject& subject);
 };
-#endif
+#endif  //PERSONAL_GPA_H

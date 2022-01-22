@@ -153,4 +153,4 @@ public:
   friend std::ostream& operator<<(std::ostream&, const Grade&);
 };
 
-#endif
+#endif  //GRADE_H

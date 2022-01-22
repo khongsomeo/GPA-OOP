@@ -117,4 +117,4 @@ public:
    */
   void printTable(const std::vector<std::vector<std::string>>&);
 };
-#endif
+#endif  //OUTPUT_HELPER_H
