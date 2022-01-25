@@ -3,6 +3,8 @@
 
 Caculating my GPA, in an OOP way.
 
+![screenshot.png](screenshot.png)
+
 ## Installation
 ### Prerequisites
 - Make sure your C++ version >= C++17.
