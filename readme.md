@@ -12,15 +12,15 @@ Caculating my GPA, in an OOP way.
 ### How-to:
 1. `git clone` the project.
 2. Compile:
-    - using Makefile:
-      ```
-      make
-      ```
+- using Makefile:
+  ```
+  make
+  ```
 
-    - On Windows:
-      ```
-      g++ src/main.cpp main -std=c++17
-      ```
+- On Windows:
+  ```
+  g++ src/main.cpp main -std=c++17
+  ```
 
 So simple, right?
 
@@ -77,7 +77,7 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 - Ignore input errors
 
-  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by two colons between data blocks:
+  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by two commas between data blocks:
   ```
   CSC10001,4,10
   ,,
