@@ -35,7 +35,7 @@ public:
    *
    * @return std::shared_ptr<PersonalFactory>
    */
-  static std::shared_ptr<PersonalFactory> getInstance();
+  static std::shared_ptr<PersonalFactory> instance();
 
   /**
    * Return total items inside _prototypes.
@@ -51,7 +51,6 @@ public:
    *
    * @return std::shared_ptr<PersonalGPA>
    */
-  std::shared_ptr<PersonalGPA> create(
-    int, const std::vector<std::string>&);
+  std::shared_ptr<PersonalGPA> create(int, const std::vector<std::string>&);
 };
 #endif  //PERSONAL_FACTORY_H

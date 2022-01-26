@@ -26,7 +26,7 @@ PersonalFactory::~PersonalFactory() {
  *
  * @return std::shared_ptr<PersonalFactory>
  */
-std::shared_ptr<PersonalFactory> PersonalFactory::getInstance() {
+std::shared_ptr<PersonalFactory> PersonalFactory::instance() {
   static std::shared_ptr<PersonalFactory> instance(
       new PersonalFactory()
   );

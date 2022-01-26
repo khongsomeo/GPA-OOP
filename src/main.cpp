@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 
     // Create new GPA calculator.
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
-      ::getInstance()
+      ::instance()
       ->create(mode, input);
 
     /**
