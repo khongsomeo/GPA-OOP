@@ -75,7 +75,7 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
     [--specific <SPECIFIC_COURSES.txt> /
      --ignore <IGNORED_COURSES.txt>] --csv
   ```
-- Ignore input errors
+- Ignore parsing errors
 
   With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by two commas between data blocks:
   ```
@@ -85,12 +85,12 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
   And eventually this will cause an error message logging to the screen.
 
-  To ignore this: simply adding `--ignore-input-error` option:
+  To ignore this: simply adding `--ignore-parsing-error` option:
   ```shell
   ./<PROGRAM> --input <GRADE_FILE.csv>
   [--specific <SPECIFIC_COURSES.txt> /
   --ignore <IGNORED_COURSES.txt>] [ --csv ]
-  --ignore-input-error
+  --ignore-parsing-error
   ```
 
 ### 3. Shell scripts

@@ -21,8 +21,8 @@
  */
 namespace InputConstants {
   enum {
-    ALLOW_INPUT_ERROR = 1 << 0,
-    IGNORE_INPUT_ERROR = 1 << 1 
+    ALLOW_PARSING_ERROR = 1 << 0,
+    IGNORE_PARSING_ERROR = 1 << 1 
   };
 }
 
@@ -59,7 +59,7 @@ public:
    *
    * @return bool
    */
-  bool isLoggingErrors();
+  bool isLoggingParsingErrors();
 
   /**
    * Split a haystack to tokens by needle.

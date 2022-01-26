@@ -13,11 +13,11 @@ int main(int argc, char* argv[]) {
   // Create a Command Line Parser with giving argc and argv
   CommandLineParser CLP(argc, argv);
   
-  // These lines check if user needs to ignore input errors
+  // These lines check if user needs to ignore parsing errors
   InputHelper::instance()->setInputFlag(
-    CLP.cmdOptionExists("--ignore-input-error") ?
-      InputConstants::IGNORE_INPUT_ERROR :
-      InputConstants::ALLOW_INPUT_ERROR
+    CLP.cmdOptionExists("--ignore-parsing-error") ?
+      InputConstants::IGNORE_PARSING_ERROR :
+      InputConstants::ALLOW_PARSING_ERROR
   );
 
   // These lines check if user needs to output to .csv file.
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 
     // Create new GPA calculator.
     std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
-      ::getInstance()
+      ::instance()
       ->create(mode, input);
 
     /**
