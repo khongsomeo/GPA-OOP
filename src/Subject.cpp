@@ -146,7 +146,7 @@ std::vector<Subject> Subject::parseSubjectVector(
     }
 
     catch (const std::exception& e) {
-      if (InputHelper::instance()->isLoggingErrors()) {
+      if (InputHelper::instance()->isLoggingParsingErrors()) {
         std::cout << "Error happened while reading file "
           << fileName
           << ", on line " << i + 1

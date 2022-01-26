@@ -39,8 +39,8 @@ void InputHelper::setInputFlag(int flag) {
  *
  * @return bool
  */
-bool InputHelper::isLoggingErrors() {
-  return _inputFlag & InputConstants::ALLOW_INPUT_ERROR;
+bool InputHelper::isLoggingParsingErrors() {
+  return _inputFlag & InputConstants::ALLOW_PARSING_ERROR;
 }
 
 /**
