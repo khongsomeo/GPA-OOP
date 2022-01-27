@@ -1,5 +1,5 @@
 # GPA-OOP
-[![C/C++ CI](https://github.com/trhgquan/GPA-OOP/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/trhgquan/GPA-OOP/actions/workflows/c-cpp.yml)
+[![C/C++ CI](https://github.com/khongsomeo/GPA-OOP/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/khongsomeo/GPA-OOP/actions/workflows/c-cpp.yml)
 
 Caculating my GPA, in an OOP way.
 
