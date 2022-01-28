@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build-executable
+
+      - name: List out all files inside current working directory
+        run: ls -f
     
       - name: Zipping release artifact
         uses: vimtor/action-zip@v1
