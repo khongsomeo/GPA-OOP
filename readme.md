@@ -19,7 +19,7 @@ Calculating my GPA, in an OOP way.
 
 - On Windows:
   ```
-  g++ src/main.cpp main -std=c++17
+  g++ src/*.cpp main -std=c++17
   ```
 
 So simple, right?

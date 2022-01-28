@@ -31,8 +31,10 @@ jobs:
       with:
         name: build-executable
         path: |
+          data/
           main
           main.exe
+          LICENSE
       if: ${{ github.event_name == 'push' }}
 
     - name: cleaning afterworks
@@ -48,13 +50,21 @@ jobs:
         with:
           name: build-executable
     
+      - name: Zipping release artifact
+        uses: papeloto/action-zip@v1
+        with:
+          files: |
+            main
+            main.exe
+            data/
+            LICENSE
+          dest: release.zip
+
       - name: Create release with artifacts
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: 'latest'
           prerelease: true
+          automatic_release_tag: 'latest'
           title: 'Latest Build'
-          files: |
-            main
-            main.exe
+          files: release.zip
