@@ -51,13 +51,14 @@ jobs:
           name: build-executable
     
       - name: Zipping release artifact
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: |
             main
             main.exe
             data/
             LICENSE
+          recursive: true
           dest: release.zip
 
       - name: Create release with artifacts
