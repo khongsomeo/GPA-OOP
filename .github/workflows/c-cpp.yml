@@ -55,7 +55,7 @@ jobs:
           files: |
             main
             main.exe
-            data/
+            data
           recursive: true
           dest: release.zip
 
