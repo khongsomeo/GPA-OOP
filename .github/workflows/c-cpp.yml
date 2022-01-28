@@ -34,6 +34,7 @@ jobs:
           data/
           main
           main.exe
+        if-no-files-found: error
       if: ${{ github.event_name == 'push' }}
 
     - name: cleaning afterworks
@@ -53,6 +54,7 @@ jobs:
         uses: vimtor/action-zip@v1
         with:
           files: data/ main main.exe
+          recursive: true
           dest: release.zip
       
       - name: Drafting a new release.
