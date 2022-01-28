@@ -8,15 +8,53 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['windows-latest', 'ubuntu-latest']
 
     steps:
     - uses: actions/checkout@v2
+      name: Checkout repository
+
     - name: make
       run: make
-    - name: make copy test into testing folder
+
+    - name: make - copy test into testing folder
       run: make init_test
-    - name: make test
+
+    - name: make - test
       run: make test
+
+    - name: Upload artifacts (pushes only)
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-executable
+        path: |
+          main
+          main.exe
+      if: ${{ github.event_name == 'push' }}
+
     - name: cleaning afterworks
       run: make clean
+
+  create-release:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifacts from previous build
+        uses: actions/download-artifact@v2
+        with:
+          name: build-executable
+    
+      - name: Create release with artifacts
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: 'latest'
+          prerelease: true
+          title: 'Latest Build'
+          files: |
+            main
+            main.exe
