@@ -7,11 +7,12 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
 
-#include "Grade.h"
-#include "InputHelper.h"
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "Grade.h"
+#include "InputHelper.h"
 
 class Subject {
 private:
