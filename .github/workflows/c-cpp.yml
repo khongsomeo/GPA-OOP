@@ -14,11 +14,11 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout repository
 
-      - uses: DoozyX/clang-format-lint-action@v0.13
-        with:
-          source: 'src/'
-          extensions: 'h,c,cpp'
-          clangFormatVersion: 13.0.0
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format
+
+      - name: clang-format linter
+        run: make lint
 
   build-and-test:
     needs: linter

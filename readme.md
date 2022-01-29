@@ -37,9 +37,7 @@ Follow these steps:
   ```
 - If there are any linting errors, run format.sh.example to format it.
   ```
-  cp example/format.sh.example format.sh
-  chmod 0700 format.sh
-  ./format.sh
+  make format
   ```
 
 
