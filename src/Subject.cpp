@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"Subject.h"
+#include "Subject.h"
 
 /**
  * Parameterised constructor
@@ -13,11 +13,10 @@
  * @param  int
  * @param  double
  */
-Subject::Subject(
-    const std::string& name, int credit, double grade) {
-  _name   = name;
+Subject::Subject(const std::string &name, int credit, double grade) {
+  _name = name;
   _credit = credit;
-  _grade  = grade;
+  _grade = grade;
 }
 
 /**
@@ -27,11 +26,10 @@ Subject::Subject(
  * @param  int
  * @param  const Grade&
  */
-Subject::Subject(
-    const std::string& name, int credit, const Grade& grade) {
-  _name   = name;
+Subject::Subject(const std::string &name, int credit, const Grade &grade) {
+  _name = name;
   _credit = credit;
-  _grade  = grade;
+  _grade = grade;
 }
 
 /**
@@ -47,27 +45,21 @@ Subject::~Subject() {
  *
  * @return std::string
  */
-std::string Subject::name() const {
-  return _name;
-}
+std::string Subject::name() const { return _name; }
 
 /**
  * Subject credit
  *
  * @return int
  */
-int Subject::credit() const {
-  return _credit;
-}
+int Subject::credit() const { return _credit; }
 
 /**
  * Subject grade
  *
  * @return Grade
  */
-Grade Subject::grade() const {
-  return _grade;
-}
+Grade Subject::grade() const { return _grade; }
 
 /**
  * Operator overloading for std::multiset sorting.
@@ -76,9 +68,9 @@ Grade Subject::grade() const {
  *
  * @return bool
  */
-bool Subject::operator< (const Subject& subject) const {
+bool Subject::operator<(const Subject &subject) const {
   return (_grade > subject._grade) ||
-    (_grade == subject._grade && _credit > subject._credit);
+         (_grade == subject._grade && _credit > subject._credit);
 }
 
 /**
@@ -103,9 +95,7 @@ std::vector<std::string> Subject::toStringVector() const {
  *
  * @return bool
  */
-bool Subject::passed() const {
-  return _grade >= 5.0;
-}
+bool Subject::passed() const { return _grade >= 5.0; }
 
 /**
  * This method parse a subject from a CSV line.
@@ -114,15 +104,11 @@ bool Subject::passed() const {
  *
  * @return Subject
  */
-Subject Subject::parse(const std::string& buffer) {
-  std::vector<std::string> tokens = InputHelper::instance()
-    ->splitTokens(buffer, ",");
+Subject Subject::parse(const std::string &buffer) {
+  std::vector<std::string> tokens =
+      InputHelper::instance()->splitTokens(buffer, ",");
 
-  return Subject(
-      tokens.at(0),
-      stoi(tokens.at(1)),
-      stod(tokens.at(2))
-  );
+  return Subject(tokens.at(0), stoi(tokens.at(1)), stod(tokens.at(2)));
 }
 
 /**
@@ -132,12 +118,11 @@ Subject Subject::parse(const std::string& buffer) {
  *
  * @return std::vector<Subject>
  */
-std::vector<Subject> Subject::parseSubjectVector(
-    const std::string& fileName) {
+std::vector<Subject> Subject::parseSubjectVector(const std::string &fileName) {
   std::vector<Subject> subjects;
 
-  std::vector<std::string> lineStrings = InputHelper::instance()
-    ->readFileLines(fileName);
+  std::vector<std::string> lineStrings =
+      InputHelper::instance()->readFileLines(fileName);
 
   // Read csv file by line.
   for (int i = 0; i < (int)lineStrings.size(); ++i) {
@@ -145,13 +130,10 @@ std::vector<Subject> Subject::parseSubjectVector(
       subjects.push_back(parse(lineStrings[i]));
     }
 
-    catch (const std::exception& e) {
+    catch (const std::exception &e) {
       if (InputHelper::instance()->isLoggingParsingErrors()) {
-        std::cout << "Error happened while reading file "
-          << fileName
-          << ", on line " << i + 1
-          << " (" << e.what() << ")"
-          << '\n';
+        std::cout << "Error happened while reading file " << fileName
+                  << ", on line " << i + 1 << " (" << e.what() << ")" << '\n';
       }
     }
   }

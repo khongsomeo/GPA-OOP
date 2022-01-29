@@ -7,10 +7,10 @@
 #ifndef GRADE_H
 #define GRADE_H
 
-#include<string>
-#include<sstream>
-#include<fstream>
-#include<iomanip>
+#include <fstream>
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 /**
  * Grade class.
@@ -43,7 +43,7 @@ public:
    *
    * @param  const Grade&
    */
-  Grade(const Grade&);
+  Grade(const Grade &);
 
   /**
    * Destructor
@@ -58,7 +58,7 @@ public:
    *
    * @return const Grade&
    */
-  const Grade& operator=(const Grade&);
+  const Grade &operator=(const Grade &);
 
   /**
    * Overload assign operator
@@ -67,7 +67,7 @@ public:
    *
    * @return const Grade&
    */
-  const Grade& operator=(double);
+  const Grade &operator=(double);
 
 public:
   /**
@@ -96,51 +96,51 @@ public:
    *
    */
 
-  bool operator<(const Grade&) const;
+  bool operator<(const Grade &) const;
 
-  bool operator>(const Grade&) const;
+  bool operator>(const Grade &) const;
 
-  bool operator>=(const Grade&) const;
+  bool operator>=(const Grade &) const;
 
-  bool operator<=(const Grade&) const;
+  bool operator<=(const Grade &) const;
 
-  bool operator==(const Grade&) const;
+  bool operator==(const Grade &) const;
 
   /**
    * Arithmetic operators
    *
    */
-  Grade operator+(const Grade&) const;
+  Grade operator+(const Grade &) const;
 
   Grade operator+(double) const;
 
-  const Grade& operator+=(const Grade&);
+  const Grade &operator+=(const Grade &);
 
-  const Grade& operator+=(double);
+  const Grade &operator+=(double);
 
-  Grade operator-(const Grade&) const;
+  Grade operator-(const Grade &) const;
 
   Grade operator-(double) const;
 
-  const Grade& operator-=(const Grade&);
+  const Grade &operator-=(const Grade &);
 
-  const Grade& operator-=(double);
+  const Grade &operator-=(double);
 
-  Grade operator*(const Grade&) const;
+  Grade operator*(const Grade &) const;
 
   Grade operator*(double) const;
 
-  const Grade& operator*=(const Grade&);
+  const Grade &operator*=(const Grade &);
 
-  const Grade& operator*=(double);
+  const Grade &operator*=(double);
 
-  Grade operator/(const Grade&) const;
+  Grade operator/(const Grade &) const;
 
   Grade operator/(double) const;
 
-  const Grade& operator/=(const Grade&);
+  const Grade &operator/=(const Grade &);
 
-  const Grade& operator/=(double);
+  const Grade &operator/=(double);
 
   /**
    * Cast to ostream.
@@ -150,7 +150,7 @@ public:
    *
    * @return std::ostream&
    */
-  friend std::ostream& operator<<(std::ostream&, const Grade&);
+  friend std::ostream &operator<<(std::ostream &, const Grade &);
 };
 
-#endif  //GRADE_H
+#endif // GRADE_H

@@ -4,28 +4,25 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"CommandLineParser.h"
-#include"InputHelper.h"
-#include"OutputHelper.h"
-#include"PersonalFactory.h"
+#include "CommandLineParser.h"
+#include "InputHelper.h"
+#include "OutputHelper.h"
+#include "PersonalFactory.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   // Create a Command Line Parser with giving argc and argv
   CommandLineParser CLP(argc, argv);
-  
+
   // These lines check if user needs to ignore parsing errors
   InputHelper::instance()->setInputFlag(
-    CLP.cmdOptionExists("--ignore-parsing-error") ?
-      InputConstants::IGNORE_PARSING_ERROR :
-      InputConstants::ALLOW_PARSING_ERROR
-  );
+      CLP.cmdOptionExists("--ignore-parsing-error")
+          ? InputConstants::IGNORE_PARSING_ERROR
+          : InputConstants::ALLOW_PARSING_ERROR);
 
   // These lines check if user needs to output to .csv file.
-  OutputHelper::instance()->setOutputFlag(
-    CLP.cmdOptionExists("--csv") ?
-      OutputConstants::FORMAT_CSV :
-      OutputConstants::FORMAT_TABLE
-  );
+  OutputHelper::instance()->setOutputFlag(CLP.cmdOptionExists("--csv")
+                                              ? OutputConstants::FORMAT_CSV
+                                              : OutputConstants::FORMAT_TABLE);
 
   // 2 digits after the floating point.
   std::cout << std::fixed << std::setprecision(2);
@@ -44,7 +41,7 @@ int main(int argc, char* argv[]) {
     if (CLP.cmdOptionExists("--specific")) {
       input.push_back(CLP.getCmdOption("--specific"));
       mode = 1;
-    }  
+    }
 
     // Ignore mode.
     else if (CLP.cmdOptionExists("--ignore")) {
@@ -53,9 +50,8 @@ int main(int argc, char* argv[]) {
     }
 
     // Create new GPA calculator.
-    std::shared_ptr<PersonalGPA> chumeochuixoong = PersonalFactory
-      ::instance()
-      ->create(mode, input);
+    std::shared_ptr<PersonalGPA> chumeochuixoong =
+        PersonalFactory ::instance()->create(mode, input);
 
     /**
      * Outputing
@@ -68,40 +64,30 @@ int main(int argc, char* argv[]) {
 
     // Print the stats.
     std::cout << "Total passed classes: "
-              << chumeochuixoong->getTotalClassesPassed()
-              << " ("
-              << Utility::percent(
-                  chumeochuixoong->getTotalClassesPassed(),
-                  chumeochuixoong->getTotalClasses())
-              << "%)"
-              << '\n';
+              << chumeochuixoong->getTotalClassesPassed() << " ("
+              << Utility::percent(chumeochuixoong->getTotalClassesPassed(),
+                                  chumeochuixoong->getTotalClasses())
+              << "%)" << '\n';
 
     // Print passed table
-    OutputHelper::instance()
-      ->printTable(chumeochuixoong->toPassedVector());
+    OutputHelper::instance()->printTable(chumeochuixoong->toPassedVector());
 
     std::cout << '\n';
 
     // Print failed stats.
     std::cout << "Total failed classes: "
-              << chumeochuixoong->getTotalClassesFailed()
-              << " ("
-              << Utility::percent(
-                  chumeochuixoong->getTotalClassesFailed(),
-                  chumeochuixoong->getTotalClasses())
-              << "%)"
-              << '\n';
+              << chumeochuixoong->getTotalClassesFailed() << " ("
+              << Utility::percent(chumeochuixoong->getTotalClassesFailed(),
+                                  chumeochuixoong->getTotalClasses())
+              << "%)" << '\n';
 
     // Print failed table.
-    OutputHelper::instance()
-      ->printTable(chumeochuixoong->toFailedVector());
+    OutputHelper::instance()->printTable(chumeochuixoong->toFailedVector());
   }
 
   // And catch exceptions
-  catch (const std::exception& e) {
-    std::cout << "Error happened ("
-              << e.what() << ")"
-              << '\n';
+  catch (const std::exception &e) {
+    std::cout << "Error happened (" << e.what() << ")" << '\n';
   }
 
   return 0;

@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"PersonalSpecific.h"
+#include "PersonalSpecific.h"
 
 PersonalSpecific::PersonalSpecific() {
   // Do nothing
@@ -21,9 +21,9 @@ PersonalSpecific::~PersonalSpecific() {
  * @param  const std::vector<string>&
  */
 PersonalSpecific::PersonalSpecific(
-    std::vector<Subject>& subjects,
-    const std::vector<std::string>& coursePrefixes) {
-  for (const std::string& prefix : coursePrefixes) {
+    std::vector<Subject> &subjects,
+    const std::vector<std::string> &coursePrefixes) {
+  for (const std::string &prefix : coursePrefixes) {
     addSpecific(subjects, prefix);
   }
 }
@@ -34,9 +34,8 @@ PersonalSpecific::PersonalSpecific(
  * @param  std::vector<Subject>&
  * @param  const std::string&
  */
-void PersonalSpecific::addSpecific(
-    std::vector<Subject>& subjects,
-    const std::string& prefix) {
+void PersonalSpecific::addSpecific(std::vector<Subject> &subjects,
+                                   const std::string &prefix) {
 
   std::vector<int> positions;
 
@@ -51,7 +50,7 @@ void PersonalSpecific::addSpecific(
   }
 
   // Remove subjects to prevent re-adding them.
-  for (const int& i : positions) {
+  for (const int &i : positions) {
     subjects.erase(subjects.begin() + i);
   }
 }
@@ -63,14 +62,12 @@ void PersonalSpecific::addSpecific(
  *
  * @return std::shared_ptr<PersonalGPA>
  */
-std::shared_ptr<PersonalGPA> PersonalSpecific::parse(
-    const std::vector<std::string>& input) {
+std::shared_ptr<PersonalGPA>
+PersonalSpecific::parse(const std::vector<std::string> &input) {
   std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
-  std::vector<std::string> prefixes = InputHelper::instance()
-    ->readFileLines(input.at(1));
+  std::vector<std::string> prefixes =
+      InputHelper::instance()->readFileLines(input.at(1));
 
-  return std::make_shared<PersonalSpecific>(
-      subjects, prefixes
-  );
+  return std::make_shared<PersonalSpecific>(subjects, prefixes);
 }

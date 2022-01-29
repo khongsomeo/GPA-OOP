@@ -4,6 +4,6 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"PersonalGPA.h"
-#include"PersonalExcept.h"
-#include"PersonalSpecific.h"
+#include "PersonalExcept.h"
+#include "PersonalGPA.h"
+#include "PersonalSpecific.h"

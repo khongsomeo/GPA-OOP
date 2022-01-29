@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"PersonalFactory.h"
+#include "PersonalFactory.h"
 
 PersonalFactory::PersonalFactory() {
   // Push list of prototypes.
@@ -27,9 +27,7 @@ PersonalFactory::~PersonalFactory() {
  * @return std::shared_ptr<PersonalFactory>
  */
 std::shared_ptr<PersonalFactory> PersonalFactory::instance() {
-  static std::shared_ptr<PersonalFactory> instance(
-      new PersonalFactory()
-  );
+  static std::shared_ptr<PersonalFactory> instance(new PersonalFactory());
 
   return instance;
 }
@@ -39,9 +37,7 @@ std::shared_ptr<PersonalFactory> PersonalFactory::instance() {
  *
  * @return int
  */
-int PersonalFactory::prototypeSize() {
-  return _prototypes.size();
-}
+int PersonalFactory::prototypeSize() { return _prototypes.size(); }
 
 /**
  * Create a new instance of PersonalGPA
@@ -50,8 +46,7 @@ int PersonalFactory::prototypeSize() {
  *
  * @return std::shared_ptr<PersonalGPA>
  */
-std::shared_ptr<PersonalGPA> PersonalFactory::create(
-    int option, const std::vector<std::string>& arguments) {
+std::shared_ptr<PersonalGPA>
+PersonalFactory::create(int option, const std::vector<std::string> &arguments) {
   return _prototypes.at(option)->parse(arguments);
 }
-

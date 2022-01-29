@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"Utility.h"
+#include "Utility.h"
 
 /**
  * This function check if a file exist.
@@ -12,7 +12,7 @@
  * @param  const std::string&
  * @return bool
  */
-bool Utility::isFileExist(const std::string& fileName) {
+bool Utility::isFileExist(const std::string &fileName) {
   std::ifstream fileTest(fileName);
   return fileTest.good();
 }
@@ -25,14 +25,8 @@ bool Utility::isFileExist(const std::string& fileName) {
  *
  * @return bool
  */
-bool Utility::isPrefix(
-    const std::string& haystack,
-    const std::string& needle) {
-  auto check = std::mismatch(
-    needle.begin(),
-    needle.end(),
-    haystack.begin()
-  );
+bool Utility::isPrefix(const std::string &haystack, const std::string &needle) {
+  auto check = std::mismatch(needle.begin(), needle.end(), haystack.begin());
 
   return check.first == needle.end();
 }
@@ -45,6 +39,4 @@ bool Utility::isPrefix(
  *
  * @return double
  */
-double Utility::percent(int x, int y) {
-  return x * 100.0 / y;
-}
+double Utility::percent(int x, int y) { return x * 100.0 / y; }

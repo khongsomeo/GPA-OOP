@@ -7,17 +7,17 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
 
-#include<iostream>
-#include<string>
-#include<vector>
-#include"InputHelper.h"
-#include"Grade.h"
+#include "Grade.h"
+#include "InputHelper.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 class Subject {
 private:
   std::string _name;
-  int         _credit;
-  Grade       _grade;
+  int _credit;
+  Grade _grade;
 
 public:
   /**
@@ -27,8 +27,8 @@ public:
    * @param  int
    * @param  double
    */
-  Subject(const std::string&, int, double);
-  
+  Subject(const std::string &, int, double);
+
   /**
    * Parameterised constructor overload.
    *
@@ -36,7 +36,7 @@ public:
    * @param  int
    * @param  const Grade&
    */
-  Subject(const std::string&, int, const Grade&);
+  Subject(const std::string &, int, const Grade &);
 
   /**
    * Destructor
@@ -73,7 +73,7 @@ public:
    *
    * @return bool
    */
-  bool operator<(const Subject&) const;
+  bool operator<(const Subject &) const;
 
   /**
    * Convert Subject to a string vector.
@@ -96,7 +96,7 @@ public:
    *
    * @return Subject
    */
-  static Subject parse(const std::string&);
+  static Subject parse(const std::string &);
 
   /**
    * This method parse a vector of Subjects from a CSV file.
@@ -105,7 +105,6 @@ public:
    *
    * @return std::vector<Subject>
    */
-  static std::vector<Subject> parseSubjectVector(
-    const std::string& fileName);
+  static std::vector<Subject> parseSubjectVector(const std::string &fileName);
 };
-#endif  //SUBJECT_H
+#endif // SUBJECT_H

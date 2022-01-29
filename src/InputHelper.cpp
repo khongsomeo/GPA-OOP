@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"InputHelper.h"
+#include "InputHelper.h"
 
 InputHelper::InputHelper() {
   // Do nothing
@@ -30,9 +30,7 @@ std::shared_ptr<InputHelper> InputHelper::instance() {
  *
  * @param  int
  */
-void InputHelper::setInputFlag(int flag) {
-  _inputFlag |= flag;
-}
+void InputHelper::setInputFlag(int flag) { _inputFlag |= flag; }
 
 /**
  * Check if errors while reading input is logged out.
@@ -51,9 +49,8 @@ bool InputHelper::isLoggingParsingErrors() {
  *
  * @return std::vector<std::string>
  */
-std::vector<std::string> InputHelper::splitTokens(
-    std::string haystack,
-    const std::string& needle) {
+std::vector<std::string> InputHelper::splitTokens(std::string haystack,
+                                                  const std::string &needle) {
   std::vector<std::string> tokens;
 
   size_t index = 0;
@@ -78,8 +75,8 @@ std::vector<std::string> InputHelper::splitTokens(
  *
  * @throw  std::runtime_error
  */
-std::vector<std::string> InputHelper::readFileLines(
-    const std::string& inputFile) {
+std::vector<std::string>
+InputHelper::readFileLines(const std::string &inputFile) {
   // If the file DNE, throw new error.
   if (!Utility::isFileExist(inputFile)) {
     throw std::runtime_error("Input file does not exist");
