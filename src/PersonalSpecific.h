@@ -7,7 +7,7 @@
 #ifndef PERSONAL_SPECIFIC_H
 #define PERSONAL_SPECIFIC_H
 
-#include"PersonalGPA.h"
+#include "PersonalGPA.h"
 
 /**
  * PersonalSpecific class
@@ -30,8 +30,7 @@ public:
    * @param  std::vector<Subject>&
    * @param  const std::vector<string>&
    */
-  PersonalSpecific(std::vector<Subject>&,
-    const std::vector<std::string>&);
+  PersonalSpecific(std::vector<Subject> &, const std::vector<std::string> &);
 
   /**
    * Add a specific course starting with "prefix".
@@ -39,8 +38,7 @@ public:
    * @param  std::vector<Subject>&
    * @param  const std::string&
    */
-  void addSpecific(std::vector<Subject>&,
-    const std::string&);
+  void addSpecific(std::vector<Subject> &, const std::string &);
 
 public:
   /**
@@ -50,7 +48,7 @@ public:
    *
    * @return std::shared_ptr<PersonalGPA>
    */
-  virtual std::shared_ptr<PersonalGPA> parse(
-    const std::vector<std::string>&) override;
+  virtual std::shared_ptr<PersonalGPA>
+  parse(const std::vector<std::string> &) override;
 };
-#endif  //PERSONAL_SPECIFIC_H
+#endif // PERSONAL_SPECIFIC_H

@@ -7,9 +7,9 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include<algorithm>
-#include<string>
-#include<fstream>
+#include <algorithm>
+#include <fstream>
+#include <string>
 
 /**
  * Utility class.
@@ -23,7 +23,7 @@ public:
    * @param  const std::string&
    * @return bool
    */
-  static bool isFileExist(const std::string&);
+  static bool isFileExist(const std::string &);
 
   /**
    * This function check if a string is a prefix of another string.
@@ -33,7 +33,7 @@ public:
    *
    * @return bool
    */
-  static bool isPrefix(const std::string&, const std::string&);
+  static bool isPrefix(const std::string &, const std::string &);
 
   /**
    * This function calculate percentage.
@@ -46,4 +46,4 @@ public:
   static double percent(int, int);
 };
 
-#endif  //UTILITY_H
+#endif // UTILITY_H

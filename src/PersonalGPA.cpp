@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"PersonalGPA.h"
+#include "PersonalGPA.h"
 
 /**
  * Constructor for PersonalGPA
@@ -27,9 +27,8 @@ PersonalGPA::~PersonalGPA() {
  *
  * @param  const std::vector<Subject>&
  */
-PersonalGPA::PersonalGPA(
-    const std::vector<Subject>& subjects) {
-  for (const Subject& subject : subjects) {
+PersonalGPA::PersonalGPA(const std::vector<Subject> &subjects) {
+  for (const Subject &subject : subjects) {
     addSubject(subject);
   }
 }
@@ -39,36 +38,28 @@ PersonalGPA::PersonalGPA(
  *
  * @return int
  */
-int PersonalGPA::passedCredits() {
-  return _passedCredits;
-}
+int PersonalGPA::passedCredits() { return _passedCredits; }
 
 /**
  * Return total failed credits
  *
  * @return int
  */
-int PersonalGPA::failedCredits() {
-  return _failedCredits;
-}
+int PersonalGPA::failedCredits() { return _failedCredits; }
 
 /**
  * Return sum grades.
  *
  * @return Grade
  */
-Grade PersonalGPA::sumGrades() {
-  return _sumGrades;
-}
+Grade PersonalGPA::sumGrades() { return _sumGrades; }
 
 /**
  * Return GPA
  *
  * @return Grade
  */
-Grade PersonalGPA::resultGPA() {
-  return _resultGPA;
-}
+Grade PersonalGPA::resultGPA() { return _resultGPA; }
 
 /**
  * Convert passed list to string vector.
@@ -112,7 +103,7 @@ std::vector<std::string> PersonalGPA::failedListToStringVector() {
 std::vector<std::vector<std::string>> PersonalGPA::toPassedVector() {
   std::vector<std::vector<std::string>> resultVector;
 
-  for (const Subject& subject : _classesPassed) {
+  for (const Subject &subject : _classesPassed) {
     resultVector.push_back(subject.toStringVector());
   }
 
@@ -130,7 +121,7 @@ std::vector<std::vector<std::string>> PersonalGPA::toPassedVector() {
 std::vector<std::vector<std::string>> PersonalGPA::toFailedVector() {
   std::vector<std::vector<std::string>> resultVector;
 
-  for (const Subject& subject : _classesFailed) {
+  for (const Subject &subject : _classesFailed) {
     resultVector.push_back(subject.toStringVector());
   }
 
@@ -162,18 +153,14 @@ int PersonalGPA::getTotalClasses() {
  *
  * @return int
  */
-int PersonalGPA::getTotalClassesPassed() {
-  return _classesPassed.size();
-}
+int PersonalGPA::getTotalClassesPassed() { return _classesPassed.size(); }
 
 /**
  * Return total failed classes.
  *
  * @return int
  */
-int PersonalGPA::getTotalClassesFailed() {
-  return _classesFailed.size();
-}
+int PersonalGPA::getTotalClassesFailed() { return _classesFailed.size(); }
 
 /**
  * Parse data into Personal
@@ -182,8 +169,8 @@ int PersonalGPA::getTotalClassesFailed() {
  *
  * @return std::shared_ptr<IPersonal>
  */
-std::shared_ptr<PersonalGPA> PersonalGPA::parse(
-    const std::vector<std::string>& input) {
+std::shared_ptr<PersonalGPA>
+PersonalGPA::parse(const std::vector<std::string> &input) {
   std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
   return std::make_shared<PersonalGPA>(subjects);
@@ -194,7 +181,7 @@ std::shared_ptr<PersonalGPA> PersonalGPA::parse(
  *
  * @param  const Subject&
  */
-void PersonalGPA::addSubject(const Subject& subject) {
+void PersonalGPA::addSubject(const Subject &subject) {
   // If not passed, then insert into failed list.
   if (!subject.passed()) {
     _classesFailed.insert(subject);

@@ -7,28 +7,25 @@
 #ifndef INPUT_HELPER_H
 #define INPUT_HELPER_H
 
-#include<string>
-#include<vector>
-#include<stdexcept>
-#include<fstream>
-#include<memory>
+#include <fstream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-#include"Utility.h"
+#include "Utility.h"
 
 /**
  * Constants (flags) for input
  *
  */
 namespace InputConstants {
-  enum {
-    ALLOW_PARSING_ERROR = 1 << 0,
-    IGNORE_PARSING_ERROR = 1 << 1 
-  };
+enum { ALLOW_PARSING_ERROR = 1 << 0, IGNORE_PARSING_ERROR = 1 << 1 };
 }
 
 /**
  * InputHelper
- * 
+ *
  */
 class InputHelper {
 private:
@@ -41,7 +38,7 @@ public:
 
   /**
    * Get instance of InputHelper
-   * 
+   *
    * @return std::shared_ptr<InputHelper>
    */
   static std::shared_ptr<InputHelper> instance();
@@ -53,7 +50,7 @@ public:
    * @param  int
    */
   void setInputFlag(int);
-  
+
   /**
    * Check if InputHelper is logging input errors
    *
@@ -69,7 +66,7 @@ public:
    *
    * @return std::vector<std::string>
    */
-  std::vector<std::string> splitTokens(std::string, const std::string&);
+  std::vector<std::string> splitTokens(std::string, const std::string &);
 
   /**
    * Read a file to vector of strings.
@@ -80,7 +77,7 @@ public:
    *
    * @throw  std::runtime_error
    */
-  std::vector<std::string> readFileLines(const std::string&);
+  std::vector<std::string> readFileLines(const std::string &);
 };
 
-#endif  //INPUT_HELPER_H
+#endif // INPUT_HELPER_H

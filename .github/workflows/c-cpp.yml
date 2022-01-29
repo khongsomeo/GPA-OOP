@@ -7,7 +7,21 @@ on:
     branches: [ master ]
 
 jobs:
+  linter:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout repository
+
+      - uses: DoozyX/clang-format-lint-action@v0.13
+        with:
+          source: 'src/'
+          extensions: 'h,c,cpp'
+          clangFormatVersion: 13.0.0
+
   build-and-test:
+    needs: linter
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

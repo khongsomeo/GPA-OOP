@@ -7,10 +7,10 @@
 #ifndef COMMAND_LINE_PARSER
 #define COMMAND_LINE_PARSER
 
-#include<algorithm>
-#include<vector>
-#include<string>
-#include<stdexcept>
+#include <algorithm>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 class CommandLineParser {
 private:
@@ -26,7 +26,7 @@ public:
    *
    * @return void
    */
-  CommandLineParser(int&, char**);
+  CommandLineParser(int &, char **);
 
 public:
   /**
@@ -36,8 +36,8 @@ public:
    *
    * @return std::string
    */
-  const std::string& getCmdOption(const std::string&) const;
-  
+  const std::string &getCmdOption(const std::string &) const;
+
   /**
    * Check if an option exist.
    *
@@ -45,7 +45,7 @@ public:
    *
    * @return bool
    */
-  bool cmdOptionExists(const std::string&) const;
+  bool cmdOptionExists(const std::string &) const;
 };
 
-#endif  //COMMAND_LINE_PARSER_H
+#endif // COMMAND_LINE_PARSER_H

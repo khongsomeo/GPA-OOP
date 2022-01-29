@@ -4,7 +4,7 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#include"OutputHelper.h"
+#include "OutputHelper.h"
 
 OutputHelper::OutputHelper() {
   // Do nothing
@@ -39,9 +39,7 @@ bool OutputHelper::isCSVOutput() {
  *
  * @param  int
  */
-void OutputHelper::setOutputFlag(int flag) {
-  _outputFlag |= flag;
-}
+void OutputHelper::setOutputFlag(int flag) { _outputFlag |= flag; }
 
 /**
  * Print the textart
@@ -69,16 +67,12 @@ void OutputHelper::printSeparator() {
 
   // Print first n - 1 column
   for (int i = 0; i < (int)OutputConstants::COLUMNS.size() - 1; ++i) {
-    std::cout << "+"
-      << std::setw(
-          OutputConstants::COLUMNS[i].length() + 3);
+    std::cout << "+" << std::setw(OutputConstants::COLUMNS[i].length() + 3);
   }
 
   // Print last column.
-  std::cout << "+"
-    << std::setw(
-        OutputConstants::COLUMNS.back().length() + 3)
-    << "+" << '\n';
+  std::cout << "+" << std::setw(OutputConstants::COLUMNS.back().length() + 3)
+            << "+" << '\n';
 }
 
 /**
@@ -86,23 +80,16 @@ void OutputHelper::printSeparator() {
  *
  * @param  const std::vector<std::string>&
  */
-void OutputHelper::printTableRow(
-    const std::vector<std::string>& lineData) {
+void OutputHelper::printTableRow(const std::vector<std::string> &lineData) {
   std::cout << std::setfill(' ');
 
   for (int i = 0; i < (int)OutputConstants::COLUMNS.size() - 1; ++i) {
-    std::cout << "|"
-      << std::setw(
-          OutputConstants::COLUMNS[i].length() + 1)
-      << lineData[i]
-      << " ";
+    std::cout << "|" << std::setw(OutputConstants::COLUMNS[i].length() + 1)
+              << lineData[i] << " ";
   }
 
-  std::cout << "|"
-    << std::setw(
-        OutputConstants::COLUMNS.back().length() + 1)
-    << lineData[OutputConstants::COLUMNS.size() - 1]
-    << " |" << '\n';
+  std::cout << "|" << std::setw(OutputConstants::COLUMNS.back().length() + 1)
+            << lineData[OutputConstants::COLUMNS.size() - 1] << " |" << '\n';
 }
 
 /**
@@ -110,8 +97,7 @@ void OutputHelper::printTableRow(
  *
  * @param  const std::vector<std::string>
  */
-void OutputHelper::printCSVLine(
-    const std::vector<std::string>& tableLine) {
+void OutputHelper::printCSVLine(const std::vector<std::string> &tableLine) {
   for (int i = 0; i < (int)tableLine.size() - 1; ++i) {
     std::cout << tableLine[i] << ',';
   }
@@ -125,7 +111,7 @@ void OutputHelper::printCSVLine(
  * @param  const std::vector<std::vector<std::string>>>&
  */
 void OutputHelper::printTable(
-    const std::vector<std::vector<std::string>>& tableData) {
+    const std::vector<std::vector<std::string>> &tableData) {
   // If no data, don't print!
   // tableData.size() == 1 when there is only a conclusion row (zero course!)
   if (tableData.size() <= 1) {
@@ -156,7 +142,7 @@ void OutputHelper::printTable(
  * @param  const std::vector<std::vector<std::string>>&
  */
 void OutputHelper::printTableFormat(
-    const std::vector<std::vector<std::string>>& tableData) {
+    const std::vector<std::vector<std::string>> &tableData) {
   // Print table line (separator).
   printSeparator();
 
@@ -187,12 +173,12 @@ void OutputHelper::printTableFormat(
  * @param  const std::vector<std::vector<std::string>>&
  */
 void OutputHelper::printTableCSV(
-    const std::vector<std::vector<std::string>>& tableData) {
+    const std::vector<std::vector<std::string>> &tableData) {
   // Print head
   printCSVLine(OutputConstants::COLUMNS);
 
   // Print data
-  for (const std::vector<std::string>& s : tableData) {
+  for (const std::vector<std::string> &s : tableData) {
     printCSVLine(s);
   }
 }

@@ -7,7 +7,7 @@
 #ifndef PERSONAL_FACTORY_H
 #define PERSONAL_FACTORY_H
 
-#include"Personal.h"
+#include "Personal.h"
 
 /**
  * PersonalFactory class - Singleton pattern
@@ -51,6 +51,6 @@ public:
    *
    * @return std::shared_ptr<PersonalGPA>
    */
-  std::shared_ptr<PersonalGPA> create(int, const std::vector<std::string>&);
+  std::shared_ptr<PersonalGPA> create(int, const std::vector<std::string> &);
 };
-#endif  //PERSONAL_FACTORY_H
+#endif // PERSONAL_FACTORY_H

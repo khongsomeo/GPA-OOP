@@ -4,7 +4,7 @@
  * Source: https://stackoverflow.com/a/868894
  */
 
-#include"CommandLineParser.h"
+#include "CommandLineParser.h"
 
 /**
  * Constructor for CommandLineParser:
@@ -15,7 +15,7 @@
  *
  * @return void
  */
-CommandLineParser::CommandLineParser(int& argc, char** argv) {
+CommandLineParser::CommandLineParser(int &argc, char **argv) {
   for (int i = 1; i < argc; ++i) {
     _tokens.push_back(std::string(argv[i]));
   }
@@ -28,7 +28,8 @@ CommandLineParser::CommandLineParser(int& argc, char** argv) {
  *
  * @return std::string
  */
-const std::string& CommandLineParser::getCmdOption(const std::string& option) const {
+const std::string &
+CommandLineParser::getCmdOption(const std::string &option) const {
   std::vector<std::string>::const_iterator itr;
 
   itr = std::find(_tokens.begin(), _tokens.end(), option);
@@ -47,7 +48,6 @@ const std::string& CommandLineParser::getCmdOption(const std::string& option) co
  *
  * @return bool
  */
-bool CommandLineParser::cmdOptionExists(const std::string& option) const {
+bool CommandLineParser::cmdOptionExists(const std::string &option) const {
   return std::find(_tokens.begin(), _tokens.end(), option) != _tokens.end();
 }
-

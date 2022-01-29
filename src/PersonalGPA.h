@@ -7,14 +7,14 @@
 #ifndef PERSONAL_GPA_H
 #define PERSONAL_GPA_H
 
-#include<string>
-#include<vector>
-#include<memory>
-#include<set>
-#include<stdexcept>
+#include <memory>
+#include <set>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-#include"Subject.h"
-#include"Grade.h"
+#include "Grade.h"
+#include "Subject.h"
 
 /**
  * Personal GPA abstract class.
@@ -24,8 +24,8 @@
 class PersonalGPA {
 protected:
   // Stores personal grades & credits.
-  int   _passedCredits = 0;
-  int   _failedCredits = 0;
+  int _passedCredits = 0;
+  int _failedCredits = 0;
   Grade _sumGrades = 0.0;
   Grade _resultGPA = 0.0;
 
@@ -51,7 +51,7 @@ public:
    *
    * @param  const std::vector<Subject>&
    */
-  PersonalGPA(const std::vector<Subject>&);
+  PersonalGPA(const std::vector<Subject> &);
 
   /**
    * Return total passed credits
@@ -146,14 +146,14 @@ public:
    *
    * @return std::shared_ptr<IPersonal>
    */
-  virtual std::shared_ptr<PersonalGPA> parse(
-    const std::vector<std::string>& input);
+  virtual std::shared_ptr<PersonalGPA>
+  parse(const std::vector<std::string> &input);
 
   /**
    * Add a new subject.
    *
    * @param  const Subject&
    */
-  void addSubject(const Subject& subject);
+  void addSubject(const Subject &subject);
 };
-#endif  //PERSONAL_GPA_H
+#endif // PERSONAL_GPA_H
