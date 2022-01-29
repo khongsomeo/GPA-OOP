@@ -23,3 +23,9 @@ init_test:
 
 test:
 	cd $(TEST_DIR) && pwd && bash test.sh
+
+lint:
+	find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format --dry-run --Werror -style=file
+
+format:
+	find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format -i -style=file

@@ -24,6 +24,23 @@ Calculating my GPA, in an OOP way.
 
 So simple, right?
 
+## Development
+We require your code to be formatted with `clang-format` before going further.
+Follow these steps:
+- Install `clang-format`:
+  ```
+  sudo apt-get install clang-format
+  ```
+- Run checks:
+  ```
+  make lint
+  ```
+- If there are any linting errors, run format.sh.example to format it.
+  ```
+  make format
+  ```
+
+
 ## Running
 ### 1. Input format
 - The input `.csv` file should looks like this:
