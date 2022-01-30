@@ -46,7 +46,7 @@ int PersonalFactory::prototypeSize() { return _prototypes.size(); }
  *
  * @return std::shared_ptr<PersonalGPA>
  */
-std::shared_ptr<PersonalGPA>
-PersonalFactory::create(int option, const std::vector<std::string> &arguments) {
+std::shared_ptr<PersonalGPA> PersonalFactory::create(
+    int option, const std::vector<std::string> &arguments) {
   return _prototypes.at(option)->parse(arguments);
 }

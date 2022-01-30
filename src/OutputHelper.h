@@ -29,15 +29,15 @@ const std::vector<std::string> COLUMNS = {
 
 // Flags for input.
 enum { FORMAT_TABLE = 1 << 0, FORMAT_CSV = 1 << 1 };
-} // namespace OutputConstants
+}  // namespace OutputConstants
 
 class OutputHelper {
-private:
+ private:
   int _outputFlag = 0;
 
   OutputHelper();
 
-private:
+ private:
   /**
    * Print a separator line.
    *
@@ -72,7 +72,7 @@ private:
    */
   void printTableFormat(const std::vector<std::vector<std::string>> &);
 
-public:
+ public:
   ~OutputHelper();
 
   /**
@@ -82,7 +82,7 @@ public:
    */
   static std::shared_ptr<OutputHelper> instance();
 
-public:
+ public:
   /**
    * Check if outputing in CSV format.
    *
@@ -110,4 +110,4 @@ public:
    */
   void printTable(const std::vector<std::vector<std::string>> &);
 };
-#endif // OUTPUT_HELPER_H
+#endif  // OUTPUT_HELPER_H

@@ -42,8 +42,8 @@ PersonalExcept::PersonalExcept(const std::vector<Subject> &subjects,
  *
  * @return std::shared_ptr<PersonalGPA>
  */
-std::shared_ptr<PersonalGPA>
-PersonalExcept::parse(const std::vector<std::string> &input) {
+std::shared_ptr<PersonalGPA> PersonalExcept::parse(
+    const std::vector<std::string> &input) {
   std::vector<Subject> subjectVector =
       Subject ::parseSubjectVector(input.at(0));
 

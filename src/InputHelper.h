@@ -28,12 +28,12 @@ enum { ALLOW_PARSING_ERROR = 1 << 0, IGNORE_PARSING_ERROR = 1 << 1 };
  *
  */
 class InputHelper {
-private:
+ private:
   int _inputFlag = 0;
 
   InputHelper();
 
-public:
+ public:
   ~InputHelper();
 
   /**
@@ -43,7 +43,7 @@ public:
    */
   static std::shared_ptr<InputHelper> instance();
 
-public:
+ public:
   /**
    * Set input flag for InputHelper
    *
@@ -80,4 +80,4 @@ public:
   std::vector<std::string> readFileLines(const std::string &);
 };
 
-#endif // INPUT_HELPER_H
+#endif  // INPUT_HELPER_H

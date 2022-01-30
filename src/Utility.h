@@ -16,7 +16,7 @@
  *
  */
 class Utility {
-public:
+ public:
   /**
    * This function check if a file exist.
    *
@@ -46,4 +46,4 @@ public:
   static double percent(int, int);
 };
 
-#endif // UTILITY_H
+#endif  // UTILITY_H

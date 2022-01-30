@@ -19,10 +19,10 @@
  * instead.
  */
 class PersonalExcept : public PersonalGPA {
-private:
+ private:
   std::multiset<std::string> _ignoredCourses;
 
-public:
+ public:
   PersonalExcept();
 
   ~PersonalExcept();
@@ -36,7 +36,7 @@ public:
   PersonalExcept(const std::vector<Subject> &,
                  const std::vector<std::string> &);
 
-public:
+ public:
   /**
    * Parse a PersonalExcept object.
    *
@@ -44,7 +44,7 @@ public:
    *
    * @return std::shared_ptr<PersonalGPA>
    */
-  virtual std::shared_ptr<PersonalGPA>
-  parse(const std::vector<std::string> &) override;
+  virtual std::shared_ptr<PersonalGPA> parse(
+      const std::vector<std::string> &) override;
 };
-#endif // PERSONAL_EXCEPT_H
+#endif  // PERSONAL_EXCEPT_H

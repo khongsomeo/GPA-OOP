@@ -64,20 +64,13 @@ const Grade &Grade::operator=(double grade) {
  * @return Grade
  */
 Grade Grade::to4Scale() const {
-  if (_grade < 3.0)
-    return Grade(0.0);
-  if (_grade < 4.0)
-    return Grade(1.0);
-  if (_grade < 5.0)
-    return Grade(1.5);
-  if (_grade < 6.0)
-    return Grade(2.0);
-  if (_grade < 7.0)
-    return Grade(2.5);
-  if (_grade < 8.0)
-    return Grade(3.0);
-  if (_grade < 9.0)
-    return Grade(3.5);
+  if (_grade < 3.0) return Grade(0.0);
+  if (_grade < 4.0) return Grade(1.0);
+  if (_grade < 5.0) return Grade(1.5);
+  if (_grade < 6.0) return Grade(2.0);
+  if (_grade < 7.0) return Grade(2.5);
+  if (_grade < 8.0) return Grade(3.0);
+  if (_grade < 9.0) return Grade(3.5);
   return Grade(4.0);
 }
 
@@ -87,20 +80,13 @@ Grade Grade::to4Scale() const {
  * @return std::string
  */
 std::string Grade::toAScale() const {
-  if (_grade < 3.0)
-    return "F";
-  if (_grade < 4.0)
-    return "D";
-  if (_grade < 5.0)
-    return "D+";
-  if (_grade < 6.0)
-    return "C";
-  if (_grade < 7.0)
-    return "B";
-  if (_grade < 8.0)
-    return "B+";
-  if (_grade < 9.0)
-    return "A";
+  if (_grade < 3.0) return "F";
+  if (_grade < 4.0) return "D";
+  if (_grade < 5.0) return "D+";
+  if (_grade < 6.0) return "C";
+  if (_grade < 7.0) return "B";
+  if (_grade < 8.0) return "B+";
+  if (_grade < 9.0) return "A";
   return "A+";
 }
 

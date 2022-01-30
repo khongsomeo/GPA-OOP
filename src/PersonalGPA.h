@@ -22,7 +22,7 @@
  * Using this class when we need to calculate overall GPA.
  */
 class PersonalGPA {
-protected:
+ protected:
   // Stores personal grades & credits.
   int _passedCredits = 0;
   int _failedCredits = 0;
@@ -33,7 +33,7 @@ protected:
   std::multiset<Subject> _classesPassed;
   std::multiset<Subject> _classesFailed;
 
-public:
+ public:
   /**
    * Constructor for PersonalGPA
    *
@@ -146,8 +146,8 @@ public:
    *
    * @return std::shared_ptr<IPersonal>
    */
-  virtual std::shared_ptr<PersonalGPA>
-  parse(const std::vector<std::string> &input);
+  virtual std::shared_ptr<PersonalGPA> parse(
+      const std::vector<std::string> &input);
 
   /**
    * Add a new subject.
@@ -156,4 +156,4 @@ public:
    */
   void addSubject(const Subject &subject);
 };
-#endif // PERSONAL_GPA_H
+#endif  // PERSONAL_GPA_H

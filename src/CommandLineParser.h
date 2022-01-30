@@ -13,10 +13,10 @@
 #include <vector>
 
 class CommandLineParser {
-private:
+ private:
   std::vector<std::string> _tokens;
 
-public:
+ public:
   /**
    * Constructor for CommandLineParser:
    * Create a vector of arguments from argc and argv
@@ -28,7 +28,7 @@ public:
    */
   CommandLineParser(int &, char **);
 
-public:
+ public:
   /**
    * Get a command line option
    *
@@ -48,4 +48,4 @@ public:
   bool cmdOptionExists(const std::string &) const;
 };
 
-#endif // COMMAND_LINE_PARSER_H
+#endif  // COMMAND_LINE_PARSER_H

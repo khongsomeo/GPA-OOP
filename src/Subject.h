@@ -15,12 +15,12 @@
 #include "InputHelper.h"
 
 class Subject {
-private:
+ private:
   std::string _name;
   int _credit;
   Grade _grade;
 
-public:
+ public:
   /**
    * Parameterised constructor
    *
@@ -45,7 +45,7 @@ public:
    */
   ~Subject();
 
-public:
+ public:
   /**
    * Subject name
    *
@@ -108,4 +108,4 @@ public:
    */
   static std::vector<Subject> parseSubjectVector(const std::string &fileName);
 };
-#endif // SUBJECT_H
+#endif  // SUBJECT_H

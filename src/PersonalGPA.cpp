@@ -169,8 +169,8 @@ int PersonalGPA::getTotalClassesFailed() { return _classesFailed.size(); }
  *
  * @return std::shared_ptr<IPersonal>
  */
-std::shared_ptr<PersonalGPA>
-PersonalGPA::parse(const std::vector<std::string> &input) {
+std::shared_ptr<PersonalGPA> PersonalGPA::parse(
+    const std::vector<std::string> &input) {
   std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
   return std::make_shared<PersonalGPA>(subjects);

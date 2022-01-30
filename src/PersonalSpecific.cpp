@@ -36,7 +36,6 @@ PersonalSpecific::PersonalSpecific(
  */
 void PersonalSpecific::addSpecific(std::vector<Subject> &subjects,
                                    const std::string &prefix) {
-
   std::vector<int> positions;
 
   for (int i = 0; i < (int)subjects.size(); ++i) {
@@ -62,8 +61,8 @@ void PersonalSpecific::addSpecific(std::vector<Subject> &subjects,
  *
  * @return std::shared_ptr<PersonalGPA>
  */
-std::shared_ptr<PersonalGPA>
-PersonalSpecific::parse(const std::vector<std::string> &input) {
+std::shared_ptr<PersonalGPA> PersonalSpecific::parse(
+    const std::vector<std::string> &input) {
   std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
 
   std::vector<std::string> prefixes =
