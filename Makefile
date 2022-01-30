@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -std=c++17
+CXXFLAGS := -Wall -static -static-libgcc -static-libstdc++ -std=c++17
 
 SRC_DIR := src
 OBJ_DIR := obj
