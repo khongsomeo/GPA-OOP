@@ -75,8 +75,8 @@ std::vector<std::string> InputHelper::splitTokens(std::string haystack,
  *
  * @throw  std::runtime_error
  */
-std::vector<std::string>
-InputHelper::readFileLines(const std::string &inputFile) {
+std::vector<std::string> InputHelper::readFileLines(
+    const std::string &inputFile) {
   // If the file DNE, throw new error.
   if (!Utility::isFileExist(inputFile)) {
     throw std::runtime_error("Input file does not exist");

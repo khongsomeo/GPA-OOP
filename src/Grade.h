@@ -21,10 +21,10 @@
  * Hence, creating a new class is the most suitable option.
  */
 class Grade {
-private:
+ private:
   double _grade;
 
-public:
+ public:
   /**
    * Default constructor
    *
@@ -69,7 +69,7 @@ public:
    */
   const Grade &operator=(double);
 
-public:
+ public:
   /**
    * Convert grade to 4 scale.
    *
@@ -153,4 +153,4 @@ public:
   friend std::ostream &operator<<(std::ostream &, const Grade &);
 };
 
-#endif // GRADE_H
+#endif  // GRADE_H

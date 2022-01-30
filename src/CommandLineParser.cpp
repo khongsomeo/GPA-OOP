@@ -28,8 +28,8 @@ CommandLineParser::CommandLineParser(int &argc, char **argv) {
  *
  * @return std::string
  */
-const std::string &
-CommandLineParser::getCmdOption(const std::string &option) const {
+const std::string &CommandLineParser::getCmdOption(
+    const std::string &option) const {
   std::vector<std::string>::const_iterator itr;
 
   itr = std::find(_tokens.begin(), _tokens.end(), option);

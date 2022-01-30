@@ -15,21 +15,21 @@
  * This class is used to generate Personal interface.
  */
 class PersonalFactory {
-private:
+ private:
   // List of prototypes.
   std::vector<std::shared_ptr<PersonalGPA>> _prototypes;
 
   // Setting up.
   PersonalFactory();
 
-public:
+ public:
   /**
    * Destructor
    *
    */
   ~PersonalFactory();
 
-public:
+ public:
   /**
    * Init a new instance.
    *
@@ -53,4 +53,4 @@ public:
    */
   std::shared_ptr<PersonalGPA> create(int, const std::vector<std::string> &);
 };
-#endif // PERSONAL_FACTORY_H
+#endif  // PERSONAL_FACTORY_H

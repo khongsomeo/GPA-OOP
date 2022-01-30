@@ -19,7 +19,7 @@
  * So I'll use this class, with default subjectVector and classPrefix = "CSC".
  */
 class PersonalSpecific : public PersonalGPA {
-public:
+ public:
   PersonalSpecific();
 
   ~PersonalSpecific();
@@ -40,7 +40,7 @@ public:
    */
   void addSpecific(std::vector<Subject> &, const std::string &);
 
-public:
+ public:
   /**
    * Parse a PersonalSpecific object.
    *
@@ -48,7 +48,7 @@ public:
    *
    * @return std::shared_ptr<PersonalGPA>
    */
-  virtual std::shared_ptr<PersonalGPA>
-  parse(const std::vector<std::string> &) override;
+  virtual std::shared_ptr<PersonalGPA> parse(
+      const std::vector<std::string> &) override;
 };
-#endif // PERSONAL_SPECIFIC_H
+#endif  // PERSONAL_SPECIFIC_H
