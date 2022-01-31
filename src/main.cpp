@@ -20,8 +20,9 @@ int main(int argc, char *argv[]) {
           : InputConstants::ALLOW_PARSING_ERROR);
 
   // These lines check if user don't want to output textart.
-  OutputHelper::instance()->setOutputFlag(
-      CLP.cmdOptionExists("--no-textart") ? OutputConstants::NO_TEXTART : OutputConstants::ALLOW_TEXTART);
+  OutputHelper::instance()->setOutputFlag(CLP.cmdOptionExists("--no-textart")
+                                              ? OutputConstants::NO_TEXTART
+                                              : OutputConstants::ALLOW_TEXTART);
 
   // These lines check if user needs to output to .csv file.
   OutputHelper::instance()->setOutputFlag(CLP.cmdOptionExists("--csv")
@@ -61,7 +62,8 @@ int main(int argc, char *argv[]) {
      * Outputing
      *
      */
-    if (!OutputHelper::instance()->isCSVOutput() && OutputHelper::instance()->isAllowTextart()) {
+    if (!OutputHelper::instance()->isCSVOutput() &&
+        OutputHelper::instance()->isAllowTextart()) {
       // Print the textart.
       OutputHelper::instance()->printTextart();
     }
