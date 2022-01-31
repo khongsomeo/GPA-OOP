@@ -40,7 +40,19 @@ test_seeds[22]="./main --input data/has_fail.csv --1234 --csv --ignore-parsing-e
 test_seeds[23]="./main --input data/has_fail.csv --specific data/specific.txt --csv --ignore-parsing-error"
 test_seeds[24]="./main --input data/has_fail.csv --ignore data/ignore.txt --csv --ignore-parsing-error"
 test_seeds[25]="./main --input --csv --ignore-parsing-error"
+test_seeds[26]="./main --input data/no_fail.csv --no-textart"
+test_seeds[27]="./main --input data/no_fail.csv --csv --no-textart"
+test_seeds[28]="./main --input data/has_fail.csv --ignore-parsing-error --no-textart"
+test_seeds[29]="./main --input data/has_fail.csv --1234 --ignore-parsing-error --no-textart"
+test_seeds[30]="./main --input data/has_fail.csv --specific data/specific.txt --ignore-parsing-error --no-textart"
+test_seeds[31]="./main --input data/has_fail.csv --ignore data/ignore.txt --ignore-parsing-error --no-textart"
+test_seeds[32]="./main --input data/has_fail.csv --csv --ignore-parsing-error --no-textart"
+test_seeds[33]="./main --input data/has_fail.csv --1234 --csv --ignore-parsing-error --no-textart"
+test_seeds[34]="./main --input data/has_fail.csv --specific data/specific.txt --csv --ignore-parsing-error --no-textart"
+test_seeds[35]="./main --input data/has_fail.csv --ignore data/ignore.txt --csv --ignore-parsing-error --no-textart"
+test_seeds[36]="./main --input --csv --ignore-parsing-error --no-textart"
 
+# Test driver
 for i in "${!test_seeds[@]}"
 do
   echo -e "${BLUE}Testcase #$i: ${test_seeds[$i]}"
