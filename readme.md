@@ -109,6 +109,16 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   --ignore <IGNORED_COURSES.txt>] [ --csv ]
   --ignore-parsing-error
   ```
+- Ignore textart?
+
+  Sometimes you need to ignore the textart. Adding `--no-textart` will solve the problem.
+  ```shell
+  ./<PROGRAM> --input <GRADE_FILE.csv>
+  [--specific <SPECIFIC_COURSES.txt> /
+  --ignore <IGNORED_COURSES.txt>] [ --csv ] [ --ignore-parsing-error ]
+  --no-textart
+  ```
+
 
 ### 3. Shell scripts
 Example commands for running are in `example/run.sh.example`,
