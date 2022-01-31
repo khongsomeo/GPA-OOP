@@ -28,7 +28,12 @@ const std::vector<std::string> COLUMNS = {
     "grade (A - scale)"};
 
 // Flags for input.
-enum { FORMAT_TABLE = 1 << 0, FORMAT_CSV = 1 << 1 };
+enum {
+  FORMAT_TABLE = 1 << 0,
+  FORMAT_CSV = 1 << 1,
+  ALLOW_TEXTART = 1 << 2,
+  NO_TEXTART = 1 << 3
+};
 }  // namespace OutputConstants
 
 class OutputHelper {
@@ -89,6 +94,13 @@ class OutputHelper {
    * @return bool
    */
   bool isCSVOutput();
+
+  /**
+   * Check if user want textart?
+   *
+   * @return bool
+   */
+  bool isAllowTextart();
 
   /**
    * Set output flag

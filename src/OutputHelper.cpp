@@ -35,6 +35,15 @@ bool OutputHelper::isCSVOutput() {
 }
 
 /**
+ * Check if user want textart?
+ *
+ * @return bool
+ */
+bool OutputHelper::isAllowTextart() {
+  return _outputFlag & OutputConstants::ALLOW_TEXTART;
+}
+
+/**
  * Set output format
  *
  * @param  int
