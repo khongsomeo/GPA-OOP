@@ -35,7 +35,7 @@ Follow these steps:
   ```
   make lint
   ```
-- If there are any linting errors, run format.sh.example to format it.
+- If there are any linting errors, run `make format` to format it.
   ```
   make format
   ```
@@ -71,7 +71,7 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   (notice that if you use full course code, then only one course added,
   using a prefix would choose every course have `courseprefix` as a prefix).
   ```
-- To calculate GPA but ignore some courses defines inside
+- To calculate GPA but ignore some courses defined inside
   `<IGNORED_COURSES.txt>`:
   ```shell
   ./<PROGRAM> --input <GRADE_FILE.csv> --ignore <IGNORED_COURSES.txt>
