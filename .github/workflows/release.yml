@@ -27,6 +27,8 @@ jobs:
           data/
           main
           main.exe
+          readme.md
+          LICENSE
         if-no-files-found: error
 
     - name: cleaning afterworks
@@ -44,7 +46,7 @@ jobs:
       - name: Zipping release artifact
         uses: vimtor/action-zip@v1
         with:
-          files: data/ main main.exe
+          files: data/ main main.exe readme.md LICENSE
           recursive: false
           dest: release.zip
 
