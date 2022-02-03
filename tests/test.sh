@@ -7,60 +7,39 @@
 ##
 
 # Colors
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+BLUE="\033[0;34m"
+NC="\033[0m"
+
+# Loading payloads
+PAYLOAD_FILE="payloads.txt"
 
 declare -a test_seeds
 
-test_seeds[0]="./main --input data/has_fail.csv"
-test_seeds[1]="./main --input data/has_fail.csv --1234"
-test_seeds[2]="./main --input data/has_fail.csv --specific data/specific.txt"
-test_seeds[3]="./main --input data/has_fail.csv --ignore data/ignore.txt"
-test_seeds[4]="./main --input data/has_fail.csv --csv"
-test_seeds[5]="./main --input data/has_fail.csv --gpa --csv"
-test_seeds[6]="./main --input data/has_fail.csv --specific data/specific.txt --csv"
-test_seeds[7]="./main --input data/has_fail.csv --ignore data/ignore.txt --csv"
-test_seeds[8]="./main --input --gpa"
-test_seeds[9]="./main --input data/has_fail.csv --specific --csv"
-test_seeds[10]="./main --input data/has_fail.csv --specific"
-test_seeds[11]="./main --input data/has_fail.csv --ignore"
-test_seeds[12]="./main --input data/has_fail.csv --ignore --csv"
-test_seeds[13]="./main"
-test_seeds[14]="./main --csv"
-test_seeds[15]="./main --input data/no_fail.csv"
-test_seeds[16]="./main --input data/no_fail.csv --csv"
-test_seeds[17]="./main --input data/has_fail.csv --ignore-parsing-error"
-test_seeds[18]="./main --input data/has_fail.csv --1234 --ignore-parsing-error"
-test_seeds[19]="./main --input data/has_fail.csv --specific data/specific.txt --ignore-parsing-error"
-test_seeds[20]="./main --input data/has_fail.csv --ignore data/ignore.txt --ignore-parsing-error"
-test_seeds[21]="./main --input data/has_fail.csv --csv --ignore-parsing-error"
-test_seeds[22]="./main --input data/has_fail.csv --1234 --csv --ignore-parsing-error"
-test_seeds[23]="./main --input data/has_fail.csv --specific data/specific.txt --csv --ignore-parsing-error"
-test_seeds[24]="./main --input data/has_fail.csv --ignore data/ignore.txt --csv --ignore-parsing-error"
-test_seeds[25]="./main --input --csv --ignore-parsing-error"
-test_seeds[26]="./main --input data/no_fail.csv --no-textart"
-test_seeds[27]="./main --input data/no_fail.csv --csv --no-textart"
-test_seeds[28]="./main --input data/has_fail.csv --ignore-parsing-error --no-textart"
-test_seeds[29]="./main --input data/has_fail.csv --1234 --ignore-parsing-error --no-textart"
-test_seeds[30]="./main --input data/has_fail.csv --specific data/specific.txt --ignore-parsing-error --no-textart"
-test_seeds[31]="./main --input data/has_fail.csv --ignore data/ignore.txt --ignore-parsing-error --no-textart"
-test_seeds[32]="./main --input data/has_fail.csv --csv --ignore-parsing-error --no-textart"
-test_seeds[33]="./main --input data/has_fail.csv --1234 --csv --ignore-parsing-error --no-textart"
-test_seeds[34]="./main --input data/has_fail.csv --specific data/specific.txt --csv --ignore-parsing-error --no-textart"
-test_seeds[35]="./main --input data/has_fail.csv --ignore data/ignore.txt --csv --ignore-parsing-error --no-textart"
-test_seeds[36]="./main --input --csv --ignore-parsing-error --no-textart"
+readarray -t test_seeds < $PAYLOAD_FILE
+
+# progressbar & total testcases
+current_progress=""
+total_testcases=${#test_seeds[@]}
 
 # Test driver
 for i in "${!test_seeds[@]}"
 do
-  echo -e "${BLUE}Testcase #$i: ${test_seeds[$i]}"
-
   check=$(${test_seeds[$i]})
 
   if [[ $(< output/$i.out) != "$check" ]]; then
-    echo -e "${RED}✘ Testcase failed.${NC}"
+    # If failed, print the failed testcase (expected & runtime)
+
+    current_progress="${current_progress}${RED}✘${NC}"
+
+    echo -ne "Testing: ${current_progress} ($((${i} + 1))/${total_testcases})\r"
+
+    echo -ne "\n"
+
+    echo -e "${RED}✘ Testcase #$(($i + 1)) failed.${NC}"
+
+    echo -e "${BLUE}Payload: ${test_seeds[$i]}${NC}"
 
     echo -e "${BLUE}Expected:${NC}"
 
@@ -71,9 +50,15 @@ do
     echo "$check"
 
     exit 1
+  
   else
-    echo -e "${GREEN}✔ Testcase passed.${NC}"
-  fi
+    # Else, print progress (with green ticks!)
 
-  printf "\n"
+    current_progress="${current_progress}${GREEN}✔${NC}"
+    echo -ne "Testing: ${current_progress} ($((${i} + 1))/${total_testcases})\r"
+  fi
 done
+
+# All tests passed. Printing congratulations!
+echo -ne "\n"
+echo -e "${GREEN}✔ All testcases passed${NC} ($((${i} + 1))/${total_testcases})"

@@ -25,6 +25,17 @@ Calculating my GPA, in an OOP way.
 So simple, right?
 
 ## Development
+### Testing
+Adding a new 19120338th test:
+- Payload: write test payload to the 19120338th line of `tests/payloads.txt`
+- Output: create a new file `tests/output/19120338.out`
+
+Running tests:
+1. `make`
+2. `make init_test`
+3. `make test`
+
+### Format
 We require your code to be formatted with `clang-format` before going further.
 Follow these steps:
 - Install `clang-format`:
