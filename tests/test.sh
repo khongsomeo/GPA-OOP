@@ -19,21 +19,27 @@ declare -a test_seeds
 
 readarray -t test_seeds < $PAYLOAD_FILE
 
-# progressbar & total testcases
-current_progress=""
+# total testcases
 total_testcases=${#test_seeds[@]}
+
+# progress bar
+current_progress=""
 
 # Test driver
 for i in "${!test_seeds[@]}"
 do
   check=$(${test_seeds[$i]})
+  
+  total_remain=$(($total_testcases - $i - 1))
+
+  remain_progress="$(printf %$((total_remain))s |tr ' ' '.')"
 
   if [[ $(< output/$i.out) != "$check" ]]; then
     # If failed, print the failed testcase (expected & runtime)
 
     current_progress="${current_progress}${RED}✘${NC}"
 
-    echo -ne "Testing: ${current_progress} ($((${i} + 1))/${total_testcases})\r"
+    echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
 
     echo -ne "\n"
 
@@ -55,7 +61,8 @@ do
     # Else, print progress (with green ticks!)
 
     current_progress="${current_progress}${GREEN}✔${NC}"
-    echo -ne "Testing: ${current_progress} ($((${i} + 1))/${total_testcases})\r"
+  
+    echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
   fi
 done
 
