@@ -28,10 +28,13 @@ current_progress=""
 # Test driver
 for i in "${!test_seeds[@]}"
 do
+  # execute test payload
   check=$(${test_seeds[$i]})
   
+  # tests remain
   total_remain=$(($total_testcases - $i - 1))
 
+  # previous, but converted to dots.
   remain_progress="$(printf %$((total_remain))s |tr ' ' '.')"
 
   if [[ $(< output/$i.out) != "$check" ]]; then
