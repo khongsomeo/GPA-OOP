@@ -30,12 +30,27 @@ jobs:
 
     - name: make
       run: make
+      if: ${{ github.event_name != 'pull_request' }}
+
+    - name: make (with test coverage)
+      run: make gcov
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: make - copy test into testing folder
       run: make init_test
 
     - name: make - test
       run: make test
+
+    - name: make - init code coverage
+      run: make lcov
+      if: ${{ github.event_name == 'pull_request' }}
+
+    - name: upload code coverage report
+      uses: romeovs/lcov-reporter-action@v0.2.16
+      with:
+        lcov-file: ./coverage/coverage.info
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: cleaning afterworks
       run: make clean

@@ -20,7 +20,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 # Clean directory for GitHub pushes
 clean:
 	rm -rf $(OBJ_DIR) main $(TEST_DIR)/main
-	rm -rf *.gcov coverage.info
+	rm -rf *.gcov coverage.info coverage/
 
 # Initialise files for testing
 init_test:
@@ -48,5 +48,6 @@ lcov:
 	lcov --capture --directory obj --output-file=coverage.info
 	lcov --extract coverage.info '*.cpp' -o coverage.info
 
+# Generate test coverage report
 generate-coverage-report:
 	genhtml coverage.info --output-directory=coverage
