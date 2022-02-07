@@ -35,6 +35,17 @@ Running tests:
 2. `make init_test`
 3. `make test`
 
+### Code coverage
+We support code coverage reports! Just make sure you have `lcov` installed.
+1. `make gcov`
+2. `make init_test`
+3. `make test`
+4. `make lcov`
+5. `make generate-coverage-report`
+
+Coverage Report will be automatically generated inside `coverage/`
+
+
 ### Format
 We require your code to be formatted with `clang-format` before going further.
 Follow these steps:
@@ -53,7 +64,6 @@ If there are any linting errors, run `make format` to format it.
 ```
 make format
 ```
-
 
 ## Running
 ### 1. Input format
