@@ -48,7 +48,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: upload code coverage report
-      uses: romeovs/lcov-reporter-action@v0.2.16
+      uses: romeovs/lcov-reporter-action@v0.3.1
       with:
         lcov-file: coverage.info
       if: ${{ github.event_name == 'pull_request' }}
