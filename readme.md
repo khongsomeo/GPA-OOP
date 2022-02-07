@@ -143,11 +143,6 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   --no-textart
   ```
 
-
-### 3. Shell scripts
-Example commands for running are in `example/run.sh.example`,
-for compiling are in `example/compile.sh.example`.
-
 ### 4. Custom textart
 - `data/textart.txt` stores the textart file. Modify it with your own textart.
 
