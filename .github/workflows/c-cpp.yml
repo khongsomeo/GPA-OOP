@@ -50,7 +50,7 @@ jobs:
     - name: upload code coverage report
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
-        lcov-file: ./coverage/coverage.info
+        lcov-file: coverage.info
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: cleaning afterworks
