@@ -7,27 +7,27 @@ Calculating my GPA, in an OOP way.
 
 ## Installation
 ### Prerequisites
-- Make sure your C++ version >= C++17.
+Make sure your C++ version >= C++17.
 
 ### How-to:
-1. `git clone` the project.
-2. Compile:
-- using Makefile:
-  ```
-  make
-  ```
+`git clone` the project, then you'll have some options to compile:
 
-- On Windows:
-  ```
-  g++ src/*.cpp main -std=c++17
-  ```
+Using Makefile:
+```
+make
+```
+
+Using `g++` - compile all files inside `src/` directory:
+```
+g++ src/*.cpp main -std=c++17
+```
 
 So simple, right?
 
 ## Development
 ### Testing
 Adding a new 19120338th test:
-- Payload: write test payload to the 19120338th line of `tests/payloads.txt`
+- Payload: write test payloads to the 19120338th line of `tests/payloads.txt`
 - Output: create a new file `tests/output/19120338.out`
 
 Running tests:
@@ -38,18 +38,21 @@ Running tests:
 ### Format
 We require your code to be formatted with `clang-format` before going further.
 Follow these steps:
-- Install `clang-format`:
-  ```
-  sudo apt-get install clang-format
-  ```
-- Run checks:
-  ```
-  make lint
-  ```
-- If there are any linting errors, run `make format` to format it.
-  ```
-  make format
-  ```
+
+Install `clang-format`:
+```
+sudo apt-get install clang-format
+```
+
+Run checks:
+```
+make lint
+```
+
+If there are any linting errors, run `make format` to format it.
+```
+make format
+```
 
 
 ## Running
