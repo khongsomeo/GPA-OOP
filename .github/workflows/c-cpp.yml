@@ -43,7 +43,8 @@ jobs:
       run: make test
 
     - name: make - init code coverage
-      run: make lcov
+      run: |
+        sudo apt-get install -y lcov && make lcov
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: upload code coverage report
