@@ -40,8 +40,9 @@ class Subject {
   Subject(const std::string &, int, const Grade &);
 
   /**
-   * Destructor
+   * Subject destructor
    *
+   * @return void
    */
   ~Subject();
 

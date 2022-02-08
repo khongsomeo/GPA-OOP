@@ -9,6 +9,7 @@
 /**
  * Default constructor
  *
+ * @return void
  */
 Grade::Grade() { _grade = 0.0; }
 
@@ -29,6 +30,7 @@ Grade::Grade(const Grade &other) { _grade = other._grade; }
 /**
  * Destructor
  *
+ * @return void
  */
 Grade::~Grade() {
   // Do nothing.

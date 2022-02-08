@@ -23,8 +23,18 @@ class PersonalExcept : public PersonalGPA {
   std::multiset<std::string> _ignoredCourses;
 
  public:
+  /**
+   * PersonalExcept default constructor
+   *
+   * @return void
+   */
   PersonalExcept();
 
+  /**
+   * PersonalExcept destructor
+   *
+   * @return void
+   */
   ~PersonalExcept();
 
   /**

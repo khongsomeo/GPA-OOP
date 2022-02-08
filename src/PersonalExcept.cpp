@@ -6,10 +6,20 @@
 
 #include "PersonalExcept.h"
 
+/**
+ * PersonalExcept default constructor
+ *
+ * @return void
+ */
 PersonalExcept::PersonalExcept() {
   // Do nothing.
 }
 
+/**
+ * PersonalExcept destructor
+ *
+ * @return void
+ */
 PersonalExcept::~PersonalExcept() {
   // Do nothing.
 }

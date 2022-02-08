@@ -28,6 +28,7 @@ class Grade {
   /**
    * Default constructor
    *
+   * @return void
    */
   Grade();
 
@@ -48,6 +49,7 @@ class Grade {
   /**
    * Destructor
    *
+   * @return void
    */
   ~Grade();
 

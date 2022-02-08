@@ -6,10 +6,20 @@
 
 #include "OutputHelper.h"
 
+/**
+ * OutputHelper default constructor
+ *
+ * @return void
+ */
 OutputHelper::OutputHelper() {
   // Do nothing
 }
 
+/**
+ * OutputHelper destructor
+ *
+ * @return void
+ */
 OutputHelper::~OutputHelper() {
   // Do nothing
 }
@@ -53,6 +63,7 @@ void OutputHelper::setOutputFlag(int flag) { _outputFlag |= flag; }
 /**
  * Print the textart
  *
+ * @return void
  */
 void OutputHelper::printTextart() {
   std::ifstream textartFile(OutputConstants::TEXTART_FILE);
@@ -70,6 +81,7 @@ void OutputHelper::printTextart() {
 /**
  * Print a separator line.
  *
+ * @return void
  */
 void OutputHelper::printSeparator() {
   std::cout << std::setfill('-');
@@ -129,8 +141,8 @@ void OutputHelper::printTable(
 
   /**
    * Output in table format
-   * (without last conclusion row)
    *
+   * (without last conclusion row)
    */
   if (!isCSVOutput()) {
     printTableFormat(tableData);

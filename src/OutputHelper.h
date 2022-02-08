@@ -36,16 +36,26 @@ enum {
 };
 }  // namespace OutputConstants
 
+/**
+ * OutputHelper class
+ *
+ */
 class OutputHelper {
  private:
   int _outputFlag = 0;
 
+  /**
+   * OutputHelper default constructor
+   *
+   * @return void
+   */
   OutputHelper();
 
  private:
   /**
    * Print a separator line.
    *
+   * @return void
    */
   void printSeparator();
 
@@ -78,6 +88,11 @@ class OutputHelper {
   void printTableFormat(const std::vector<std::vector<std::string>> &);
 
  public:
+  /**
+   * OutputHelper destructor
+   *
+   * @return void
+   */
   ~OutputHelper();
 
   /**
@@ -112,6 +127,7 @@ class OutputHelper {
   /**
    * Print the textart
    *
+   * @return void
    */
   void printTextart();
 

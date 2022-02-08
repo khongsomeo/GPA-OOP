@@ -20,8 +20,18 @@
  */
 class PersonalSpecific : public PersonalGPA {
  public:
+  /**
+   * PersonalSpecific default constructor
+   *
+   * @return void
+   */
   PersonalSpecific();
 
+  /**
+   * PersonalSpecific destructor
+   *
+   * @return void
+   */
   ~PersonalSpecific();
 
   /**

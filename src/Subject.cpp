@@ -7,6 +7,15 @@
 #include "Subject.h"
 
 /**
+ * Subject destructor
+ *
+ * @return void
+ */
+Subject::~Subject() {
+  // Do nothing
+}
+
+/**
  * Parameterised constructor
  *
  * @param  const std::string&
@@ -30,14 +39,6 @@ Subject::Subject(const std::string &name, int credit, const Grade &grade) {
   _name = name;
   _credit = credit;
   _grade = grade;
-}
-
-/**
- * Destructor
- *
- */
-Subject::~Subject() {
-  // Do nothing
 }
 
 /**

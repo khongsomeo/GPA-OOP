@@ -7,16 +7,18 @@
 #include "PersonalGPA.h"
 
 /**
- * Constructor for PersonalGPA
+ * PersonalGPA default constructor
  *
+ * @return void
  */
 PersonalGPA::PersonalGPA() {
   // Do nothing;
 }
 
 /**
- * Destructor for PersonalGPA
+ * PersonalGPA destructor
  *
+ * @return void
  */
 PersonalGPA::~PersonalGPA() {
   // Do nothing;
