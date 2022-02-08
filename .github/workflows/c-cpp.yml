@@ -4,7 +4,11 @@ on:
   push:
     branches: [ master ]
   pull_request_target:
-    types: [ opened ]
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
 
 jobs:
   linter:
