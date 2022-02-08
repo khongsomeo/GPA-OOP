@@ -3,8 +3,8 @@ name: C/C++ CI
 on:
   push:
     branches: [ master ]
-  pull_request_target:
-    types: [ opened, reopened, assigned ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   linter:
@@ -34,7 +34,7 @@ jobs:
 
     - name: make (with test coverage)
       run: make gcov
-      if: ${{ github.event_name == 'pull_request_target' }}
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: make - copy test into testing folder
       run: make init_test
@@ -45,13 +45,14 @@ jobs:
     - name: make - init code coverage
       run: |
         sudo apt-get install -y lcov && make lcov
-      if: ${{ github.event_name == 'pull_request_target' }}
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: upload code coverage report
       uses: romeovs/lcov-reporter-action@v0.3.1
       with:
         lcov-file: coverage.info
-      if: ${{ github.event_name == 'pull_request_target' }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: cleaning afterworks
       run: make clean
