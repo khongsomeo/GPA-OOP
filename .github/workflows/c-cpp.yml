@@ -52,9 +52,12 @@ jobs:
       if: ${{ github.event_name == 'pull_request_target' }}
 
     - name: upload code coverage report
-      uses: romeovs/lcov-reporter-action@v0.3.1
+      uses: zgosalvez/github-actions-report-lcov@v1
       with:
-        lcov-file: coverage.info
+        coverage-files: coverage.info
+        minimum-coverage: 80
+        artifact-name: code-coverage-report
+        github-token: ${{ secrets.GITHUB_TOKEN }}
       if: ${{ github.event_name == 'pull_request_target' }}
 
     - name: cleaning afterworks
