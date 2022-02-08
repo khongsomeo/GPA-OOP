@@ -6,10 +6,20 @@
 
 #include "InputHelper.h"
 
+/**
+ * InputHelper default constructor
+ *
+ * @return void
+ */
 InputHelper::InputHelper() {
   // Do nothing
 }
 
+/**
+ * InputHelper destructor
+ *
+ * @return void
+ */
 InputHelper::~InputHelper() {
   // Do nothing
 }

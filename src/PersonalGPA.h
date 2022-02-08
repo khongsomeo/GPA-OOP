@@ -35,14 +35,16 @@ class PersonalGPA {
 
  public:
   /**
-   * Constructor for PersonalGPA
+   * PersonalGPA default constructor
    *
+   * @return void
    */
   PersonalGPA();
 
   /**
-   * Destructor for PersonalGPA
+   * PersonalGPA destructor
    *
+   * @return void
    */
   ~PersonalGPA();
 

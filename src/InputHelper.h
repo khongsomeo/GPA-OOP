@@ -24,16 +24,26 @@ enum { ALLOW_PARSING_ERROR = 1 << 0, IGNORE_PARSING_ERROR = 1 << 1 };
 }
 
 /**
- * InputHelper
+ * InputHelper class
  *
  */
 class InputHelper {
  private:
   int _inputFlag = 0;
 
+  /**
+   * InputHelper default constructor
+   *
+   * @return void
+   */
   InputHelper();
 
  public:
+  /**
+   * InputHelper destructor
+   *
+   * @return void
+   */
   ~InputHelper();
 
   /**

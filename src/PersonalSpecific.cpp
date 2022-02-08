@@ -6,10 +6,20 @@
 
 #include "PersonalSpecific.h"
 
+/**
+ * PersonalSpecific default constructor
+ *
+ * @return void
+ */
 PersonalSpecific::PersonalSpecific() {
   // Do nothing
 }
 
+/**
+ * PersonalSpecific destructor
+ *
+ * @return void
+ */
 PersonalSpecific::~PersonalSpecific() {
   // Do nothing
 }

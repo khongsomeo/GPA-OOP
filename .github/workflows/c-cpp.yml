@@ -3,12 +3,8 @@ name: C/C++ CI
 on:
   push:
     branches: [ master ]
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+  pull_request:
+    branches: [ master ]
 
 jobs:
   linter:
@@ -34,31 +30,12 @@ jobs:
 
     - name: make
       run: make
-      if: ${{ github.event_name == 'push' }}
-
-    - name: make (with test coverage)
-      run: make gcov
-      if: ${{ github.event_name == 'pull_request_target' }}
 
     - name: make - copy test into testing folder
       run: make init_test
 
     - name: make - test
       run: make test
-
-    - name: make - init code coverage
-      run: |
-        sudo apt-get install -y lcov && make lcov
-      if: ${{ github.event_name == 'pull_request_target' }}
-
-    - name: upload code coverage report
-      uses: zgosalvez/github-actions-report-lcov@v1
-      with:
-        coverage-files: coverage.info
-        minimum-coverage: 80
-        artifact-name: code-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ github.event_name == 'pull_request_target' }}
 
     - name: cleaning afterworks
       run: make clean

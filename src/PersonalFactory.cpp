@@ -6,6 +6,12 @@
 
 #include "PersonalFactory.h"
 
+/**
+ * PersonalFactory default constructor
+ * This will push prototypes (classes) to a list - to create later.
+ *
+ * @return void
+ */
 PersonalFactory::PersonalFactory() {
   // Push list of prototypes.
   _prototypes.push_back(std::make_shared<PersonalGPA>());
@@ -14,8 +20,9 @@ PersonalFactory::PersonalFactory() {
 }
 
 /**
- * Destructor
+ * PersonalFactory destructor
  *
+ * @return void
  */
 PersonalFactory::~PersonalFactory() {
   // Do nothing.

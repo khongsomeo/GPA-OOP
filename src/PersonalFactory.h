@@ -19,13 +19,18 @@ class PersonalFactory {
   // List of prototypes.
   std::vector<std::shared_ptr<PersonalGPA>> _prototypes;
 
-  // Setting up.
+  /**
+   * PersonalFactory default constructor
+   *
+   * @return void
+   */
   PersonalFactory();
 
  public:
   /**
-   * Destructor
+   * PersonalFactory destructor
    *
+   * @return void
    */
   ~PersonalFactory();
 
