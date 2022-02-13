@@ -29,8 +29,6 @@ PersonalExcept::~PersonalExcept() {
  *
  * @param  const std::vector<Course>&
  * @param  const std::vector<std::string>&
- *
- * @throw  std::runtime_error
  */
 PersonalExcept::PersonalExcept(const std::vector<Course> &courses,
                                const std::vector<std::string> &ignoredCourses) {
@@ -44,11 +42,6 @@ PersonalExcept::PersonalExcept(const std::vector<Course> &courses,
     if (_ignoredCourses.find(course.name()) == _ignoredCourses.end()) {
       addCourse(course);
     }
-  }
-
-  // Throw std::runtime_error if no course was added.
-  if (0 == getTotalCourses()) {
-    throw std::runtime_error("No course was added.");
   }
 
   // Calculate GPA based on passed course.

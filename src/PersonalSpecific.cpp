@@ -37,11 +37,6 @@ PersonalSpecific::PersonalSpecific(
     addSpecific(courses, prefix);
   }
 
-  // Throw std::runtime_error if no course was added.
-  if (0 == getTotalCourses()) {
-    throw std::runtime_error("No course was added.");
-  }
-
   // Calculate GPA.
   calculateGPA();
 }

@@ -38,6 +38,8 @@ class PersonalGPA {
    * Calculate total GPA.
    *
    * @return void
+   *
+   * @throw  std::runtime_error
    */
   void calculateGPA();
 
