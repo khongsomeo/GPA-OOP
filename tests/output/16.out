@@ -1,8 +1,8 @@
 Error happened while reading file data/no_fail.csv, on line 8 (stod)
 Error happened while reading file data/no_fail.csv, on line 16 (stod)
 Error happened while reading file data/no_fail.csv, on line 25 (stod)
-Total passed classes: 28 (100.00%)
-class code,credits,grade (10 - scale),grade (4 - scale),grade (A - scale)
+Total passed courses: 28 (100.00%)
+course code,credits,grade (10 - scale),grade (4 - scale),grade (A - scale)
 CSC10001,4,10.00,4.00,A+
 CSC10003,4,10.00,4.00,A+
 MTH00086,1,10.00,4.00,A+
@@ -33,4 +33,4 @@ MTH00041,3,5.00,2.00,C
 BAA00005,2,5.00,2.00,C
 Overall,76,7.95,3.00,B+
 
-Total failed classes: 0 (0.00%)
+Total failed courses: 0 (0.00%)

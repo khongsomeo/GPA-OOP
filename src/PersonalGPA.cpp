@@ -27,12 +27,22 @@ PersonalGPA::~PersonalGPA() {
 /**
  * Parameterised constructor
  *
- * @param  const std::vector<Subject>&
+ * @param  const std::vector<Course>&
+ *
+ * @throw  std::runtime_error
  */
-PersonalGPA::PersonalGPA(const std::vector<Subject> &subjects) {
-  for (const Subject &subject : subjects) {
-    addSubject(subject);
+PersonalGPA::PersonalGPA(const std::vector<Course> &courses) {
+  for (const Course &course : courses) {
+    addCourse(course);
   }
+
+  // Handling the situtation that no course was added.
+  if (0 == getTotalCourses()) {
+    throw std::runtime_error("No course was added.");
+  }
+
+  // Calculate GPA if nothing went wrong.
+  calculateGPA();
 }
 
 /**
@@ -50,13 +60,6 @@ int PersonalGPA::passedCredits() { return _passedCredits; }
 int PersonalGPA::failedCredits() { return _failedCredits; }
 
 /**
- * Return sum grades.
- *
- * @return Grade
- */
-Grade PersonalGPA::sumGrades() { return _sumGrades; }
-
-/**
  * Return GPA
  *
  * @return Grade
@@ -72,10 +75,10 @@ std::vector<std::string> PersonalGPA::passedListToStringVector() {
   std::vector<std::string> stringVector;
 
   stringVector.push_back("Overall");
-  stringVector.push_back(std::to_string(_passedCredits));
-  stringVector.push_back(_resultGPA.toString());
-  stringVector.push_back(_resultGPA.to4Scale().toString());
-  stringVector.push_back(_resultGPA.toAScale());
+  stringVector.push_back(std::to_string(passedCredits()));
+  stringVector.push_back(resultGPA().toString());
+  stringVector.push_back(resultGPA().to4Scale().toString());
+  stringVector.push_back(resultGPA().toAScale());
 
   return stringVector;
 }
@@ -89,7 +92,7 @@ std::vector<std::string> PersonalGPA::failedListToStringVector() {
   std::vector<std::string> stringVector;
 
   stringVector.push_back("Overall");
-  stringVector.push_back(std::to_string(_failedCredits));
+  stringVector.push_back(std::to_string(failedCredits()));
   stringVector.push_back("None");
   stringVector.push_back("None");
   stringVector.push_back("None");
@@ -105,8 +108,8 @@ std::vector<std::string> PersonalGPA::failedListToStringVector() {
 std::vector<std::vector<std::string>> PersonalGPA::toPassedVector() {
   std::vector<std::vector<std::string>> resultVector;
 
-  for (const Subject &subject : _classesPassed) {
-    resultVector.push_back(subject.toStringVector());
+  for (const Course &course : _coursesPassed) {
+    resultVector.push_back(course.toStringVector());
   }
 
   // Push overall.
@@ -123,8 +126,8 @@ std::vector<std::vector<std::string>> PersonalGPA::toPassedVector() {
 std::vector<std::vector<std::string>> PersonalGPA::toFailedVector() {
   std::vector<std::vector<std::string>> resultVector;
 
-  for (const Subject &subject : _classesFailed) {
-    resultVector.push_back(subject.toStringVector());
+  for (const Course &course : _coursesFailed) {
+    resultVector.push_back(course.toStringVector());
   }
 
   resultVector.push_back(failedListToStringVector());
@@ -133,69 +136,116 @@ std::vector<std::vector<std::string>> PersonalGPA::toFailedVector() {
 }
 
 /**
- * Return total classes.
+ * Return total courses.
  *
  * @return int
- *
- * @throw  std::runtime_error
  */
-int PersonalGPA::getTotalClasses() {
-  int totalClasses = _classesPassed.size() + _classesFailed.size();
+int PersonalGPA::getTotalCourses() {
+  int totalCourses = _coursesPassed.size() + _coursesFailed.size();
 
-  // Handling the situtation that no class added.
-  if (0 == totalClasses) {
-    throw std::runtime_error("No class was added.");
-  }
-
-  return totalClasses;
+  return totalCourses;
 }
 
 /**
- * Return total passed classes.
+ * Return total passed courses.
  *
  * @return int
  */
-int PersonalGPA::getTotalClassesPassed() { return _classesPassed.size(); }
+int PersonalGPA::getTotalCoursesPassed() { return _coursesPassed.size(); }
 
 /**
- * Return total failed classes.
+ * Return total failed courses.
  *
  * @return int
  */
-int PersonalGPA::getTotalClassesFailed() { return _classesFailed.size(); }
+int PersonalGPA::getTotalCoursesFailed() { return _coursesFailed.size(); }
 
 /**
  * Parse data into Personal
  *
  * @param  const std::vector<std::string>&
  *
- * @return std::shared_ptr<IPersonal>
+ * @return std::shared_ptr<PersonalGPA>
  */
 std::shared_ptr<PersonalGPA> PersonalGPA::parse(
     const std::vector<std::string> &input) {
-  std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
+  std::vector<Course> courses = Course::parseCourseVector(input.at(0));
 
-  return std::make_shared<PersonalGPA>(subjects);
+  return std::make_shared<PersonalGPA>(courses);
 }
 
 /**
- * Add a new subject.
+ * Calculate total GPA.
  *
- * @param  const Subject&
+ * @return void
  */
-void PersonalGPA::addSubject(const Subject &subject) {
-  // If not passed, then insert into failed list.
-  if (!subject.passed()) {
-    _classesFailed.insert(subject);
-    _failedCredits += subject.credit();
-    return;
+void PersonalGPA::calculateGPA() {
+  for (const Course &course : _coursesPassed) {
+    // Calculate new GPA.
+    _sumGrades += course.grade() * course.credit();
+    _resultGPA = _sumGrades / (1.0 * _passedCredits);
+  }
+}
+
+/**
+ * Add a failed course to failed course list.
+ *
+ * @param  const Course&
+ *
+ * @return void
+ */
+void PersonalGPA::addFailedCourse(const Course &course) {
+  // Remove course, if passed.
+  // This happened when the student re-take a low-grade course, and failed.
+  std::multiset<Course>::iterator it =
+      std::find(_coursesPassed.begin(), _coursesPassed.end(), course);
+
+  if (it != _coursesPassed.end()) {
+    _coursesPassed.erase(it);
+    _passedCredits -= course.credit();
   }
 
-  // Calculate new GPA.
-  _passedCredits += subject.credit();
-  _sumGrades += subject.grade() * subject.credit();
-  _resultGPA = _sumGrades / (1.0 * _passedCredits);
+  // Insert new failed class to list.
+  _coursesFailed.insert(course);
+  _failedCredits += course.credit();
+}
 
-  // Insert to passed list.
-  _classesPassed.insert(subject);
+/**
+ * Add a passed course to passed course list.
+ *
+ * @param  const Course&
+ *
+ * @return void
+ */
+void PersonalGPA::addPassedCourse(const Course &course) {
+  // Remove failed attempts, if passed.
+  std::multiset<Course>::iterator it =
+      std::find(_coursesFailed.begin(), _coursesFailed.end(), course);
+
+  if (it != _coursesFailed.end()) {
+    _coursesFailed.erase(it);
+    _failedCredits -= course.credit();
+  }
+
+  // Insert new passed class to list.
+  _coursesPassed.insert(course);
+  _passedCredits += course.credit();
+}
+
+/**
+ * Add a new course.
+ *
+ * @param  const Course&
+ *
+ * @return void
+ */
+void PersonalGPA::addCourse(const Course &course) {
+  // If not passed, then insert into failed list.
+  if (!course.passed()) {
+    addFailedCourse(course);
+  }
+
+  else {
+    addPassedCourse(course);
+  }
 }

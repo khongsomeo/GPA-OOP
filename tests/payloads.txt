@@ -35,3 +35,15 @@
 ./main --input data/has_fail.csv --specific data/specific.txt --csv --ignore-parsing-error --no-textart
 ./main --input data/has_fail.csv --ignore data/ignore.txt --csv --ignore-parsing-error --no-textart
 ./main --input --csv --ignore-parsing-error --no-textart
+./main --input data/nothing.csv
+./main --input data/nothing.csv --csv
+./main --input data/nothing.csv --ignore-parsing-error
+./main --input data/nothing.csv --no-textart
+./main --input data/nothing.csv --ignore data/ignore.txt
+./main --input data/nothing.csv --ignore data/ignore.txt --csv
+./main --input data/nothing.csv --specific data/specific.txt
+./main --input data/nothing.csv --specific data/specific.txt
+./main --input data/fail-pass.csv
+./main --input data/fail-pass.csv --csv
+./main --input data/pass-fail.csv
+./main --input data/pass-fail.csv --csv

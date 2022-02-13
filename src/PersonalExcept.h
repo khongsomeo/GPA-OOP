@@ -12,7 +12,7 @@
 /**
  * PersonalExcept class
  *
- * This class is used when we need to calculate GPA except some classes.
+ * This class is used when we need to calculate GPA except some courses.
  *
  * For example, I need to calculate my GPA except PE, English and National
  * Defense. So I'll add these courses's code to except.txt, and use this class
@@ -40,11 +40,10 @@ class PersonalExcept : public PersonalGPA {
   /**
    * Parameterised constructor for PersonalExcept
    *
-   * @param  const std::vector<Subject>&
+   * @param  const std::vector<Course>&
    * @param  const std::vector<std::string>&
    */
-  PersonalExcept(const std::vector<Subject> &,
-                 const std::vector<std::string> &);
+  PersonalExcept(const std::vector<Course> &, const std::vector<std::string> &);
 
  public:
   /**
