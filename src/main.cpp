@@ -69,10 +69,10 @@ int main(int argc, char *argv[]) {
     }
 
     // Print the stats.
-    std::cout << "Total passed classes: "
-              << chumeochuixoong->getTotalClassesPassed() << " ("
-              << Utility::percent(chumeochuixoong->getTotalClassesPassed(),
-                                  chumeochuixoong->getTotalClasses())
+    std::cout << "Total passed courses: "
+              << chumeochuixoong->getTotalCoursesPassed() << " ("
+              << Utility::percent(chumeochuixoong->getTotalCoursesPassed(),
+                                  chumeochuixoong->getTotalCourses())
               << "%)" << '\n';
 
     // Print passed table
@@ -81,10 +81,10 @@ int main(int argc, char *argv[]) {
     std::cout << '\n';
 
     // Print failed stats.
-    std::cout << "Total failed classes: "
-              << chumeochuixoong->getTotalClassesFailed() << " ("
-              << Utility::percent(chumeochuixoong->getTotalClassesFailed(),
-                                  chumeochuixoong->getTotalClasses())
+    std::cout << "Total failed courses: "
+              << chumeochuixoong->getTotalCoursesFailed() << " ("
+              << Utility::percent(chumeochuixoong->getTotalCoursesFailed(),
+                                  chumeochuixoong->getTotalCourses())
               << "%)" << '\n';
 
     // Print failed table.

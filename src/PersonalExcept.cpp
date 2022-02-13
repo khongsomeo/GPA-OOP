@@ -27,22 +27,32 @@ PersonalExcept::~PersonalExcept() {
 /**
  * Parameterised constructor for PersonalExcept
  *
- * @param  const std::vector<Subject>&
+ * @param  const std::vector<Course>&
  * @param  const std::vector<std::string>&
+ *
+ * @throw  std::runtime_error
  */
-PersonalExcept::PersonalExcept(const std::vector<Subject> &subjects,
+PersonalExcept::PersonalExcept(const std::vector<Course> &courses,
                                const std::vector<std::string> &ignoredCourses) {
   // Insert ignored courses inside a multiset.
   for (const std::string &course : ignoredCourses) {
     _ignoredCourses.insert(course);
   }
 
-  // Add Subject when it doesn't exist inside _ignoredCourses.
-  for (const Subject &subject : subjects) {
-    if (_ignoredCourses.find(subject.name()) == _ignoredCourses.end()) {
-      addSubject(subject);
+  // Add Course when it doesn't exist inside _ignoredCourses.
+  for (const Course &course : courses) {
+    if (_ignoredCourses.find(course.name()) == _ignoredCourses.end()) {
+      addCourse(course);
     }
   }
+
+  // Throw std::runtime_error if no course was added.
+  if (0 == getTotalCourses()) {
+    throw std::runtime_error("No course was added.");
+  }
+
+  // Calculate GPA based on passed course.
+  calculateGPA();
 }
 
 /**
@@ -54,11 +64,10 @@ PersonalExcept::PersonalExcept(const std::vector<Subject> &subjects,
  */
 std::shared_ptr<PersonalGPA> PersonalExcept::parse(
     const std::vector<std::string> &input) {
-  std::vector<Subject> subjectVector =
-      Subject ::parseSubjectVector(input.at(0));
+  std::vector<Course> courseVector = Course::parseCourseVector(input.at(0));
 
   std::vector<std::string> ignoredCourses =
       InputHelper::instance()->readFileLines(input.at(1));
 
-  return std::make_shared<PersonalExcept>(subjectVector, ignoredCourses);
+  return std::make_shared<PersonalExcept>(courseVector, ignoredCourses);
 }

@@ -4,8 +4,8 @@
  * Code by @trhgquan - https://github.com/trhgquan
  */
 
-#ifndef SUBJECT_H
-#define SUBJECT_H
+#ifndef COURSE_H
+#define COURSE_H
 
 #include <iostream>
 #include <string>
@@ -14,7 +14,7 @@
 #include "Grade.h"
 #include "InputHelper.h"
 
-class Subject {
+class Course {
  private:
   std::string _name;
   int _credit;
@@ -28,7 +28,7 @@ class Subject {
    * @param  int
    * @param  double
    */
-  Subject(const std::string &, int, double);
+  Course(const std::string &, int, double);
 
   /**
    * Parameterised constructor overload.
@@ -37,32 +37,32 @@ class Subject {
    * @param  int
    * @param  const Grade&
    */
-  Subject(const std::string &, int, const Grade &);
+  Course(const std::string &, int, const Grade &);
 
   /**
-   * Subject destructor
+   * Course destructor
    *
    * @return void
    */
-  ~Subject();
+  ~Course();
 
  public:
   /**
-   * Subject name
+   * Course name
    *
    * @return std::string
    */
   std::string name() const;
 
   /**
-   * Subject credit
+   * Course credit
    *
    * @return int
    */
   int credit() const;
 
   /**
-   * Subject grade
+   * Course grade
    *
    * @return Grade
    */
@@ -71,21 +71,30 @@ class Subject {
   /**
    * Operator overloading for std::multiset sorting.
    *
-   * @param  const Subject&
+   * @param  const Course&
    *
    * @return bool
    */
-  bool operator<(const Subject &) const;
+  bool operator<(const Course &) const;
 
   /**
-   * Convert Subject to a string vector.
+   * Operator overloading for std::multiset searching.
+   *
+   * @param  const Course&
+   *
+   * @return bool
+   */
+  bool operator==(const Course &) const;
+
+  /**
+   * Convert Course to a string vector.
    *
    * @return std::vector<std::string>
    */
   std::vector<std::string> toStringVector() const;
 
   /**
-   * Check if subject passed.
+   * Check if a course passed.
    *
    * @return bool
    */
@@ -96,17 +105,17 @@ class Subject {
    *
    * @param  const std::string&
    *
-   * @return Subject
+   * @return Course
    */
-  static Subject parse(const std::string &);
+  static Course parse(const std::string &);
 
   /**
-   * This method parse a vector of Subjects from a CSV file.
+   * This method parse a vector of Courses from a CSV file.
    *
    * @param  const std::string&
    *
-   * @return std::vector<Subject>
+   * @return std::vector<Course>
    */
-  static std::vector<Subject> parseSubjectVector(const std::string &fileName);
+  static std::vector<Course> parseCourseVector(const std::string &fileName);
 };
-#endif  // SUBJECT_H
+#endif  // COURSE_H

@@ -27,40 +27,48 @@ PersonalSpecific::~PersonalSpecific() {
 /**
  * Parameterised constructor.
  *
- * @param  std::vector<Subject>&
+ * @param  std::vector<Course>&
  * @param  const std::vector<string>&
  */
 PersonalSpecific::PersonalSpecific(
-    std::vector<Subject> &subjects,
+    std::vector<Course> &courses,
     const std::vector<std::string> &coursePrefixes) {
   for (const std::string &prefix : coursePrefixes) {
-    addSpecific(subjects, prefix);
+    addSpecific(courses, prefix);
   }
+
+  // Throw std::runtime_error if no course was added.
+  if (0 == getTotalCourses()) {
+    throw std::runtime_error("No course was added.");
+  }
+
+  // Calculate GPA.
+  calculateGPA();
 }
 
 /**
  * Add a specific course starting with "prefix".
  *
- * @param  std::vector<Subject>&
+ * @param  std::vector<Course>&
  * @param  const std::string&
  */
-void PersonalSpecific::addSpecific(std::vector<Subject> &subjects,
+void PersonalSpecific::addSpecific(std::vector<Course> &courses,
                                    const std::string &prefix) {
   std::vector<int> positions;
 
-  for (int i = 0; i < (int)subjects.size(); ++i) {
-    if (Utility::isPrefix(subjects.at(i).name(), prefix)) {
+  for (int i = 0; i < (int)courses.size(); ++i) {
+    if (Utility::isPrefix(courses.at(i).name(), prefix)) {
       // Add subject.
-      addSubject(subjects.at(i));
+      addCourse(courses.at(i));
 
       // Add to remove list.
       positions.push_back(i);
     }
   }
 
-  // Remove subjects to prevent re-adding them.
+  // Remove courses to prevent re-adding them.
   for (const int &i : positions) {
-    subjects.erase(subjects.begin() + i);
+    courses.erase(courses.begin() + i);
   }
 }
 
@@ -73,10 +81,10 @@ void PersonalSpecific::addSpecific(std::vector<Subject> &subjects,
  */
 std::shared_ptr<PersonalGPA> PersonalSpecific::parse(
     const std::vector<std::string> &input) {
-  std::vector<Subject> subjects = Subject::parseSubjectVector(input.at(0));
+  std::vector<Course> courses = Course::parseCourseVector(input.at(0));
 
   std::vector<std::string> prefixes =
       InputHelper::instance()->readFileLines(input.at(1));
 
-  return std::make_shared<PersonalSpecific>(subjects, prefixes);
+  return std::make_shared<PersonalSpecific>(courses, prefixes);
 }

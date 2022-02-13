@@ -13,7 +13,7 @@
  * PersonalSpecific class
  *
  * This class is used when we want to calculate average
- * of some specific classes with default class code only.
+ * of some specific courses with default class code only.
  *
  * e.g: I want to calculate average of "CSCxxxxx" course.
  * So I'll use this class, with default subjectVector and classPrefix = "CSC".
@@ -37,18 +37,18 @@ class PersonalSpecific : public PersonalGPA {
   /**
    * Parameterised constructor.
    *
-   * @param  std::vector<Subject>&
+   * @param  std::vector<Course>&
    * @param  const std::vector<string>&
    */
-  PersonalSpecific(std::vector<Subject> &, const std::vector<std::string> &);
+  PersonalSpecific(std::vector<Course> &, const std::vector<std::string> &);
 
   /**
    * Add a specific course starting with "prefix".
    *
-   * @param  std::vector<Subject>&
+   * @param  std::vector<Course>&
    * @param  const std::string&
    */
-  void addSpecific(std::vector<Subject> &, const std::string &);
+  void addSpecific(std::vector<Course> &, const std::string &);
 
  public:
   /**

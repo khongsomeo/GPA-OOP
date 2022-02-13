@@ -13,8 +13,8 @@
 #include <string>
 #include <vector>
 
+#include "Course.h"
 #include "Grade.h"
-#include "Subject.h"
 
 /**
  * Personal GPA abstract class.
@@ -29,9 +29,35 @@ class PersonalGPA {
   Grade _sumGrades = 0.0;
   Grade _resultGPA = 0.0;
 
-  // Stores classes passed / failed.
-  std::multiset<Subject> _classesPassed;
-  std::multiset<Subject> _classesFailed;
+  // Stores courses passed / failed.
+  std::multiset<Course> _coursesPassed;
+  std::multiset<Course> _coursesFailed;
+
+ protected:
+  /**
+   * Calculate total GPA.
+   *
+   * @return void
+   */
+  void calculateGPA();
+
+  /**
+   * Add a failed course to failed course list.
+   *
+   * @param  const Course&
+   *
+   * @return void
+   */
+  void addFailedCourse(const Course &);
+
+  /**
+   * Add a passed course to passed course list.
+   *
+   * @param  const Course&
+   *
+   * @return void
+   */
+  void addPassedCourse(const Course &);
 
  public:
   /**
@@ -51,9 +77,11 @@ class PersonalGPA {
   /**
    * Parameterised constructor
    *
-   * @param  const std::vector<Subject>&
+   * @param  const std::vector<Course>&
+   *
+   * @throw  std::runtime_error
    */
-  PersonalGPA(const std::vector<Subject> &);
+  PersonalGPA(const std::vector<Course> &);
 
   /**
    * Return total passed credits
@@ -68,13 +96,6 @@ class PersonalGPA {
    * @return int
    */
   int failedCredits();
-
-  /**
-   * Return sum grades.
-   *
-   * @return Grade
-   */
-  Grade sumGrades();
 
   /**
    * Return GPA
@@ -119,43 +140,42 @@ class PersonalGPA {
   int getTotalPassedCredits();
 
   /**
-   * Return total classes.
+   * Return total courses.
    *
    * @return int
-   *
-   * @throw  std::runtime_error
    */
-  int getTotalClasses();
+  int getTotalCourses();
 
   /**
-   * Return total passed classes.
+   * Return total passed courses.
    *
    * @return int
    */
-  int getTotalClassesPassed();
+  int getTotalCoursesPassed();
 
   /**
-   * Return total failed classes.
+   * Return total failed courses.
    *
    * @return int
    */
-  int getTotalClassesFailed();
+  int getTotalCoursesFailed();
 
   /**
    * Parse data into Personal
    *
    * @param  const std::vector<std::string>&
    *
-   * @return std::shared_ptr<IPersonal>
+   * @return std::shared_ptr<PersonalGPA>
    */
-  virtual std::shared_ptr<PersonalGPA> parse(
-      const std::vector<std::string> &input);
+  virtual std::shared_ptr<PersonalGPA> parse(const std::vector<std::string> &);
 
   /**
-   * Add a new subject.
+   * Add a new course.
    *
-   * @param  const Subject&
+   * @param  const Course&
+   *
+   * @return void
    */
-  void addSubject(const Subject &subject);
+  void addCourse(const Course &);
 };
 #endif  // PERSONAL_GPA_H
