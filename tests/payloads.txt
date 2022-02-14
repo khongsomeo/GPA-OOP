@@ -47,3 +47,7 @@
 ./main --input data/fail-pass.csv --csv
 ./main --input data/pass-fail.csv
 ./main --input data/pass-fail.csv --csv
+./main --input data/pass-fail.csv --specific data/specific-pass-fail.txt
+./main --input data/pass-fail.csv --specific data/specific-pass-fail.txt --csv
+./main --input data/pass-fail.csv --ignore data/ignore-pass-fail.txt
+./main --input data/pass-fail.csv --ignore data/ignore-pass-fail.txt --csv
