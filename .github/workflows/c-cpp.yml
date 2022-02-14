@@ -34,8 +34,9 @@ jobs:
     - name: make - copy test into testing folder
       run: make init_test
 
-    - name: make - test
-      run: make test
+    - name: make - test_silent
+      # Running silent (without progress check)
+      run: make test_silent
 
     - name: cleaning afterworks
       run: make clean

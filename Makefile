@@ -30,6 +30,10 @@ init_test:
 test:
 	cd $(TEST_DIR) && pwd && bash test.sh
 
+# Testing code on workflow
+test_silent:
+	cd $(TEST_DIR) && pwd && bash test.sh --silent
+
 # Lint for code format
 lint:
 	find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format --dry-run --Werror -style=file

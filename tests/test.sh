@@ -6,6 +6,9 @@
 ## @trhgquan - https://github.com/trhgquan
 ##
 
+# Silent status - display status check if has this option.
+silent=$1
+
 # Colors
 GREEN="\033[0;32m"
 RED="\033[0;31m"
@@ -40,9 +43,11 @@ do
   if [[ $(< output/$i.out) != "$check" ]]; then
     # If failed, print the failed testcase (expected & runtime)
 
-    current_progress="${current_progress}${RED}✘${NC}"
+    if [[ $silent == "" ]]; then
+      current_progress="${current_progress}${RED}✘${NC}"
 
-    echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
+      echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
+    fi
 
     echo -ne "\n"
 
@@ -62,10 +67,12 @@ do
   
   else
     # Else, print progress (with green ticks!)
-
-    current_progress="${current_progress}${GREEN}✔${NC}"
+    # Of course, print progress only when silent mode is not on.
+    if [[ $silent == "" ]]; then
+      current_progress="${current_progress}${GREEN}✔${NC}"
   
-    echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
+      echo -ne "Testing: ${current_progress}${remain_progress} ($((${i} + 1))/${total_testcases})\r"
+    fi
   fi
 done
 
