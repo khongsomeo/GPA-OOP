@@ -31,15 +31,6 @@ class Course {
   Course(const std::string &, int, double);
 
   /**
-   * Parameterised constructor overload.
-   *
-   * @param  const std::string&
-   * @param  int
-   * @param  const Grade&
-   */
-  Course(const std::string &, int, const Grade &);
-
-  /**
    * Course destructor
    *
    * @return void

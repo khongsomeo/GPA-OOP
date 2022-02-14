@@ -36,11 +36,6 @@ PersonalGPA::PersonalGPA(const std::vector<Course> &courses) {
     addCourse(course);
   }
 
-  // Handling the situtation that no course was added.
-  if (0 == getTotalCourses()) {
-    throw std::runtime_error("No course was added.");
-  }
-
   // Calculate GPA if nothing went wrong.
   calculateGPA();
 }
@@ -178,8 +173,15 @@ std::shared_ptr<PersonalGPA> PersonalGPA::parse(
  * Calculate total GPA.
  *
  * @return void
+ *
+ * @throw  std::runtime_error
  */
 void PersonalGPA::calculateGPA() {
+  // Throw std::runtime_error if no course was added.
+  if (0 == getTotalCourses()) {
+    throw std::runtime_error("No course was added.");
+  }
+
   for (const Course &course : _coursesPassed) {
     // Calculate new GPA.
     _sumGrades += course.grade() * course.credit();
