@@ -29,19 +29,6 @@ Course::Course(const std::string &name, int credit, double grade) {
 }
 
 /**
- * Parameterised constructor overload.
- *
- * @param  const std::string&
- * @param  int
- * @param  const Grade&
- */
-Course::Course(const std::string &name, int credit, const Grade &grade) {
-  _name = name;
-  _credit = credit;
-  _grade = grade;
-}
-
-/**
  * Course name
  *
  * @return std::string
