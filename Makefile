@@ -1,15 +1,34 @@
 CXX := g++
 CXXFLAGS := -Wall -static -static-libgcc -static-libstdc++ -std=c++17
 
+# For compiling
 SRC_DIR := src
 OBJ_DIR := obj
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
+EXECUTABLE_NAME := main
 
+# For testing
 TEST_DIR := tests
+TEST_PAYLOAD := cd $(TEST_DIR) && pwd && bash test.sh
+
+# For linting and format
+LINT_PAYLOAD := find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format --dry-run --Werror -style=file
+FORMAT_PAYLOAD := find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format -i -style=file
+
+# For coverage
+COVERAGE_FILENAME := coverage.info
+COVERAGE_OUTPUT_DIR := coverage
+COVERAGE_INIT_PAYLOAD := lcov --capture --directory obj --output-file=$(COVERAGE_FILENAME)
+COVERAGE_EXTRACT_PAYLOAD := lcov --extract $(COVERAGE_FILENAME) '*.cpp' -o $(COVERAGE_FILENAME)
+COVERAGE_GENERATE_REPORT_PAYLOAD := genhtml $(COVERAGE_FILENAME) --output-directory=$(COVERAGE_OUTPUT_DIR)
+
+# For cleaning
+REMOVAL := $(OBJ_DIR)/ $(EXECUTABLE_NAME) $(TEST_DIR)/$(EXECUTABLE_NAME) *.gcov $(COVERAGE_FILENAME) $(COVERAGE_OUTPUT_DIR)/
+
 
 # Link object files to execution
-main: $(OBJ_FILES)
+$(EXECUTABLE_NAME): $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Compile to object files
@@ -19,35 +38,38 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 # Clean directory for GitHub pushes
 clean:
-	rm -rf $(OBJ_DIR) main $(TEST_DIR)/main
-	rm -rf *.gcov coverage.info coverage/
+	rm -rf $(REMOVAL)
 
 # Initialise files for testing
 init_test:
-	cp main $(TEST_DIR)/main
+	cp $(EXECUTABLE_NAME) $(TEST_DIR)/$(EXECUTABLE_NAME)
 
 # Testing code
 test:
-	cd $(TEST_DIR) && pwd && bash test.sh
+	$(TEST_PAYLOAD)
+
+# Testing code on workflow
+test_silent: TEST_PAYLOAD += --silent
+test_silent:
+	$(TEST_PAYLOAD)
 
 # Lint for code format
 lint:
-	find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format --dry-run --Werror -style=file
+	$(LINT_PAYLOAD)
 
 # Format code
 format:
-	find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format -i -style=file
+	$(FORMAT_PAYLOAD)
 
 # Run test coverage
 gcov: CXXFLAGS += --coverage
 gcov: $(OBJ_FILES)
-	$(CXX) $(CXXFLAGS) -o main $^
+	$(CXX) $(CXXFLAGS) -o $(EXECUTABLE_NAME) $^
 
 # Generate human-readable coverage.
 lcov:
-	lcov --capture --directory obj --output-file=coverage.info
-	lcov --extract coverage.info '*.cpp' -o coverage.info
+	$(COVERAGE_INIT_PAYLOAD) && $(COVERAGE_EXTRACT_PAYLOAD)
 
 # Generate test coverage report
 generate-coverage-report:
-	genhtml coverage.info --output-directory=coverage
+	$(COVERAGE_GENERATE_REPORT_PAYLOAD)
