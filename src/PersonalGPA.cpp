@@ -207,9 +207,19 @@ void PersonalGPA::addFailedCourse(const Course &course) {
     _passedCredits -= course.credit();
   }
 
+  // If course already exist in failed list, update it.
+  it = std::find(_coursesFailed.begin(), _coursesFailed.end(), course);
+
+  if (it != _coursesFailed.end()) {
+    _coursesFailed.erase(it);
+    _coursesFailed.insert(course);
+  }
+
   // Insert new failed class to list.
-  _coursesFailed.insert(course);
-  _failedCredits += course.credit();
+  else {
+    _coursesFailed.insert(course);
+    _failedCredits += course.credit();
+  }
 }
 
 /**
@@ -229,9 +239,19 @@ void PersonalGPA::addPassedCourse(const Course &course) {
     _failedCredits -= course.credit();
   }
 
+  // If course already exist in passed list, update it.
+  it = std::find(_coursesPassed.begin(), _coursesPassed.end(), course);
+
+  if (it != _coursesPassed.end()) {
+    _coursesPassed.erase(it);
+    _coursesPassed.insert(course);
+  }
+
   // Insert new passed class to list.
-  _coursesPassed.insert(course);
-  _passedCredits += course.credit();
+  else {
+    _coursesPassed.insert(course);
+    _passedCredits += course.credit();
+  }
 }
 
 /**

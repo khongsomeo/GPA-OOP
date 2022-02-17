@@ -40,13 +40,6 @@ std::shared_ptr<PersonalFactory> PersonalFactory::instance() {
 }
 
 /**
- * Return total items inside _prototypes.
- *
- * @return int
- */
-int PersonalFactory::prototypeSize() { return _prototypes.size(); }
-
-/**
  * Create a new instance of PersonalGPA
  *
  * @param  const std::vector<std::string>&
