@@ -51,3 +51,14 @@
 ./main --input data/pass-fail.csv --specific data/specific-pass-fail.txt --csv
 ./main --input data/pass-fail.csv --ignore data/ignore-pass-fail.txt
 ./main --input data/pass-fail.csv --ignore data/ignore-pass-fail.txt --csv
+./main --input data/pass-retake.csv --csv
+./main --input data/pass-retake.csv --ignore data/ignore-pass-fail.txt --csv
+./main --input data/pass-retake.csv --specific data/specific-pass-fail.txt --csv
+./main --input data/pass-failed-pass.csv
+./main --input data/pass-failed-pass.csv --csv
+./main --input data/pass-failed-pass.csv --specific data/specific-pass-fail.txt --csv
+./main --input data/pass-failed-pass.csv --ignore data/ignore-pass-fail.txt --csv
+./main --input data/fail-pass-fail.csv
+./main --input data/fail-pass-fail.csv --csv
+./main --input data/fail-pass-fail.csv --specific data/specific-pass-fail.txt --csv
+./main --input data/fail-pass-fail.csv --ignore data/ignore-pass-fail.txt --csv

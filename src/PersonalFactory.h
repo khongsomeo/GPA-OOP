@@ -43,13 +43,6 @@ class PersonalFactory {
   static std::shared_ptr<PersonalFactory> instance();
 
   /**
-   * Return total items inside _prototypes.
-   *
-   * @return int
-   */
-  int prototypeSize();
-
-  /**
    * Create a new instance of PersonalGPA
    *
    * @param  const std::vector<std::string>&
