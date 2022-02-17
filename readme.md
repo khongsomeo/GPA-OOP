@@ -75,6 +75,22 @@ make format
   |CSC10002|4|8.5
   |...|...|...
 
+- **Order of courses is important!** If you have an input file like this:
+  
+  |course code|course credit|course grade|
+  |:---------:|:-----------:|:----------:|
+  |CSC10001|4|10
+  |CSC10001|4|8.5
+
+  The program will give this result:
+  
+  |course code|credits|grade (10 - scale)|grade (4 - scale)|grade (A - scale)|
+  |:---------:|:-----:|:----------------:|:---------------:|:---------------:|
+  |CSC10001|4|8.5|3.5|A
+
+  This is because you've already *retake* the `CSC10001` course, and receive
+  8.5 instead of 10.
+
 ### 2. Command-line arguments
 Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
 - To calculate overall GPA:
