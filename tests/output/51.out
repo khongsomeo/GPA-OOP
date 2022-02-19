@@ -1,1 +1,6 @@
-Error happened (No course was added.)
+Total passed courses: 0 (0.00%)
+
+Total failed courses: 1 (100.00%)
+course code,credits,grade (10 - scale),grade (4 - scale),grade (A - scale)
+MTH00053,3,2.50,0.00,F
+Overall,3,None,None,None

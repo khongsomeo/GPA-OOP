@@ -1,0 +1,1 @@
+./main --input data/pass-fail.csv --ignore data/ignore-pass-fail.txt --csv

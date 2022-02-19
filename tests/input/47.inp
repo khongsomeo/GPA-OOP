@@ -1,0 +1,1 @@
+./main --input data/fail-pass.csv --csv

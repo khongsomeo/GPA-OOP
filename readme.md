@@ -26,14 +26,14 @@ So simple, right?
 
 ## Development
 ### Testing
-Adding a new 19120338th test:
-- Payload: write test payloads to the 19120338th line of `tests/payloads.txt`
-- Output: create a new file `tests/output/19120338.out`
+Adding a new testcase named `19120338`:
+- Payload: write test payloads to `tests/input/19120338.inp`
+- Output: write expected output to `tests/output/19120338.out`
 
 Running tests:
 1. `make`
 2. `make init_test`
-3. `make test`
+3. `make test` (or silent mode: `make test_silent` - without progress bar)
 
 ### Code coverage
 We support code coverage reports! Just make sure you have `lcov` installed.

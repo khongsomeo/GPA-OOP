@@ -1,0 +1,1 @@
+./main --input data/has_fail.csv --1234 --ignore-parsing-error
