@@ -1,0 +1,1 @@
+./main --input data/has_fail.csv --ignore-parsing-error --no-textart

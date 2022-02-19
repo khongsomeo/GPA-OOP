@@ -10,7 +10,9 @@ EXECUTABLE_NAME := main
 
 # For testing
 TEST_DIR := tests
-TEST_PAYLOAD := cd $(TEST_DIR) && pwd && bash test.sh
+TEST_DRIVER := test.pl
+TEST_DRIVER_ENGINE := perl
+TEST_PAYLOAD := cd $(TEST_DIR) && pwd && $(TEST_DRIVER_ENGINE) $(TEST_DRIVER)
 
 # For linting and format
 LINT_PAYLOAD := find src/ -iname *.c -o -iname *.cpp -o -iname *.h | xargs clang-format --dry-run --Werror -style=file
