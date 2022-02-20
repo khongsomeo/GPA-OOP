@@ -22,7 +22,7 @@ sub run {
 
   # Report error if there are not enough input / output files.
   if ($total_tests != utils::count_files($output_dir)) {
-    print colored("✘ Error: Input file and Output file quantity are not the same!", "red"), "\n";
+    print utils::colored("✘ Error: Input file and Output file quantity are not the same!", "red"), "\n";
 
     return 1;
   }
