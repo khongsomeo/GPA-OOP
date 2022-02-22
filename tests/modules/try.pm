@@ -6,7 +6,7 @@ use warnings;
 use FindBin;
 use File::Basename;
 
-use lib "$FindBin::Bin/";
+use lib qq($FindBin::Bin/);
 use progress;
 use utils;
 
@@ -22,29 +22,29 @@ sub run {
 
   # Report error if there are not enough input / output files.
   if ($total_tests != utils::count_files($output_dir)) {
-    print utils::colored("✘ Error: Input file and Output file quantity are not the same!", "red"), "\n";
+    print(utils::colored(qq(✘ Error: Input file and Output file quantity are not the same!\n), qq(red)));
 
     return 1;
   }
 
   # Read input dir and get file list.
-  opendir my $INDIR, $input_dir or die "Cannot open $input_dir";
+  opendir my $INDIR, $input_dir or die qq(Cannot open $input_dir);
 
   my @input_files = readdir($INDIR);
 
   my $index = 0;
 
   foreach my $input_file (@input_files) {
-    unless ($input_file eq "." || $input_file eq "..") {
+    unless ($input_file eq qq(.) || $input_file eq qq(..)) {
       # Getting output file.
       my $output_file = File::Basename::basename($input_file);
 
       $output_file =~ s/.inp/.out/g;
 
-      $output_file = "$output_dir/$output_file";
+      $output_file = qq($output_dir/$output_file);
 
       # Adding correct path to input file.
-      $input_file = "$input_dir/$input_file";
+      $input_file = qq($input_dir/$input_file);
 
       # Testing if expected_output match runtime.
       my $expected_output = utils::get_file_content($output_file);
@@ -65,7 +65,7 @@ sub run {
 
   close $INDIR;
 
-  print utils::colored("\n✔ All testcases passed", "green"), " ($total_tests / $total_tests)\n";
+  print utils::colored(qq(\n✔ All testcases passed), qq(green)), qq( ($total_tests / $total_tests)\n);
 
   return 0;
 }
