@@ -7,17 +7,15 @@ use FindBin;
 
 sub main {
   for my $argv (@ARGV) {
-    my $path = "$FindBin::Bin/$argv";
-
-    print $path;
+    my $path = qq($FindBin::Bin/$argv);
 
     # Check if directory exist
     if (-e $path && -d $path) {
-      print " - Junk found\n";
+      print(qq($path - Junk found\n));
       return 1;
     }
 
-    print " - Junk not found\n";
+    print(qq($path - Junk not found\n));
   }
 
   return 0;
