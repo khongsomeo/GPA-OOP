@@ -5,7 +5,7 @@ use warnings;
 
 use FindBin;
 
-use lib "$FindBin::Bin/";
+use lib qq($FindBin::Bin/);
 use utils;
 
 package progress;
@@ -16,11 +16,11 @@ sub print_success_progress {
 
   # Progress bar
   if ($print_progress) {
-    my $current_progress = utils::colored("✔" x $current, "green");
+    my $current_progress = utils::colored(qq(✔) x $current, qq(green));
     
-    my $remain_progress = "." x ($total - $current);
+    my $remain_progress = qq(.) x ($total - $current);
 
-    print "\rTesting: ", "$current_progress", "$remain_progress";
+    print(qq(\rTesting: ($current / $total) $current_progress), qq($remain_progress));
   }
 }
 
@@ -34,21 +34,21 @@ sub print_failed_progress {
 
   # Progress bar
   if ($print_progress) {
-    my $current_progress = utils::colored("✔" x ($current - 1), "green");
-    my $error_progress = utils::colored("✘", "red");
-    my $remain_progress = "." x ($total - $current - 2);
+    my $current_progress = utils::colored(qq(✔) x ($current - 1), qq(green));
+    my $error_progress = utils::colored(qq(✘), qq(red));
+    my $remain_progress = qq(.) x ($total - $current - 2);
 
-    print "\rTesting: ", "$current_progress", "$error_progress", "$remain_progress";
+    print(qq(\rTesting: ($current / $total) $current_progress), qq($error_progress), qq($remain_progress));
   }
 
   # Failed info
-  print utils::colored("\n✘ Testcase \"$input_file\" failed:\n", "red");
-  print utils::colored("Payload:\n", "blue");
-  print utils::colored("$payload\n", "yellow");
-  print utils::colored("Expected output:\n", "blue");
-  print "$expected\n";
-  print utils::colored("Runtime:\n", "blue");
-  print "$result\n";
+  print(utils::colored(qq(\n✘ Testcase \"$input_file\" failed:\n), qq(red)));
+  print(utils::colored(qq(Payload:\n), qq(blue)));
+  print(utils::colored(qq($payload\n), qq(yellow)));
+  print(utils::colored(qq(Expected output:\n), qq(blue)));
+  print(qq($expected\n));
+  print(utils::colored(qq(Runtime:\n), qq(blue)));
+  print(qq($result\n));
 }
 
 1;

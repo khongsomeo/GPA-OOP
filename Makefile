@@ -26,8 +26,9 @@ COVERAGE_EXTRACT_PAYLOAD := lcov --extract $(COVERAGE_FILENAME) '*.cpp' -o $(COV
 COVERAGE_GENERATE_REPORT_PAYLOAD := genhtml $(COVERAGE_FILENAME) --output-directory=$(COVERAGE_OUTPUT_DIR)
 
 # For cleaning
-REMOVAL := $(OBJ_DIR)/ $(EXECUTABLE_NAME) $(TEST_DIR)/$(EXECUTABLE_NAME) *.gcov $(COVERAGE_FILENAME) $(COVERAGE_OUTPUT_DIR)/
-
+REMOVAL := $(OBJ_DIR)/ $(EXECUTABLE_NAME) $(TEST_DIR)/$(EXECUTABLE_NAME) $(COVERAGE_FILENAME) $(COVERAGE_OUTPUT_DIR)/
+JUNK_HUNTER := jh.pl
+JUNK_HUNTER_ENGINE := perl
 
 # Link object files to execution
 $(EXECUTABLE_NAME): $(OBJ_FILES)
@@ -54,6 +55,10 @@ test:
 test_silent: TEST_PAYLOAD += --silent
 test_silent:
 	$(TEST_PAYLOAD)
+
+# Hunting for junks
+junk_hunt:
+	$(JUNK_HUNTER_ENGINE) $(JUNK_HUNTER) $(REMOVAL)
 
 # Lint for code format
 lint:

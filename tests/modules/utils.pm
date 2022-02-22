@@ -9,22 +9,22 @@ package utils;
 sub colored {
   (my $string, my $color) = ($_[0], $_[1]);
 
-  (my $color_ansi, my $no_color) = ("", "\033[0m");
+  (my $color_ansi, my $no_color) = (qq(), qq(\033[0m));
 
-  if ($color eq "red") {
-    $color_ansi = "\033[91m";
+  if ($color eq qq(red)) {
+    $color_ansi = qq(\033[91m);
   }
 
-  elsif ($color eq "green") {
-    $color_ansi = "\033[92m";
+  elsif ($color eq qq(green)) {
+    $color_ansi = qq(\033[92m);
   }
 
-  elsif ($color eq "yellow") {
-    $color_ansi = "\033[93m";
+  elsif ($color eq qq(yellow)) {
+    $color_ansi = qq(\033[93m);
   }
 
-  elsif ($color eq "blue") {
-    $color_ansi = "\033[96m";
+  elsif ($color eq qq(blue)) {
+    $color_ansi = qq(\033[96m);
   }
 
   else {
@@ -50,7 +50,7 @@ sub count_files {
 sub get_file_content {
   my $file = $_[0];
 
-  open my $fh, "<", $file or die "Cannot open file $file: $!";
+  open my $fh, qq(<), $file or die qq(Cannot open file $file: $!);
 
   read $fh, my $file_content, -s $fh;
 
