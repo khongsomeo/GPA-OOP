@@ -20,7 +20,7 @@ sub print_success_progress {
     
     my $remain_progress = qq(.) x ($total - $current);
 
-    print(qq(\rTesting: $current_progress $remain_progress));
+    print(qq(\rTesting: ($current / $total) $current_progress), qq($remain_progress));
   }
 }
 
@@ -38,7 +38,7 @@ sub print_failed_progress {
     my $error_progress = utils::colored(qq(✘), qq(red));
     my $remain_progress = qq(.) x ($total - $current - 2);
 
-    print(qq(\rTesting: $current_progress $error_progress $remain_progress));
+    print(qq(\rTesting: ($current / $total) $current_progress), qq($error_progress), qq($remain_progress));
   }
 
   # Failed info
