@@ -56,6 +56,7 @@ test_silent: TEST_PAYLOAD += --silent
 test_silent:
 	$(TEST_PAYLOAD)
 
+# Hunting for junks
 junk_hunt:
 	$(JUNK_HUNTER_ENGINE) $(JUNK_HUNTER) $(REMOVAL)
 
