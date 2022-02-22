@@ -20,6 +20,9 @@ jobs:
       - name: clang-format linter
         run: make lint
 
+      - name: junk hunt
+        run: make junk_hunt
+
   build-and-test:
     needs: linter
     runs-on: ubuntu-latest
