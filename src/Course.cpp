@@ -79,7 +79,8 @@ bool Course::operator<(const Course &course) const {
  * @return bool
  */
 bool Course::operator==(const Course &course) const {
-  return (_name == course._name) && (_credit == course._credit) && (_type == course._type);
+  return (_name == course._name) && (_credit == course._credit) &&
+         (_type == course._type);
 }
 
 /**
