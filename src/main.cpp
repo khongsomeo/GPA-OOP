@@ -78,6 +78,18 @@ int main(int argc, char *argv[]) {
     // Print passed table
     OutputHelper::instance()->printTable(chumeochuixoong->toPassedVector());
 
+    // Print credit stats
+    if (chumeochuixoong->getTotalCoursesPassed() > 0) {
+      std::cout << "Passed credit details: " << '\n';
+      for (auto &credit : chumeochuixoong->getCreditDetail()) {
+        std::cout << "Courses type " << credit.first << ": " << credit.second
+                  << " ("
+                  << Utility::percent(credit.second,
+                                      chumeochuixoong->passedCredits())
+                  << "%)" << '\n';
+      }
+    }
+
     std::cout << '\n';
 
     // Print failed stats.

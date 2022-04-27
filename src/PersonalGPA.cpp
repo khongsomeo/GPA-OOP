@@ -74,6 +74,7 @@ std::vector<std::string> PersonalGPA::passedListToStringVector() {
   stringVector.push_back(resultGPA().toString());
   stringVector.push_back(resultGPA().to4Scale().toString());
   stringVector.push_back(resultGPA().toAScale());
+  stringVector.push_back("N/A");
 
   return stringVector;
 }
@@ -91,6 +92,7 @@ std::vector<std::string> PersonalGPA::failedListToStringVector() {
   stringVector.push_back("None");
   stringVector.push_back("None");
   stringVector.push_back("None");
+  stringVector.push_back("N/A");
 
   return stringVector;
 }
@@ -156,6 +158,15 @@ int PersonalGPA::getTotalCoursesPassed() { return _coursesPassed.size(); }
 int PersonalGPA::getTotalCoursesFailed() { return _coursesFailed.size(); }
 
 /**
+ * Get credit detail
+ *
+ * @return std::map<std::string, int>
+ */
+std::map<std::string, int> PersonalGPA::getCreditDetail() {
+  return _creditDetail;
+}
+
+/**
  * Parse data into Personal
  *
  * @param  const std::vector<std::string>&
@@ -205,6 +216,7 @@ void PersonalGPA::addFailedCourse(const Course &course) {
   if (it != _coursesPassed.end()) {
     _coursesPassed.erase(it);
     _passedCredits -= course.credit();
+    _creditDetail[course.type()] -= course.credit();
   }
 
   // If course already exist in failed list, update it.
@@ -251,6 +263,7 @@ void PersonalGPA::addPassedCourse(const Course &course) {
   else {
     _coursesPassed.insert(course);
     _passedCredits += course.credit();
+    _creditDetail[course.type()] += course.credit();
   }
 }
 

@@ -7,6 +7,7 @@
 #ifndef PERSONAL_GPA_H
 #define PERSONAL_GPA_H
 
+#include <map>
 #include <memory>
 #include <set>
 #include <stdexcept>
@@ -28,6 +29,8 @@ class PersonalGPA {
   int _failedCredits = 0;
   Grade _sumGrades = 0.0;
   Grade _resultGPA = 0.0;
+
+  std::map<std::string, int> _creditDetail;
 
   // Stores courses passed / failed.
   std::multiset<Course> _coursesPassed;
@@ -161,6 +164,13 @@ class PersonalGPA {
    * @return int
    */
   int getTotalCoursesFailed();
+
+  /**
+   * Get credit details
+   *
+   * @return std::map<std::string, int>
+   */
+  std::map<std::string, int> getCreditDetail();
 
   /**
    * Parse data into Personal
