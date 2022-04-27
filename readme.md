@@ -136,11 +136,11 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 - Ignore parsing errors
 
-  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by two commas between data blocks:
+  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by commas between data blocks:
   ```
-  CSC10001,4,10
-  ,,
-  CSC10002,4,8.5
+  CSC10001,4,10,BB
+  ,,,
+  CSC10002,4,8.5,BB
   ```
   And eventually this will cause an error message logging to the screen.
 
