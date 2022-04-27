@@ -21,11 +21,14 @@ Course::~Course() {
  * @param  const std::string&
  * @param  int
  * @param  double
+ * @param  const std::string&
  */
-Course::Course(const std::string &name, int credit, double grade) {
+Course::Course(const std::string &name, int credit, double grade,
+               const std::string &type) {
   _name = name;
   _credit = credit;
   _grade = grade;
+  _type = type;
 }
 
 /**
@@ -48,6 +51,13 @@ int Course::credit() const { return _credit; }
  * @return Grade
  */
 Grade Course::grade() const { return _grade; }
+
+/**
+ * Course type
+ *
+ * @return std::string
+ */
+std::string Course::type() const { return _type; }
 
 /**
  * Operator overloading for std::multiset sorting.
@@ -85,6 +95,7 @@ std::vector<std::string> Course::toStringVector() const {
   courseStringVector.push_back(_grade.toString());
   courseStringVector.push_back(_grade.to4Scale().toString());
   courseStringVector.push_back(_grade.toAScale());
+  courseStringVector.push_back(_type);
 
   return courseStringVector;
 }
@@ -107,7 +118,8 @@ Course Course::parse(const std::string &buffer) {
   std::vector<std::string> tokens =
       InputHelper::instance()->splitTokens(buffer, ",");
 
-  return Course(tokens.at(0), stoi(tokens.at(1)), stod(tokens.at(2)));
+  return Course(tokens.at(0), stoi(tokens.at(1)), stod(tokens.at(2)),
+                tokens.at(3));
 }
 
 /**

@@ -19,6 +19,7 @@ class Course {
   std::string _name;
   int _credit;
   Grade _grade;
+  std::string _type;
 
  public:
   /**
@@ -27,8 +28,9 @@ class Course {
    * @param  const std::string&
    * @param  int
    * @param  double
+   * @param  const std::string&
    */
-  Course(const std::string &, int, double);
+  Course(const std::string &, int, double, const std::string &);
 
   /**
    * Course destructor
@@ -58,6 +60,13 @@ class Course {
    * @return Grade
    */
   Grade grade() const;
+
+  /**
+   * Course type
+   *
+   * @return std::string
+   */
+  std::string type() const;
 
   /**
    * Operator overloading for std::multiset sorting.

@@ -24,8 +24,8 @@ const std::string TEXTART_FILE = "data/textart.txt";
 
 // Default column name
 const std::vector<std::string> COLUMNS = {
-    "course code", "credits", "grade (10 - scale)", "grade (4 - scale)",
-    "grade (A - scale)"};
+    "course code",       "credits",           "grade (10 - scale)",
+    "grade (4 - scale)", "grade (A - scale)", "course type"};
 
 // Flags for input.
 enum {

@@ -2,3 +2,5 @@
 *.info
 obj/
 coverage/
+main
+tests/main
