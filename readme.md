@@ -69,24 +69,26 @@ make format
 ### 1. Input format
 - The input `.csv` file should looks like this:
 
-  |course code|course credit|course grade|
-  |:---------:|:-----------:|:----------:|
-  |CSC10001|4|10
-  |CSC10002|4|8.5
-  |...|...|...
+  |course code|course credit|course grade|course type|
+  |:---------:|:-----------:|:----------:|:---------:|
+  |CSC10001|4|10|BB
+  |CSC10002|4|8.5|TC
+  |...|...|...|...
+
+  Course type can be any string, will be grouped to in credit stats.
 
 - **Order of courses is important!** If you have an input file like this:
   
-  |course code|course credit|course grade|
-  |:---------:|:-----------:|:----------:|
-  |CSC10001|4|10
-  |CSC10001|4|8.5
+  |course code|course credit|course grade|course type|
+  |:---------:|:-----------:|:----------:|:---------:|
+  |CSC10001|4|10|BB
+  |CSC10001|4|8.5|BB
 
   The program will give this result:
   
-  |course code|credits|grade (10 - scale)|grade (4 - scale)|grade (A - scale)|
-  |:---------:|:-----:|:----------------:|:---------------:|:---------------:|
-  |CSC10001|4|8.5|3.5|A
+  |course code|credits|grade (10 - scale)|grade (4 - scale)|grade (A - scale)|course type|
+  |:---------:|:-----:|:----------------:|:---------------:|:---------------:|:---------:|
+  |CSC10001|4|8.5|3.5|A|BB
 
   This is because you've already *retake* the `CSC10001` course, and receive
   8.5 instead of 10.
@@ -134,11 +136,11 @@ Given that the program has been compiled successfully to `<PROGRAM>.exe`, then:
   ```
 - Ignore parsing errors
 
-  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by two commas between data blocks:
+  With .csv files created by Microsoft Excel, sometimes there will be blank lines marked by commas between data blocks:
   ```
-  CSC10001,4,10
-  ,,
-  CSC10002,4,8.5
+  CSC10001,4,10,BB
+  ,,,
+  CSC10002,4,8.5,BB
   ```
   And eventually this will cause an error message logging to the screen.
 
