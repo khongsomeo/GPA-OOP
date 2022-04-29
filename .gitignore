@@ -4,3 +4,4 @@ obj/
 coverage/
 main
 tests/main
+data/

@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     // Print credit stats
     if (chumeochuixoong->getTotalCoursesPassed() > 0) {
       std::cout << "Passed credit details: " << '\n';
-      for (auto &credit : chumeochuixoong->getCreditDetail()) {
+      for (const auto &credit : chumeochuixoong->getCreditDetail()) {
         std::cout << "Courses type " << credit.first << ": " << credit.second
                   << " ("
                   << Utility::percent(credit.second,
