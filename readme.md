@@ -1,5 +1,6 @@
 # GPA-OOP
 [![C/C++ CI](https://github.com/khongsomeo/GPA-OOP/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/khongsomeo/GPA-OOP/actions/workflows/c-cpp.yml)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/khongsomeo/GPA-OOP?label=Latest%20version&style=flat-square)
 
 Calculating my GPA, in an OOP way.
 
