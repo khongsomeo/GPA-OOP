@@ -1,6 +1,6 @@
-Error happened while reading file data/no_fail.csv, on line 8 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/no_fail.csv, on line 16 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/no_fail.csv, on line 25 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
+Error happened while reading file data/no_fail.csv, on line 8 (stod)
+Error happened while reading file data/no_fail.csv, on line 16 (stod)
+Error happened while reading file data/no_fail.csv, on line 25 (stod)
 THIS IS TEXTART
 
 Total passed courses: 28 (100.00%)
@@ -36,7 +36,7 @@ Total passed courses: 28 (100.00%)
 |    MTH00041 |       3 |               5.00 |              2.00 |                 C |          BB |
 |    BAA00005 |       2 |               5.00 |              2.00 |                 C |          BB |
 +-------------+---------+--------------------+-------------------+-------------------+-------------+
-|     Overall |      76 |               7.95 |              3.00 |                B+ |         N/A |
+|     Overall |      76 |               7.95 |              3.29 |                B+ |         N/A |
 +-------------+---------+--------------------+-------------------+-------------------+-------------+
 Passed credit details: 
 Courses type BB: 70 (92.11%)

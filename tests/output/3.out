@@ -1,6 +1,6 @@
-Error happened while reading file data/has_fail.csv, on line 8 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/has_fail.csv, on line 16 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/has_fail.csv, on line 25 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
+Error happened while reading file data/has_fail.csv, on line 8 (stod)
+Error happened while reading file data/has_fail.csv, on line 16 (stod)
+Error happened while reading file data/has_fail.csv, on line 25 (stod)
 THIS IS TEXTART
 
 Total passed courses: 5 (62.50%)
@@ -13,7 +13,7 @@ Total passed courses: 5 (62.50%)
 |    CSC10004 |       4 |               8.50 |              3.50 |                 A |          BB |
 |    CSC10008 |       4 |               8.50 |              3.50 |                 A |          BB |
 +-------------+---------+--------------------+-------------------+-------------------+-------------+
-|     Overall |      20 |               8.80 |              3.50 |                 A |         N/A |
+|     Overall |      20 |               8.80 |              3.60 |                 A |         N/A |
 +-------------+---------+--------------------+-------------------+-------------------+-------------+
 Passed credit details: 
 Courses type BB: 20 (100.00%)
