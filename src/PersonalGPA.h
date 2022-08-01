@@ -27,8 +27,10 @@ class PersonalGPA {
   // Stores personal grades & credits.
   int _passedCredits = 0;
   int _failedCredits = 0;
-  Grade _sumGrades = 0.0;
-  Grade _resultGPA = 0.0;
+  Grade _sumGradeScale10 = 0.0;
+  Grade _sumGradeScale4 = 0.0;
+  Grade _resultGPAScale10 = 0.0;
+  Grade _resultGPAScale4 = 0.0;
 
   std::map<std::string, int> _creditDetail;
 
@@ -103,11 +105,18 @@ class PersonalGPA {
   int failedCredits();
 
   /**
-   * Return GPA
+   * Return GPA in scale 10.
    *
    * @return Grade
    */
-  Grade resultGPA();
+  Grade resultGPAScale10();
+
+  /**
+   * Return GPA in scale 4.
+   *
+   * @return Grade
+   */
+  Grade resultGPAScale4();
 
   /**
    * Convert passed list to string vector.

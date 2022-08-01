@@ -55,11 +55,18 @@ int PersonalGPA::passedCredits() { return _passedCredits; }
 int PersonalGPA::failedCredits() { return _failedCredits; }
 
 /**
- * Return GPA
+ * Return GPA in scale 10.
  *
  * @return Grade
  */
-Grade PersonalGPA::resultGPA() { return _resultGPA; }
+Grade PersonalGPA::resultGPAScale10() { return _resultGPAScale10; }
+
+/**
+ * Return GPA in scale 4.
+ *
+ * @return Grade
+ */
+Grade PersonalGPA::resultGPAScale4() { return _resultGPAScale4; }
 
 /**
  * Convert passed list to string vector.
@@ -71,9 +78,9 @@ std::vector<std::string> PersonalGPA::passedListToStringVector() {
 
   stringVector.push_back("Overall");
   stringVector.push_back(std::to_string(passedCredits()));
-  stringVector.push_back(resultGPA().toString());
-  stringVector.push_back(resultGPA().to4Scale().toString());
-  stringVector.push_back(resultGPA().toAScale());
+  stringVector.push_back(resultGPAScale10().toString());
+  stringVector.push_back(resultGPAScale4().toString());
+  stringVector.push_back(resultGPAScale10().toAScale());
   stringVector.push_back("N/A");
 
   return stringVector;
@@ -195,8 +202,11 @@ void PersonalGPA::calculateGPA() {
 
   for (const Course &course : _coursesPassed) {
     // Calculate new GPA.
-    _sumGrades += course.grade() * course.credit();
-    _resultGPA = _sumGrades / (1.0 * _passedCredits);
+    _sumGradeScale10 += course.grade() * course.credit();
+    _sumGradeScale4 += course.grade().to4Scale() * course.credit();
+
+    _resultGPAScale10 = _sumGradeScale10 / (1.0 * _passedCredits);
+    _resultGPAScale4 = _sumGradeScale4 / (1.0 * _passedCredits);
   }
 }
 
