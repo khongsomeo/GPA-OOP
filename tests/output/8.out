@@ -1,6 +1,6 @@
-Error happened while reading file data/has_fail.csv, on line 8 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/has_fail.csv, on line 16 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
-Error happened while reading file data/has_fail.csv, on line 25 (vector::_M_range_check: __n (which is 3) >= this->size() (which is 3))
+Error happened while reading file data/has_fail.csv, on line 8 (stod)
+Error happened while reading file data/has_fail.csv, on line 16 (stod)
+Error happened while reading file data/has_fail.csv, on line 25 (stod)
 Total passed courses: 22 (88.00%)
 course code,credits,grade (10 - scale),grade (4 - scale),grade (A - scale),course type
 CSC10001,4,10.00,4.00,A+,BB
@@ -25,7 +25,7 @@ MTH00081,1,5.50,2.00,C,BB
 MTH00003,3,5.00,2.00,C,BB
 MTH00041,3,5.00,2.00,C,BB
 BAA00005,2,5.00,2.00,C,TC
-Overall,57,7.61,3.00,B+,N/A
+Overall,57,7.61,3.15,B+,N/A
 Passed credit details: 
 Courses type BB: 49 (85.96%)
 Courses type TC: 8 (14.04%)
