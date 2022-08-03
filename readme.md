@@ -7,13 +7,16 @@ Calculating my GPA, in an OOP way.
 
 ![screenshot.png](screenshot.png)
 
+## Documentation
+[The Wiki page](https://github.com/khongsomeo/GPA-OOP/wiki) stores the most of GPA-OOP.
+
+Contribute to the documentation by creating changes in `docs` directory and create a Pull Request.
+
 ## Installation
 Choose a way to install:
 
 ### Already have GNU Make and g++
 Execute a `git clone`, then run `make` to compile. You can use `g++` to compile the original source code too.
-
-For further information, visit [The Wiki page](https://github.com/khongsomeo/GPA-OOP/wiki).
 
 ### Using prebuild
 Download a prebuild in [The Release page](https://github.com/khongsomeo/GPA-OOP/releases) - find the `release.zip` archive in each version.
