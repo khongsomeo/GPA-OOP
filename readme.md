@@ -10,7 +10,7 @@ Calculating my GPA, in an OOP way.
 ## Documentation
 [The Wiki page](https://github.com/khongsomeo/GPA-OOP/wiki) stores the most of GPA-OOP.
 
-Contribute to the documentation by creating changes in `docs` directory and create a Pull Request.
+Contribute to the documentation by creating changes in [gpa-oop-wiki](https://github.com/khongsomeo/gpa-oop-wiki) and create a Pull Request.
 
 ## Installation
 Choose a way to install:
