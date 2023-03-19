@@ -65,9 +65,7 @@ const Grade &Grade::operator=(double grade) {
  *
  * @return Grade
  */
-Grade Grade::to4Scale() const {
-  return Grade(_grade * 0.4);
-}
+Grade Grade::to4Scale() const { return Grade(_grade * 0.4); }
 
 /**
  * Convert grade to A scale.
