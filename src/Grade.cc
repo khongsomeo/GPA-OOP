@@ -66,14 +66,7 @@ const Grade &Grade::operator=(double grade) {
  * @return Grade
  */
 Grade Grade::to4Scale() const {
-  if (_grade < 3.0) return Grade(0.0);
-  if (_grade < 4.0) return Grade(1.0);
-  if (_grade < 5.0) return Grade(1.5);
-  if (_grade < 6.0) return Grade(2.0);
-  if (_grade < 7.0) return Grade(2.5);
-  if (_grade < 8.0) return Grade(3.0);
-  if (_grade < 9.0) return Grade(3.5);
-  return Grade(4.0);
+  return Grade(_grade * 0.4);
 }
 
 /**
