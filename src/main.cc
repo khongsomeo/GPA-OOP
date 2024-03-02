@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Create new GPA calculator.
-    std::shared_ptr<PersonalGPA> chumeochuixoong =
+    std::shared_ptr<PersonalGPA> personalGPAObj =
         PersonalFactory ::instance()->create(mode, input);
 
     /**
@@ -70,22 +70,22 @@ int main(int argc, char *argv[]) {
 
     // Print the stats.
     std::cout << "Total passed courses: "
-              << chumeochuixoong->getTotalCoursesPassed() << " ("
-              << Utility::percent(chumeochuixoong->getTotalCoursesPassed(),
-                                  chumeochuixoong->getTotalCourses())
+              << personalGPAObj->getTotalCoursesPassed() << " ("
+              << Utility::percent(personalGPAObj->getTotalCoursesPassed(),
+                                  personalGPAObj->getTotalCourses())
               << "%)" << '\n';
 
     // Print passed table
-    OutputHelper::instance()->printTable(chumeochuixoong->toPassedVector());
+    OutputHelper::instance()->printTable(personalGPAObj->toPassedVector());
 
     // Print credit stats
-    if (chumeochuixoong->getTotalCoursesPassed() > 0) {
+    if (personalGPAObj->getTotalCoursesPassed() > 0) {
       std::cout << "Passed credit details: " << '\n';
-      for (const auto &credit : chumeochuixoong->getCreditDetail()) {
+      for (const auto &credit : personalGPAObj->getCreditDetail()) {
         std::cout << "Courses type " << credit.first << ": " << credit.second
                   << " ("
                   << Utility::percent(credit.second,
-                                      chumeochuixoong->passedCredits())
+                                      personalGPAObj->passedCredits())
                   << "%)" << '\n';
       }
     }
@@ -94,13 +94,13 @@ int main(int argc, char *argv[]) {
 
     // Print failed stats.
     std::cout << "Total failed courses: "
-              << chumeochuixoong->getTotalCoursesFailed() << " ("
-              << Utility::percent(chumeochuixoong->getTotalCoursesFailed(),
-                                  chumeochuixoong->getTotalCourses())
+              << personalGPAObj->getTotalCoursesFailed() << " ("
+              << Utility::percent(personalGPAObj->getTotalCoursesFailed(),
+                                  personalGPAObj->getTotalCourses())
               << "%)" << '\n';
 
     // Print failed table.
-    OutputHelper::instance()->printTable(chumeochuixoong->toFailedVector());
+    OutputHelper::instance()->printTable(personalGPAObj->toFailedVector());
   }
 
   // And catch exceptions
