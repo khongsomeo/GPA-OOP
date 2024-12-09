@@ -1,0 +1,7 @@
+version: "3.8"
+name: gpa-oop
+
+services:
+    gpa-oop:
+        image: "khongsomeo/gpa-oop"
+        build: .
