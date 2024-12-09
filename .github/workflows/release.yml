@@ -34,6 +34,7 @@ jobs:
                       readme.md
                       LICENSE
                   if-no-files-found: error
+                  overwrite: true
 
             - name: cleaning afterworks
               run: make clean
