@@ -24,7 +24,7 @@ jobs:
               run: make
 
             - name: Upload artifacts
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                   name: build-executable
                   path: |
@@ -43,7 +43,7 @@ jobs:
         needs: release-build
         steps:
             - name: Download artifacts from previous build
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: build-executable
 
