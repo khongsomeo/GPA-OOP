@@ -26,7 +26,7 @@ jobs:
             - name: Upload artifacts
               uses: actions/upload-artifact@v4
               with:
-                  name: build-executable
+                  name: build-executable-${{ matrix.os }}
                   path: |
                       data/
                       main
@@ -46,7 +46,8 @@ jobs:
             - name: Download artifacts from previous build
               uses: actions/download-artifact@v4
               with:
-                  name: build-executable
+                  pattern: build-executable-*
+                  merge-multiple: true
 
             - name: Zipping release artifact
               uses: vimtor/action-zip@v1
